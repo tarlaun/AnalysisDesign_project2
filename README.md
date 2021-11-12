@@ -4,3 +4,6 @@
 
 ## Run Server
     python3 manage.py runserver 0:8000
+
+## Create Migrations
+    python3 manage.py migrate
