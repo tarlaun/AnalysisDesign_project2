@@ -7,3 +7,6 @@
 
 ## Create Migrations
     python3 manage.py migrate
+
+## Create Admin User
+    python3 manage.py createsuperuser
