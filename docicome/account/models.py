@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.db.models.enums import IntegerChoices
+from django.core.validators import RegexValidator
 
 # Create your models here.
 
@@ -10,6 +11,8 @@ class UserType(IntegerChoices):
   
 class Account(AbstractUser):
     user_type = models.SmallIntegerField('user_type', choices=UserType.choices, default=UserType.PATIENT)
+    phone_regex = RegexValidator(regex=r'^+9\d{9,11}$', message="Phone number must be entered in the format: '+999999999'.")
+    phone_number = models.CharField(validators=[phone_regex], max_length=13, blank=True, null=False) # validators should be a list
     # add additional fields in here
 
 
@@ -18,9 +21,12 @@ class Account(AbstractUser):
 
     @staticmethod
     def get_fields():
-        return 'username', 'email', 'first_name', 'last_name', 'user_type'
+        return 'username', 'email', 'first_name', 'last_name', 'user_type', 'phone_number'
 
-# Create your models here.
+    @staticmethod
+    def get_form_fields():
+        return ('username', 'email', 'first_name', 'last_name', 'phone_number')
+
 
 class Doctor(models.Model):
     specialty = models.TextField()

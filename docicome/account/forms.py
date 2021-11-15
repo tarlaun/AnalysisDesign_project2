@@ -7,11 +7,12 @@ class AccountCreationForm(UserCreationForm):
 
     class Meta:
         model = Account
-        fields = ('username', 'email', 'first_name', 'last_name')
+        fields = Account.get_form_fields()
 
 class AccountChangeForm(UserChangeForm):
 
     class Meta:
-        model = Account
-        fields = ('username', 'email','first_name', 'last_name')
+        model = Account        
+        fields = Account.get_form_fields()
+
 
