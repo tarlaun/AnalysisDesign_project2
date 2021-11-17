@@ -54,6 +54,7 @@ class Order(models.Model):
     doctor = models.ForeignKey(Doctor, null=True, blank=True, on_delete=models.PROTECT)
     expertise = models.ForeignKey(Expertise, on_delete=models.PROTECT)
     address = models.TextField()
+    details = models.TextField()
 
     def __str__(self):
         return f'{self.user.__str__()} {self.doctor.__str__()} {self.expertise.__str__()}'
