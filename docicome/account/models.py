@@ -47,3 +47,11 @@ class Doctor(models.Model):
     @staticmethod
     def get_fields():
         return 'user', 'specialty'
+
+
+class Order(models.Model):
+    user = models.ForeignKey(Account, on_delete=models.PROTECT, null=False)
+    doctor = models.ForeignKey(Doctor, null=True, on_delete=models.PROTECT)
+    expertise = models.ForeignKey(Expertise, on_delete=models.PROTECT)
+    address = models.TextField()
+
