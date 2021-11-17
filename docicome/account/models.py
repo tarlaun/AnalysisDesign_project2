@@ -12,7 +12,7 @@ class UserType(IntegerChoices):
 class Account(AbstractUser):
     user_type = models.SmallIntegerField('user_type', choices=UserType.choices, default=UserType.PATIENT)
     phone_regex = RegexValidator(regex=r'^+9\d{9,11}$', message="Phone number must be entered in the format: '+999999999'.")
-    phone_number = models.CharField(validators=[phone_regex], max_length=13, blank=True, null=False) # validators should be a list
+    phone_number = models.CharField(validators=[phone_regex], max_length=13, blank=False) # validators should be a list
     # add additional fields in here
 
 
@@ -21,7 +21,7 @@ class Account(AbstractUser):
 
     @staticmethod
     def get_fields():
-        return 'username', 'email', 'first_name', 'last_name', 'user_type', 'phone_number'
+        return ('username', 'email', 'first_name', 'last_name', 'user_type', 'phone_number')
 
     @staticmethod
     def get_form_fields():
