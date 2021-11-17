@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Account, Doctor, Expertise
+from .models import Account, Doctor, Expertise, Order
 
 
 @admin.register(Account)
@@ -14,3 +14,4 @@ class AuthorAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Expertise)
+admin.site.register(Order)

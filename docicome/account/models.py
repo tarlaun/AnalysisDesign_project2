@@ -25,7 +25,7 @@ class Account(AbstractUser):
 
     @staticmethod
     def get_fields():
-        return 'username', 'email', 'first_name', 'last_name', 'user_type', 'phone_number'
+        return 'username', 'email', 'first_name', 'last_name', 'user_type', 'phone_number', 'password'
 
     @staticmethod
     def get_form_fields():
@@ -46,7 +46,10 @@ class Doctor(models.Model):
 
     @staticmethod
     def get_fields():
-        return 'user', 'specialty'
+        return 'user', 'expertise'
+
+    def __str__(self):
+        return self.user.__str__()
 
 
 class Order(models.Model):
@@ -55,3 +58,5 @@ class Order(models.Model):
     expertise = models.ForeignKey(Expertise, on_delete=models.PROTECT)
     address = models.TextField()
 
+    def __str__(self):
+        return f'{self.user.__str__()} {self.doctor.__str__()} {self.expertise.__str__()}'
