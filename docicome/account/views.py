@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import user_passes_test
 from .forms import AccountCreationForm
 from .models import Expertise
@@ -29,3 +29,8 @@ class ExpertiseView(generic.ListView):
 
     def get_queryset(self):
         return Expertise.objects.all()
+
+
+def request_for_chosen_expertise(request, exp_id):
+    expertise = get_object_or_404(Expertise, pk=exp_id)
+    return render(request, 'request_for_expertise.html', {'expertise': expertise})
