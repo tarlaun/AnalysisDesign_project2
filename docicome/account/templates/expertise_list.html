@@ -10,7 +10,8 @@
             {% for exp in expertise_list %}
                 <div class="item black">
                     <div class="ui content">
-                        <div class="ui header big" style="text-align: right;">{{ exp.name }}</div>
+                        <li><a href="{% url 'req_for_exp' exp.id %}" class="ui header big"
+                               style="text-align: right;">{{ exp.name }}</a></li>
                         <div class="description aligned center"> قیمت : حدودا <b>{{ exp.price }}</b> تومان</div>
                     </div>
                 </div>
