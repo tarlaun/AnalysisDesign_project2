@@ -10,4 +10,13 @@
         وارد کنید
         <i class="first aid red icon"></i>
     </div>
+    <form class="ui form">
+        {% csrf_token %}
+        <div class="field" style="text-align: right;">
+            <label style="font-size: 15px">آدرس</label>
+            <label>
+                <textarea rows="2" required="required" name="address" style="direction:rtl;"></textarea>
+            </label>
+        </div>
+    </form>
 </div>
