@@ -24,7 +24,7 @@ def register(request):
 
 
 class ExpertiseView(generic.ListView):
-    template_name = 'exp_list.html'
+    template_name = 'expertise_list.html'
     context_object_name = 'expertise_list'
 
     def get_queryset(self):
