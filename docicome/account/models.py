@@ -54,7 +54,7 @@ class Doctor(models.Model):
 
 class Order(models.Model):
     user = models.ForeignKey(Account, on_delete=models.PROTECT, null=False)
-    doctor = models.ForeignKey(Doctor, null=True, on_delete=models.PROTECT)
+    doctor = models.ForeignKey(Doctor, null=True, on_delete=models.PROTECT, blank=True)
     expertise = models.ForeignKey(Expertise, on_delete=models.PROTECT)
     address = models.TextField()
 
