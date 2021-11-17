@@ -1,0 +1,18 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
+<div class="ui raised very padded text container segment">
+
+        <h3 class="ui block black header" style="text-align: right;">
+            .تخصص مورد نظر خود را انتخاب کنید
+        </h3>
+        {% if expertise_list %}
+            <div class="ui middle aligned list">
+                {% for exp in expertise_list %}
+                    <div class="item black">
+                        <div class="ui content">
+                            <div class="ui header big" style="text-align: right;">{{ exp.name }}</div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+</div>
