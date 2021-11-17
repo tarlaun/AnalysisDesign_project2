@@ -26,7 +26,7 @@
         font-family: sahel, serif !important;
     }
 </style>
-<body>
+<body onload="clear_fields()">
 <div class="ui one column stackable center aligned page grid register-form">
     <div class="column eight wide">
         <form action="" method="POST" class="ui form">
@@ -34,10 +34,10 @@
             <div class="ui hidden divider"></div>
             <h1 class="ui dividing header">ورود</h1>
             <div class="field form-fields-text">
-                {{ form.username }}
+                <input type="text" name="username" placeholder="نام کاربری">
             </div>
-            <div class="field">
-                {{ form.password1 }}
+            <div class="field form-fields-text">
+                <input type="password" name="password" placeholder="رمز">
             </div>
             <div class="ui hidden divider"></div>
             {{ form.errors }}
@@ -53,6 +53,12 @@
 
     for (let i = 1; i <= 2; i++) {
         form_fields[i].style.textAlign = 'center'
+    }
+
+    function clear_fields() {
+        for (let i = 1; i <= 2; i++) {
+            form_fields[i].value = ''
+        }
     }
 </script>
 </body>
