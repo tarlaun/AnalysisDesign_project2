@@ -155,8 +155,10 @@ cython_debug/
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 # User-specific stuff
+.idea
+.idea/*
 .idea/**/workspace.xml
-.idea/**/tasks.xml
+.idea/**/tasks.xmls
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
 .idea/**/shelf
@@ -188,8 +190,8 @@ cython_debug/
 # .idea/compiler.xml
 # .idea/jarRepositories.xml
 # .idea/modules.xml
-# .idea/*.iml
-# .idea/modules
+ .idea/*.iml
+ .idea/modules
 # *.iml
 # *.ipr
 
@@ -231,7 +233,7 @@ fabric.properties
 
 # *.iml
 # modules.xml
-# .idea/misc.xml
+ .idea/misc.xml
 # *.ipr
 
 # Sonarlint plugin
