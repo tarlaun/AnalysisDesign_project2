@@ -1,8 +1,10 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 from django.contrib.auth.decorators import user_passes_test
 from .forms import AccountCreationForm
-from .models import Expertise
+from .models import Expertise, Order
 from django.views import generic
 
 
@@ -34,3 +36,12 @@ class ExpertiseView(generic.ListView):
 def request_for_chosen_expertise(request, exp_id):
     expertise = get_object_or_404(Expertise, pk=exp_id)
     return render(request, 'request_for_expertise.html', {'expertise': expertise})
+
+
+def add_order(request, exp_id):
+    expertise = get_object_or_404(Expertise, pk=exp_id)
+    address = request.POST['address']
+    details = request.POST['details']
+    o = Order(user_id=request.user.id, expertise_id=expertise.id, address=address, details=details)
+    o.save()
+    return HttpResponseRedirect(reverse('?'))
