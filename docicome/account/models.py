@@ -13,9 +13,10 @@ class UserType(IntegerChoices):
 
 class Account(AbstractUser):
     user_type = models.SmallIntegerField('user_type', choices=UserType.choices, default=UserType.PATIENT)
-    phone_regex = RegexValidator(regex=r'^(\+|0)9\d{9,11}$', message="Phone number must be entered in the format: '+999999999'.")
-    phone_number = models.CharField(validators=[phone_regex], max_length=13, blank=False) # validators should be a list
-    
+    phone_regex = RegexValidator(regex=r'^(\+|0)9\d{9,11}$',
+                                 message="Phone number must be entered in the format: '+999999999'.")
+    phone_number = models.CharField(validators=[phone_regex], max_length=13, blank=False)  # validators should be a list
+
     def __str__(self):
         return self.username
 
@@ -50,7 +51,7 @@ class Doctor(models.Model):
 
 class Order(models.Model):
     user = models.ForeignKey(Account, on_delete=models.PROTECT, null=False)
-    doctor = models.ForeignKey(Doctor, null=True, on_delete=models.PROTECT)
+    doctor = models.ForeignKey(Doctor, null=True, blank=True, on_delete=models.PROTECT)
     expertise = models.ForeignKey(Expertise, on_delete=models.PROTECT)
     address = models.TextField()
 
