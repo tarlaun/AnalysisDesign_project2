@@ -8,17 +8,29 @@ from .models import Account, Doctor, Expertise, Order
 
 @admin.register(Account)
 class AccountAdmin(UserAdmin):
+    fieldsets = (
+       (None, {
+            'fields': ('username', 'password')
+        }),
+        ('Personal info', {
+            'fields': ('first_name', 'last_name', 'email', 'phone_number')
+        }),
+         
+        ('Additional info', {
+            'fields': ("user_type",)
+        })
+    )
    
     add_fieldsets = (
         (None, {
-            'fields': ('username', 'password')
+            'fields': ('username', 'password1', "password2")
         }),
         ('Personal info', {
             'fields': ('first_name', 'last_name', 'email', "phone_number")
         }),
          
         ('Additional info', {
-            'fields': ('user_type', )
+            'fields': ("user_type",)
         })
     )
     list_display = Account.get_fields()
