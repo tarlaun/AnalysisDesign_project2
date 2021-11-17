@@ -10,7 +10,7 @@
         وارد کنید
         <i class="first aid red icon"></i>
     </div>
-    <form class="ui form">
+    <form class="ui form" action="{% url 'add_order' expertise.id %}" method="post">
         {% csrf_token %}
         <div class="field" style="text-align: right;">
             <label style="font-size: 15px">آدرس</label>
