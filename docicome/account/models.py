@@ -26,7 +26,7 @@ class Account(AbstractUser):
 
     @staticmethod
     def get_form_fields():
-        return ('username', 'email', 'first_name', 'last_name', 'phone_number')
+        return 'username', 'email', 'first_name', 'last_name', 'phone_number'
 
 
 class Expertise(models.Model):

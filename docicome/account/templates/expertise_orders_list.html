@@ -6,7 +6,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>نمایش لیست درخواست‌ها به پزشک</title>
+    <title>نمایش لیست درخواست‌ها</title>
 </head>
 
 <body>
@@ -16,7 +16,7 @@
 <div class="ui segment" style="padding:10px;margin:10px;direction:rtl;background-color:floralwhite;">
     <a class="item">
         <div class="ui horizontal label">نام:</div>
-        {{ order.patient.name }}
+        {{ order.user }}
     </a>
     <a class="item">
         <div class="ui horizontal label">آدرس:</div>
@@ -24,7 +24,7 @@
     </a>
     <a class="item">
         <div class="ui horizontal label">شرح مشکل:</div>
-        {{ order.problem }}
+        {{ order.details }}
     </a>
     <button class="ui green button" onclick="window.location='{% url 'accept_order' order.id %}'">
         قبول

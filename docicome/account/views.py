@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import user_passes_test
 from .forms import AccountCreationForm
 from django.contrib import messages
+from .models import UserType, Doctor, Account, Order
 
 
 def being_doctor_check(user):
@@ -51,29 +52,31 @@ def logout(request):
 def home(request):
     return HttpResponse("Home Page")
 
-@login_required
+
+# @login_required
 # TODO: If the user isn’t logged in, redirect to settings.LOGIN_URL
-@user_passes_test(being_doctor_check)
+# @user_passes_test(being_doctor_check)
 def expertise_orders_list(request):
-    # doctor = request.auth.doctor
-    # expertise = doctor.expertise
-    # orders_list = filter(orders.all, expertise=expertise)
-    orders_list = [
-        {'id': 1, 'patient': {'name': 'نام بیمار اول'},
-         'address': 'آدرس ۱', 'problem': 'شرح ۱'},
-        {'id': 2, 'patient': {'name': 'نام بیمار دوم'},
-         'address': 'آدرس ۲', 'problem': 'شرح ۲'},
-        {'id': 3, 'patient': {'name': 'نام بیمار سوم'},
-         'address': 'آدرس ۳', 'problem': 'شرح ۳'},
-    ]
+    if not request.user.is_authenticated:
+        return HttpResponse("Log in")
+    if request.user.user_type == UserType.PATIENT:
+        return HttpResponse("You are not a doctor")
+    doctor = Doctor.objects.get(user=request.user)
+    expertise = doctor.expertise
+    orders_list = Order.objects.filter(expertise=expertise, doctor=None)
     return render(request, 'expertise_orders_list.html', {'orders_list': orders_list})
 
 
-@login_required
-@user_passes_test(being_doctor_check)
+# @login_required
+# @user_passes_test(being_doctor_check)
 def accept_order(request, order_id):
-    print(request.user.is_authenticated)
-    # if is doctor and same expertise and order is not taken by others
-    order = {'id': 1, 'patient': {'name': 'نام بیمار اول'},
-             'address': 'آدرس ۱', 'problem': 'شرح ۱'}
+    if not request.user.is_authenticated:
+        return HttpResponse("Log in")
+    if request.user.user_type == UserType.PATIENT:
+        return HttpResponse("You are not a doctor")
+    order = Order.objects.get(id=order_id)
+    if order.doctor:
+        return HttpResponse("This Order was accepted by another doctor!")
+    order.doctor = Doctor.objects.get(user=request.user)
+    order.save()
     return render(request, 'accept_order.html', {'order': order})
