@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
+
+<head>
+	<meta charset="utf-8">
+	<title>قبول درخواست</title>
+</head>
+
+<body>
+	<div class="ui segment" style="padding:10px;margin:10px;direction:rtl;background-color:floralwhite;">
+		<a class="item">
+			<div class="ui horizontal label">نام:</div>
+			{{ order.user }}
+		</a>
+		<a class="item">
+			<div class="ui horizontal label">آدرس:</div>
+			{{ order.address }}
+		</a>
+		<a class="item">
+			<div class="ui horizontal label">شرح مشکل:</div>
+			{{ order.details }}
+		</a>
+		 قبول شد
+	</div>
+</body>
+
+</html>
