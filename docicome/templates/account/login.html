@@ -6,7 +6,7 @@
           href="//cdn.jsdelivr.net/semantic-ui/1.11.4/semantic.min.css"/>
     <script data-require="semantic-ui@1.11.4" data-semver="1.11.4"
             src="//cdn.jsdelivr.net/semantic-ui/1.11.4/semantic.min.js"></script>
-    <title>ثبت‌نام</title>
+    <title>ورود</title>
 </head>
 <style>
     @font-face {
@@ -32,46 +32,26 @@
         <form action="" method="POST" class="ui form">
             {% csrf_token %}
             <div class="ui hidden divider"></div>
-            <h1 class="ui dividing header">ثبت‌نام</h1>
+            <h1 class="ui dividing header">ورود</h1>
             <div class="field form-fields-text">
                 {{ form.username }}
             </div>
             <div class="field">
-                {{ form.email }}
-            </div>
-            <div class="field">
-                {{ form.first_name }}
-            </div>
-            <div class="field">
-                {{ form.last_name }}
-            </div>
-            <div class="field">
-                {{ form.phone_number }}
-            </div>
-            <div class="field">
                 {{ form.password1 }}
-            </div>
-            <div class="field">
-                {{ form.password2 }}
             </div>
             <div class="ui hidden divider"></div>
             {{ form.errors }}
             <div class="ui hidden divider"></div>
-            <input class="fluid ui primary button" type="submit" value="ثبت‌نام">
+            <input class="fluid ui primary button" type="submit" value="ورود">
         </form>
     </div>
 </div>
 <script>
     let form_fields = document.getElementsByTagName('input')
     form_fields[1].placeholder = 'نام کاربری'
-    form_fields[2].placeholder = 'آدرس ایمیل'
-    form_fields[3].placeholder = 'نام'
-    form_fields[4].placeholder = 'نام خانوادگی'
-    form_fields[5].placeholder = 'شماره تلفن همراه'
-    form_fields[6].placeholder = 'رمز'
-    form_fields[7].placeholder = 'تکرار رمز'
+    form_fields[2].placeholder = 'رمز'
 
-    for (let i = 1; i <= 7; i++) {
+    for (let i = 1; i <= 2; i++) {
         form_fields[i].style.textAlign = 'center'
     }
 </script>

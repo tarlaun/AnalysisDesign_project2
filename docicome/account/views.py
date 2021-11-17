@@ -19,3 +19,9 @@ def register(request):
     context = {"form": form}
 
     return render(request, 'account/register.html', context)
+
+
+def login(request):
+    form = AccountCreationForm()
+    context = {"form": form}
+    return render(request, 'account/login.html', context)
