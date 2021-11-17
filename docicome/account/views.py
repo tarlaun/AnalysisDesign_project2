@@ -1,6 +1,11 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-
+from django.contrib.auth.decorators import user_passes_test
 from .forms import AccountCreationForm
+
+
+def being_doctor_check(user):
+    return user.user_type == 2
 
 
 def register(request):
@@ -16,6 +21,9 @@ def register(request):
     return render(request, 'account/register.html', context)
 
 
+@login_required
+# TODO: If the user isn’t logged in, redirect to settings.LOGIN_URL
+@user_passes_test(being_doctor_check)
 def expertise_orders_list(request):
     # doctor = request.auth.doctor
     # expertise = doctor.expertise
@@ -31,8 +39,11 @@ def expertise_orders_list(request):
     return render(request, 'expertise_orders_list.html', {'orders_list': orders_list})
 
 
+@login_required
+@user_passes_test(being_doctor_check)
 def accept_order(request, order_id):
+    print(request.user.is_authenticated)
     # if is doctor and same expertise and order is not taken by others
     order = {'id': 1, 'patient': {'name': 'نام بیمار اول'},
-           'address': 'آدرس ۱', 'problem': 'شرح ۱'}
+             'address': 'آدرس ۱', 'problem': 'شرح ۱'}
     return render(request, 'accept_order.html', {'order': order})
