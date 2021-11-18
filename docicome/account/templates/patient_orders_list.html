@@ -17,6 +17,15 @@
                 </div>
                 <div class="list">
                     <a class="item">
+                        <a>نام پزشک:</a>
+                        {% if order.doctor %}
+                            {{ order.doctor }}
+                        {% else %}
+                            درخواست شما هنوز توسط هیچ پزشکی تایید نشده‌است.
+                        {% endif %}
+                    </a>
+                    <br/>
+                    <a class="item">
                         <a class="label">آدرس:</a>
                         {{ order.address }}
                     </a>
