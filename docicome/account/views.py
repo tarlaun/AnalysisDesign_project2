@@ -108,4 +108,9 @@ def add_order(request, exp_id):
     details = request.POST['details']
     o = Order(user_id=request.user.id, expertise_id=expertise.id, address=address, details=details)
     o.save()
-    return HttpResponseRedirect(reverse('?'))
+    return HttpResponseRedirect(reverse('patient_orders_list'))
+
+
+def patient_orders_list(request):
+    orders_list = Order.objects.filter(user_id=request.user.id)
+    return render(request, 'patient_orders_list.html', {'orders_list': orders_list[::-1]})
