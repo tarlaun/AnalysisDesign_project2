@@ -99,6 +99,10 @@ def request_for_chosen_expertise(request, exp_id):
 
 
 def add_order(request, exp_id):
+    if not request.user.is_authenticated:
+        return HttpResponse("Log in")
+    if request.user.user_type != UserType.PATIENT:
+        return HttpResponse("You are not a Patient")
     expertise = get_object_or_404(Expertise, pk=exp_id)
     address = request.POST['address']
     details = request.POST['details']
