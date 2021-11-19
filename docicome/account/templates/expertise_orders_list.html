@@ -8,13 +8,13 @@
     <meta charset="utf-8">
     <title>نمایش لیست درخواست‌ها</title>
 </head>
-<div class="ui vertical labeled icon buttons">
-        <button class="ui button red">
-            <i class="sign out alternate icon white"></i>
-            <a onclick="window.location='{% url 'signout' %}'" style="color: white;">خروج</a>
-        </button>
-    </div>
 <body>
+<div class="ui vertical labeled icon buttons">
+    <button class="ui button red">
+        <i class="sign out alternate icon white"></i>
+        <a onclick="window.location='{% url 'signout' %}'" style="color: white;">خروج</a>
+    </button>
+</div>
 {% if orders_list %}
 
 {% for order in orders_list %}
