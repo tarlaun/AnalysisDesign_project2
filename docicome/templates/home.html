@@ -1,7 +1,146 @@
-{% block title %}Home{% endblock %}
+<!DOCTYPE html>
+<html lang="fa">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=2, user-scalable=no"
+    />
+    <meta
+      name="description"
+      content="Semantic-UI-Forest, collection of design, themes and templates for Semantic-UI."
+    />
+    <meta name="keywords" content="Semantic-UI, Theme, Design, Template" />
+    <meta name="author" content="PPType" />
+    <meta name="theme-color" content="#ffffff" />
+    <title>Docicom</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+      type="text/css"
+    />
+    <style>
+      body {
+        -webkit-font-smoothing: antialiased;
+      }
 
-{% block content %}
+      html * {
+        font-family: sahel, serif !important;
+      }
 
-  <p>You are not logged in</p>
-  <a href="accounts/signup/">Log In</a> |
-{% endblock %}
+      @font-face {
+        font-family: Sahel;
+        src: url('https://cdn.fontcdn.ir/Font/Persian/Sahel/Sahel.eot');
+        src: url('https://cdn.fontcdn.ir/Font/Persian/Sahel/Sahel.eot?#iefix') format('embedded-opentype'),
+        url('https://cdn.fontcdn.ir/Font/Persian/Sahel/Sahel.woff') format('woff'),
+        url('https://cdn.fontcdn.ir/Font/Persian/Sahel/Sahel.ttf') format('truetype');
+        font-weight: normal;
+      }
+
+      @media only screen and (min-width: 768px) {
+        .ui.container {
+          width: 700px;
+          max-width: 700px;
+        }
+
+        nav.ui.container .ui.header {
+          float: left;
+          margin-top: 12px;
+        }
+
+        nav.ui.container .ui.inverted.compact.menu {
+          float: right;
+        }
+      }
+
+      .ui.inverted.vertical.center.aligned.segment {
+        padding-top: 36px;
+      }
+
+      nav.ui.container .ui.inverted.compact.menu {
+        background-color: rgb(51, 51, 51);
+      }
+
+      nav.ui.container .ui.inverted.compact.menu .item {
+        padding-bottom: 0;
+      }
+
+      nav.ui.container .ui.inverted.compact.menu .item {
+        font-size: 16px;
+        padding-left: 0;
+        padding-right: 0;
+        padding-bottom: 14px;
+        margin-left: 16px;
+        margin-right: 16px;
+        border-radius: 0;
+      }
+
+      nav.ui.container .ui.inverted.compact.menu .active.item {
+        background-color: inherit;
+        border-bottom-color: white;
+        border-bottom-style: solid;
+        border-bottom-width: 2px;
+      }
+
+      .ui.inverted.vertical.segment {
+        height: 100vh;
+        background-color: rgb(51, 51, 51);
+      }
+
+      .ui.content.container {
+        height: 300px;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+      }
+
+      .ui.content.container h1.header {
+        font-size: 36px;
+      }
+
+      .ui.content.container p {
+        font-size: 21px;
+        line-height: 1.6;
+        font-weight: 300;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      }
+
+      .ui.inverted.vertical.segment footer.ui.segment {
+        height: 80px;
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        color: gray;
+      }
+
+      .ui.inverted.vertical.segment footer.ui.segment a {
+        color: white;
+      }
+    </style>
+  </head>
+
+  <body id="root">
+    <div class="ui inverted vertical center aligned segment">
+      <nav class="ui container">
+        <div class="ui borderless inverted compact menu">
+          <a class="active item" href="">خانه</a> <a class="item" href="/accounts/signup/">ثبت‌نام</a>
+          <a class="item" href="/accounts/signin/">ورود</a>
+        </div>
+      </nav>
+      <div class="ui content container">
+        <h1 class="ui inverted header">Docicom</h1>
+        <p dir="rtl">
+          سامانه درمان سیار (Docicom) چندی است که برای یاری مردم ایران در ایام سخت کرونا شروع به کار کرده است تا بتواند حضور مردم را در مراکز پر خطری مانند بیمارستان‌ها و درمانگاه‌ها کاهش دهد. این نسخه از سامانه در حال حاضر به صورت آزمایشی و برای برطرف نمودن مشکلات آن است. از همکاری شما هم‌وطن عزیز برای بهبود این سامانه کمال تشکر را داریم.
+        </p>
+        <a href="accounts/signup"><div class="ui huge button">ثبت نام کنید</div></a>
+      </div>
+{#      <footer class="ui inverted vertical segment">#}
+{#        Cover template for Semantic-UI, by @Semantic-UI-Forest.#}
+{#      </footer>#}
+    </div>
+  </body>
+</html>
