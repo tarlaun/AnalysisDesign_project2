@@ -5,10 +5,17 @@
 </head>
 
 <div class="ui raised very padded text container segment">
-
+    
+    <div class="ui vertical labeled icon buttons">
+        <button class="ui button red">
+            <i class="sign out alternate icon white"></i>
+            <a onclick="window.location='{% url 'signout' %}'" style="color: white;">خروج</a>
+        </button>
+    </div>
+    
     <h3 class="ui block black header" style="text-align: right;">
-        <i class="heartbeat red icon"></i>
         .تخصص مورد نظر خود را انتخاب کنید
+        <i class="heartbeat red icon"></i>
     </h3>
     {% if expertise_list %}
         <div class="ui middle aligned selection animated divided list">

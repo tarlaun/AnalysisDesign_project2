@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
@@ -14,7 +14,7 @@ from django.views import generic
 def being_doctor_check(user):
     return user.user_type == 2
 
-
+# register A User using Account Creation Form And django auth app
 def register(request):
     form = AccountCreationForm()
 
@@ -47,9 +47,10 @@ def signin(request):
     context = {"form": form}
     return render(request, 'account/login.html', context)
 
-
-def logout(request):
-    logout(re)
+#log out from site
+def signout(request):
+    logout(request)
+    return render(request, "home.html", {})
 
 
 def home(request):

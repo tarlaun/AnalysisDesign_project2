@@ -5,7 +5,7 @@ from .forms import AccountCreationForm
 from .models import Account, Doctor
 from .models import Account, Doctor, Expertise, Order
 
-
+# select fields tha django admin show and registers
 @admin.register(Account)
 class AccountAdmin(UserAdmin):
     fieldsets = (

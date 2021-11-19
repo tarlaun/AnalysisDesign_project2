@@ -3,9 +3,11 @@ from . import views
 
 
 urlpatterns = [
+    # ورود و ثبت نام کاربر
     path('signup/', views.register, name='signup'),
     path('signin/', views.signin, name='signin'),
     path('home/', views.home, name='home'),
+    path('signout/', views.signout, name='signout'),
     # پزشک :: نمایش درخواست‌های فعال موجود برای تخصص پزشک
     # پزشک :: قابلیت قبول درخواست
     path('expertise_orders_list/', views.expertise_orders_list, name='expertise_orders_list'),

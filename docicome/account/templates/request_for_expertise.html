@@ -4,6 +4,12 @@
     <title>صفحه‌ی ثبت درخواست</title>
 </head>
 <div class="ui raised very padded text container segment">
+<div class="ui vertical labeled icon buttons">
+        <button class="ui button red">
+            <i class="sign out alternate icon white"></i>
+            <a onclick="window.location='{% url 'signout' %}'" style="color: white;">خروج</a>
+        </button>
+    </div>
     <div class="ui blue message" style="text-align: right;">
         .لطفا مشخصات خود را برای درخواست پزشک از تخصص
         <b style="font-size: 22px">{{ expertise.name }}</b>
