@@ -12,7 +12,7 @@ from django.views import generic
 
 
 def being_doctor_check(user):
-    return user.user_type == 2
+    return user.user_type == UserType.DOCTOR
 
 # register A User using Account Creation Form And django auth app
 def register(request):
@@ -39,7 +39,10 @@ def signin(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('home')
+            if being_doctor_check(user):
+                return redirect('expertise_orders_list')
+            else:
+                return redirect('patient_orders_list')
         else:
             return HttpResponse('Username or Password is incorrect. <a href="">Return to login</a>')
 
