@@ -123,3 +123,4 @@ def add_order(request, exp_id):
 def patient_orders_list(request):
     orders_list = Order.objects.filter(user_id=request.user.id)
     return render(request, 'patient_orders_list.html', {'orders_list': orders_list[::-1]})
+
