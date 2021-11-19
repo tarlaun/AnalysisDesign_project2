@@ -14,6 +14,7 @@ from django.views import generic
 def being_doctor_check(user):
     return user.user_type == UserType.DOCTOR
 
+
 # register A User using Account Creation Form And django auth app
 def register(request):
     form = AccountCreationForm()
@@ -50,7 +51,8 @@ def signin(request):
     context = {"form": form}
     return render(request, 'account/login.html', context)
 
-#log out from site
+
+# log out from site
 def signout(request):
     logout(request)
     return render(request, "home.html", {})
@@ -61,7 +63,6 @@ def home(request):
 
 
 # @login_required
-# TODO: If the user isn’t logged in, redirect to settings.LOGIN_URL
 # @user_passes_test(being_doctor_check)
 def expertise_orders_list(request):
     if not request.user.is_authenticated:
@@ -84,8 +85,11 @@ def accept_order(request, order_id):
     order = Order.objects.get(id=order_id)
     if order.doctor:
         return HttpResponse("This Order was accepted by another doctor!")
-    order.doctor = Doctor.objects.get(user=request.user)
+    doctor = Doctor.objects.get(user=request.user)
+    order.doctor = doctor
     order.save()
+    doctor.not_processed_income += order.expertise.price
+    doctor.save()
     return render(request, 'accept_order.html', {'order': order})
 
 
