@@ -10,6 +10,7 @@ class UserType(IntegerChoices):
     DOCTOR = 1,
     PATIENT = 2
 
+
 # Our Custom User Model
 class Account(AbstractUser):
     user_type = models.SmallIntegerField('user_type', choices=UserType.choices, default=UserType.PATIENT)
@@ -36,10 +37,12 @@ class Expertise(models.Model):
     def __str__(self):
         return self.name
 
+
 # each doctor type account is related to a doctor entry
 class Doctor(models.Model):
     expertise = models.ForeignKey(Expertise, on_delete=models.PROTECT)
     user = models.OneToOneField(Account, on_delete=models.CASCADE, primary_key=True)
+    not_processed_income = models.IntegerField(default=0)
 
     @staticmethod
     def get_fields():
