@@ -77,6 +77,7 @@ def expertise_orders_list(request):
 
 # @login_required
 # @user_passes_test(being_doctor_check)
+# Change Doctor Status of Order in DB
 def accept_order(request, order_id):
     if not request.user.is_authenticated:
         return HttpResponse("Log in")
@@ -92,7 +93,7 @@ def accept_order(request, order_id):
     doctor.save()
     return render(request, 'accept_order.html', {'order': order})
 
-
+# View Expertise List For Patient
 class ExpertiseView(generic.ListView):
     template_name = 'expertise_list.html'
     context_object_name = 'expertise_list'
@@ -100,12 +101,12 @@ class ExpertiseView(generic.ListView):
     def get_queryset(self):
         return Expertise.objects.all()
 
-
+# View Request Page After Choosing Expertise
 def request_for_chosen_expertise(request, exp_id):
     expertise = get_object_or_404(Expertise, pk=exp_id)
     return render(request, 'request_for_expertise.html', {'expertise': expertise})
 
-
+# ADD Order Into DB
 def add_order(request, exp_id):
     if not request.user.is_authenticated:
         return HttpResponse("Log in")
@@ -118,7 +119,7 @@ def add_order(request, exp_id):
     o.save()
     return HttpResponseRedirect(reverse('patient_orders_list'))
 
-
+# View Patient's Previous Orders List
 def patient_orders_list(request):
     orders_list = Order.objects.filter(user_id=request.user.id)
     return render(request, 'patient_orders_list.html', {'orders_list': orders_list[::-1]})
