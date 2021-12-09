@@ -1,6 +1,11 @@
+{% load static %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
 <head>
     <meta charset="utf-8">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="{% static 'js/stars.js' %}" defer></script>
     <title>سوابق درخواست پیشین</title>
 </head>
 <div class="ui raised very padded text container segment">
@@ -46,10 +51,22 @@
                         <a>شرح بیماری:</a>
                         {{ order.details }}
                     </a>
+                    <br/>
+                    <div class="col text-right">
+                        <a>امتیازدهی:</a>
+                        <form class="rate-form" action="" method="POST" id="{{order.id}}">
+                            {% csrf_token %}
+                            <button type="submit" class="fa fa-star my-btn" id="first"></button>
+                            <button type="submit" class="fa fa-star my-btn" id="second"></button>
+                            <button type="submit" class="fa fa-star my-btn" id="third"></button>
+                            <button type="submit" class="fa fa-star my-btn" id="fourth"></button>
+                            <button type="submit" class="fa fa-star my-btn" id="fifth"></button>
+                        </form>
+                        <div id="confirm-box"></div>
+                    </div>
                 </div>
             </div>
         {% endfor %}
-
     {% else %}
         <div class="ui red inverted segment" style="padding:10px;margin:10px;direction:rtl">
             هیچ درخواستی وجود ندارد!

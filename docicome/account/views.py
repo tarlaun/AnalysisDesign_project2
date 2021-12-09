@@ -1,6 +1,6 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -124,3 +124,13 @@ def patient_orders_list(request):
     orders_list = Order.objects.filter(user_id=request.user.id)
     return render(request, 'patient_orders_list.html', {'orders_list': orders_list[::-1]})
 
+def rate_order(request):
+    if request.method == 'POST':
+        el_id = request.POST.get('el_id')
+        val = request.POST.get('val')
+        print(el_id, val, "********************")
+        order = Order.objects.get(id=el_id)
+        order.score = val
+        order.save()
+        return JsonResponse({'success':'true', 'score': val}, safe=False)
+    return JsonResponse({'success':'false'})
