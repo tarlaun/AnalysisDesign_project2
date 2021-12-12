@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import user_passes_test
-from .forms import AccountCreationForm
+from .forms import AccountCreationForm, LoginForm
 from django.contrib import messages
 from .models import UserType, Doctor, Account, Order, Expertise
 from django.views import generic
@@ -47,8 +47,10 @@ def signin(request):
         else:
             return HttpResponse('Username or Password is incorrect. <a href="">Return to login</a>')
 
-    form = AccountCreationForm()
+    # form = AccountCreationForm()
+    form = LoginForm()
     context = {"form": form}
+    print("----- form:", form)
     return render(request, 'account/login.html', context)
 
 
