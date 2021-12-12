@@ -72,7 +72,7 @@ def expertise_orders_list(request):
     doctor = Doctor.objects.get(user=request.user)
     expertise = doctor.expertise
     orders_list = Order.objects.filter(expertise=expertise, doctor=None)
-    return render(request, 'expertise_orders_list.html', {'orders_list': orders_list})
+    return render(request, 'account/expertise_orders_list.html', {'orders_list': orders_list})
 
 
 # @login_required
@@ -91,11 +91,11 @@ def accept_order(request, order_id):
     order.save()
     doctor.not_processed_income += order.expertise.price
     doctor.save()
-    return render(request, 'accept_order.html', {'order': order})
+    return render(request, 'account/accept_order.html', {'order': order})
 
 # View Expertise List For Patient
 class ExpertiseView(generic.ListView):
-    template_name = 'expertise_list.html'
+    template_name = 'account/expertise_list.html'
     context_object_name = 'expertise_list'
 
     def get_queryset(self):
@@ -104,7 +104,7 @@ class ExpertiseView(generic.ListView):
 # View Request Page After Choosing Expertise
 def request_for_chosen_expertise(request, exp_id):
     expertise = get_object_or_404(Expertise, pk=exp_id)
-    return render(request, 'request_for_expertise.html', {'expertise': expertise})
+    return render(request, 'account/request_for_expertise.html', {'expertise': expertise})
 
 # ADD Order Into DB
 def add_order(request, exp_id):
@@ -122,5 +122,5 @@ def add_order(request, exp_id):
 # View Patient's Previous Orders List
 def patient_orders_list(request):
     orders_list = Order.objects.filter(user_id=request.user.id)
-    return render(request, 'patient_orders_list.html', {'orders_list': orders_list[::-1]})
+    return render(request, 'account/patient_orders_list.html', {'orders_list': orders_list[::-1]})
 
