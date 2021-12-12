@@ -10,11 +10,14 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
-from pathlib import Path
+from unipath import Path
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+
+# BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).parent
+CORE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -30,9 +33,6 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    # my apps
-    'account',
-
     #django apps
     'django.contrib.admin',
     'django.contrib.auth',
@@ -40,10 +40,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # my apps
+    'apps.account',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -52,13 +56,15 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'docicome.urls'
+ROOT_URLCONF = 'core.urls'
+TEMPLATE_DIR = os.path.join(CORE_DIR, "apps/templates")
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'templates')
+            TEMPLATE_DIR
+            # os.path.join(BASE_DIR, 'templates')
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -72,7 +78,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'docicome.wsgi.application'
+WSGI_APPLICATION = 'core.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
@@ -80,7 +86,7 @@ WSGI_APPLICATION = 'docicome.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': 'db.sqlite3',
     }
 }
 
@@ -118,10 +124,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
+# STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
+
+
+STATIC_ROOT = os.path.join(CORE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
+
+# Extra places for collectstatic to find static files.
+STATICFILES_DIRS = (
+    os.path.join(CORE_DIR, 'apps/static'),
+)
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'account.Account' # new

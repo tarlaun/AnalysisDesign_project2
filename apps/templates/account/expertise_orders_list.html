@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
+
+<head>
+    <meta charset="utf-8">
+    <title>نمایش لیست درخواست‌ها</title>
+</head>
+<body>
+<div class="ui vertical labeled icon buttons">
+    <button class="ui button red">
+        <i class="sign out alternate icon white"></i>
+        <a onclick="window.location='{% url 'signout' %}'" style="color: white;">خروج</a>
+    </button>
+</div>
+{% if orders_list %}
+
+{% for order in orders_list %}
+<div class="ui segment" style="padding:10px;margin:10px;direction:rtl;background-color:floralwhite;">
+    <a class="item">
+        <div class="ui horizontal label">نام:</div>
+        {{ order.user }}
+    </a>
+    <a class="item">
+        <div class="ui horizontal label">آدرس:</div>
+        {{ order.address }}
+    </a>
+    <a class="item">
+        <div class="ui horizontal label">شرح مشکل:</div>
+        {{ order.details }}
+    </a>
+    <button class="ui green button" onclick="window.location='{% url 'accept_order' order.id %}'">
+        قبول
+    </button>
+</div>
+{% endfor %}
+
+{% else %}
+<div class="ui red inverted segment" style="padding:10px;margin:10px;direction:rtl">
+    هیچ درخواستی وجود ندارد!
+</div>
+{% endif %}
+</body>
+
+</html>
