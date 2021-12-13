@@ -124,11 +124,12 @@ def patient_orders_list(request):
     orders_list = Order.objects.filter(user_id=request.user.id)
     return render(request, 'patient_orders_list.html', {'orders_list': orders_list[::-1]})
 
+# save a score for orders
 def rate_order(request):
     if request.method == 'POST':
         el_id = request.POST.get('el_id')
         val = request.POST.get('val')
-        print(el_id, val, "********************")
+        # print("***************", el_id, val, "********************")
         order = Order.objects.get(id=el_id)
         order.score = val
         order.save()
