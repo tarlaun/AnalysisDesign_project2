@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.db.models.enums import IntegerChoices
-from django.core.validators import RegexValidator
+from django.core.validators import RegexValidator, MaxValueValidator, MinValueValidator
 
 
 # Create your models here.
@@ -58,6 +58,13 @@ class Order(models.Model):
     expertise = models.ForeignKey(Expertise, on_delete=models.PROTECT)
     address = models.TextField()
     details = models.TextField()
+    score = models.IntegerField(default=0,
+        validators=[
+            MaxValueValidator(5),
+            MinValueValidator(0),
+        ]
+    )
+    comment = models.TextField()
 
     def __str__(self):
         return f'{self.user.__str__()} {self.doctor.__str__()} {self.expertise.__str__()}'
