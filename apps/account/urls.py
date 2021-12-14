@@ -16,5 +16,7 @@ urlpatterns = [
     path('expertise_list/<int:exp_id>/', views.request_for_chosen_expertise, name='req_for_exp'),
     path('add_order/<int:exp_id>/', views.add_order, name='add_order'),
     path('patient_orders_list/', views.patient_orders_list, name='patient_orders_list'),
+
+    path('doctor_list/', views.DoctorView.as_view(), name='doctor_list'),
     path('rate/', views.rate_order, name='rate-view'),
 ]
