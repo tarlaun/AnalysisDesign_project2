@@ -1,4 +1,3 @@
-
 {% extends "layouts/authentication-base.html" %}
 
 {% block title %} Register {% endblock title %}
@@ -8,130 +7,161 @@
 
 {% block content %}
 
-    <div class="page-inner">
-        <div class="page-header">
-            <h4 class="page-title">Register</h4>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-title">
-                            {% if msg %}
-                                <span class="text-danger">{{ msg | safe }}</span>
-                            {% else %}
-                            <span>
+<div class="page-inner">
+    <div class="page-header">
+        <h4 class="page-title">Register</h4>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        {% if msg %}
+                        <span class="text-danger">{{ msg | safe }}</span>
+                        {% else %}
+                        <span>
                                 Complete your credentials 
                             </span>
-                            {% endif %}
-                        </div>
+                        {% endif %}
                     </div>
+                </div>
 
-                    <form method="post" action="">
-                        {% csrf_token %}
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6 col-lg-4">
+                <form method="post" action="">
+                    {% csrf_token %}
+                    <div class="card-body">
+                        {% comment %}
+                        <div class="row"> {% endcomment %}
+                            {% comment %}
+                            <div class="col-md-6 col-lg-4"> {% endcomment %}
 
-                                    <div class="form-group">
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
                                                 <span class="input-group-text">
-                                                    <i class="far fa-address-card"></i>
+                                                    <i class="fas fa-user-circle"></i>
                                                 </span>
+                                                </div>
+                                                {{ form.first_name }}
                                             </div>
-                                            {{ form.first_name }}
                                         </div>
+                                        <span class="text-danger">{{ form.first_name.errors }}</span>
                                     </div>
-                                    <span class="text-danger">{{ form.first_name.errors }}</span>
 
-                                    <div class="form-group">
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
                                                 <span class="input-group-text">
-                                                    <i class=" 	far fa-address-card"></i>
+                                                    <i class="fas fa-user-circle"></i>
                                                 </span>
+                                                </div>
+                                                {{ form.last_name }}
                                             </div>
-                                            {{ form.last_name }}
                                         </div>
+                                        <span class="text-danger">{{ form.last_name.errors }}</span>
                                     </div>
-                                    <span class="text-danger">{{ form.last_name.errors }}</span>
+                                </div>
 
-                                    <div class="form-group">
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
                                                 <span class="input-group-text">
                                                     <i class="fas fa-user-alt"></i>
                                                 </span>
+                                                </div>
+                                                {{ form.username }}
                                             </div>
-                                            {{ form.username }}
                                         </div>
+                                        <span class="text-danger">{{ form.username.errors }}</span>
                                     </div>
-                                    <span class="text-danger">{{ form.username.errors }}</span>
 
-                                    <div class="form-group">
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
                                                 <span class="input-group-text">
                                                     <i class="far fa-envelope"></i>
                                                 </span>
+                                                </div>
+                                                {{ form.email }}
                                             </div>
-                                            {{ form.email }}
                                         </div>
+                                        <span class="text-danger">{{ form.email.errors }}</span>
                                     </div>
-                                    <span class="text-danger">{{ form.email.errors }}</span>
+                                </div>
 
-                                    <div class="form-group">
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
                                                 <span class="input-group-text">
                                                     <i class="fas fa-phone"></i>
                                                 </span>
+                                                </div>
+                                                {{ form.phone_number }}
                                             </div>
-                                            {{ form.phone_number }}
                                         </div>
+                                        <span class="text-danger">{{ form.phone_number.errors }}</span>
                                     </div>
-                                    <span class="text-danger">{{ form.phone_number.errors }}</span>
 
-                                    <div class="form-group">
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">
-                                                    <i class="fas fa-lock"></i>
-                                                </span>
-                                            </div>
-                                            {{ form.password1 }}
-                                        </div>
-                                    </div>
-                                    <span class="text-danger">{{ form.password1.errors }}</span>
-
-                                    <div class="form-group">
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">
-                                                    <i class="fas fa-lock"></i>
-                                                </span>
-                                            </div>
-                                            {{ form.password2 }}
-                                        </div>
-                                    </div>
-                                    <span class="text-danger">{{ form.password2.errors }}</span>
-
+                                    <div class="col"></div>
                                 </div>
+
+
+
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="fas fa-lock"></i>
+                                                </span>
+                                                </div>
+                                                {{ form.password1 }}
+                                            </div>
+                                        </div>
+                                        <span class="text-danger">{{ form.password1.errors }}</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="fas fa-lock"></i>
+                                                </span>
+                                                </div>
+                                                {{ form.password2 }}
+                                            </div>
+                                        </div>
+                                        <span class="text-danger">{{ form.password2.errors }}</span>
+                                    </div>
+                                </div>
+
+                                {% comment %}
                             </div>
+                            {% endcomment %}
+                            {% comment %}
                         </div>
-                        <div class="card-action">
-                            <button type="submit" class="btn btn-success">Submit</button>
-                            &nbsp; &nbsp;
-                            <span>Already have and account?</span> <a href="{% url 'signin' %}" >Login</a>
-                        </div>
+                        {% endcomment %}
+                    </div>
+                    <div class="card-action">
+                        <button type="submit" class="btn btn-success">Submit</button>
+                        &nbsp; &nbsp;
+                        <span>Already have and account?</span> <a href="{% url 'signin' %}">Login</a>
+                    </div>
 
-                    </form>
+                </form>
 
-                </div>
             </div>
         </div>
     </div>
+</div>
 
 {% endblock content %}
 
