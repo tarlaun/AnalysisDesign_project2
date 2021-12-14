@@ -42,9 +42,8 @@ def signin(request):
         if user is not None:
             login(request, user)
             if being_doctor_check(user):
-                #return redirect('expertise_orders_list')
+                return redirect('expertise_orders_list')
 
-                return redirect('doctor_list')
             else:
                 return redirect('patient_orders_list')
         else:
