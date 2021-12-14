@@ -149,7 +149,7 @@ def rate_order(request):
         return JsonResponse({'success':'true', 'score': val}, safe=False)
     return JsonResponse({'success':'false'})
 
-def doctor_list(request, exp_id=1):
+def doctor_list(request, exp_id):
 
     expertise = get_object_or_404(Expertise, pk=exp_id)
     docs_list = Doctor.objects.filter(expertise=expertise)
