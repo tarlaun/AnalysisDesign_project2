@@ -152,4 +152,4 @@ def doctor_list(request, exp_id):
 
     expertise = get_object_or_404(Expertise, pk=exp_id)
     docs_list = Doctor.objects.filter(expertise=expertise)
-    return render(request, 'account/doctor_list.html', {'doctor_list': docs_list})
+    return render(request, 'account/doctor_list.html', {'doctor_list': docs_list, 'exp_name':expertise.name})

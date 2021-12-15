@@ -1,0 +1,57 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
+<head>
+    <meta charset="utf-8">
+    <title>
+        لیست پزشکان تخصص
+    </title>
+</head>
+
+<div class="ui raised very padded text container segment">
+
+    <div class="ui vertical labeled icon buttons">
+        <button class="ui button red">
+            <i class="sign out alternate icon white"></i>
+            <a onclick="window.location='{% url 'signout' %}'" style="color: white;">خروج</a>
+        </button>
+    </div>
+
+    <h3 class="ui block black header" style="text-align: right;">
+        .پزشک مورد نظر خود را انتخاب کنید
+        <i class="heartbeat red icon"></i>
+
+        <b>{{ exp_name }}</b>:
+        تخصص
+    </h3>
+    {% if doctor_list %}
+        <div class="ui middle aligned selection animated divided list">
+            {% for doc in doctor_list %}
+                <div class="item black">
+                    <div class="ui content">
+                        <table class="table is-fullwidth is-hoverable">
+                            <thead>
+                            <tr>
+                                <th><abbr title="ID">ID</abbr></th>
+                                <th>Name</th>
+                                <th>Last Name</th>
+                                <th>Phone Number</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th>{{ doc.user.id }}</th>
+                                <td>{{ doc.user.first_name }}</td>
+                                <td>{{ doc.user.last_name }}</td>
+                                <td>{{ doc.user.phone_number }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>.با عرض پوزش فعلا قادر به ارائه‌ی خدمات پزشکی در این تخصص نیستیم
+            <i class="frown blue icon"></i>
+        </p>
+    {% endif %}
+</div>
