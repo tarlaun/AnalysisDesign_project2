@@ -71,6 +71,25 @@
                     <div style="text-align: left;">
                         <button id="Score" class="button white ui">امتیاز</button>
                     </div>
+                    <br/>
+
+
+                    <div style="text-align: left;">
+                        <dialog id="CommentDialog">
+                            <form class="comment-form" action="" method="POST" id="{{order.id}}">
+                                {% csrf_token %}
+                                <p>"hi"</p>
+                            </form>
+                            <div id="conf-box"></div>
+                            <a href="{% url 'patient_orders_list' %}"><button value="cancel" class="button white ui">Cancel</button></a>
+                            <a href="{% url 'patient_orders_list' %}"><button id="confBtn" class="button white ui">Submit</button></a>
+                        </dialog>
+                    </div>
+                    <div style="text-align: left;">
+                        <button id="Comment" class="button white ui">ثبت نظر</button>
+                    </div>
+
+
                 </div>
             </div>
         {% endfor %}

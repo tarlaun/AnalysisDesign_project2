@@ -144,9 +144,8 @@ def comment_for_order(request):
     if request.method == 'POST':
         order_id = request.POST.get('order_id')
         comment = request.POST.get('val')
-        # print("***************", el_id, val, "********************")
         order = Order.objects.get(id=order_id)
-        order.score = comment
+        order.comment = comment
         order.save()
         return JsonResponse({'success': 'true', 'comment': comment}, safe=False)
     return JsonResponse({'success': 'false'})
