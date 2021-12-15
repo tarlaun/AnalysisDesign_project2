@@ -87,3 +87,7 @@ class OrderTest(TestCase):
             str(response.content, encoding="utf8"),
             {"success": "true", "score": score_val},
         )
+
+    def test_comment_order(self):
+        # TODO
+        pass
