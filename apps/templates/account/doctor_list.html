@@ -2,7 +2,7 @@
 <head>
     <meta charset="utf-8">
     <title>
-        لیست پزشکان تخصص
+        {{ exp_name }} doctors list
     </title>
 </head>
 
@@ -11,16 +11,18 @@
     <div class="ui vertical labeled icon buttons">
         <button class="ui button red">
             <i class="sign out alternate icon white"></i>
-            <a onclick="window.location='{% url 'signout' %}'" style="color: white;">خروج</a>
+            <a onclick="window.location='{% url 'signout' %}'" style="color: white;">Logout</a>
         </button>
     </div>
 
-    <h3 class="ui block black header" style="text-align: right;">
-        .پزشک مورد نظر خود را انتخاب کنید
-        <i class="heartbeat red icon"></i>
+    <h3 class="ui block black header" style="text-align: center;">
+       Expertise:
+        <b>{{ exp_name }}</b>
 
-        <b>{{ exp_name }}</b>:
-        تخصص
+        <i class="heartbeat red icon"></i>
+        Choose your doctor from the list:
+
+
     </h3>
     {% if doctor_list %}
         <div class="ui middle aligned selection animated divided list">
@@ -50,7 +52,7 @@
             {% endfor %}
         </div>
     {% else %}
-        <p>.با عرض پوزش فعلا قادر به ارائه‌ی خدمات پزشکی در این تخصص نیستیم
+        <p> Unfortunately no doctors are available in this field at the moment. We apologize for the inconvenience.
             <i class="frown blue icon"></i>
         </p>
     {% endif %}
