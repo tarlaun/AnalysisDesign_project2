@@ -7,49 +7,49 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <script src="{% static 'assets/js/orders/stars.js' %}" defer></script>
     <script src="{% static 'assets/js/orders/pop-up.js' %}" defer></script>
-    <title>سوابق درخواست پیشین</title>
+    <title>History of appointments:</title>
 </head>
 <div class="ui raised very padded text container segment">
     <div class="ui vertical labeled icon buttons" style="float:right">
         <button class="ui button blue">
             <i class="plus icon"></i>
-            <a onclick="window.location='{% url 'expertise_list' %}'" style="color: white;">ثبت درخواست جدید</a>
+            <a onclick="window.location='{% url 'expertise_list' %}'" style="color: white;">Submit an appointment request:</a>
         </button>
     </div>
     <div class="ui vertical labeled icon buttons">
         <button class="ui button red">
             <i class="sign out alternate icon white"></i>
-            <a onclick="window.location='{% url 'signout' %}'" style="color: white;">خروج</a>
+            <a onclick="window.location='{% url 'signout' %}'" style="color: white;">Logout</a>
         </button>
     </div>
-    <h3 class="ui block black header" style="text-align: right;">
-        سوابق درخواست‌های پیشین
+    <h3 class="ui block black header" style="text-align: left;">
+        History of appointments:
         <i class="id badge red icon"></i>
     </h3>
     {% if orders_list %}
         {% for order in orders_list %}
             <div class="ui segment" style="direction:rtl;background-color:floralwhite;">
                 <div>
-                    <b style="font-size: 20px; color: palevioletred;">تخصص
+                    <b style="font-size: 20px; color: palevioletred;">Expertise
                         {{ order.expertise.name }}</b>
                 </div>
                 <div class="list">
                     <a class="item">
-                        <a>نام پزشک:</a>
+                        <a>Doctor's name:</a>
                         {% if order.doctor %}
                             {{ order.doctor }}
                         {% else %}
-                            درخواست شما هنوز توسط هیچ پزشکی تایید نشده‌است.
+                            Your request has not been accepted by a doctor yet.
                         {% endif %}
                     </a>
                     <br/>
                     <a class="item">
-                        <a class="label">آدرس:</a>
+                        <a class="label">Address:</a>
                         {{ order.address }}
                     </a>
                     <br/>
                     <a class="item">
-                        <a>شرح بیماری:</a>
+                        <a>Details:</a>
                         {{ order.details }}
                     </a>
                     <br/>
@@ -75,8 +75,8 @@
             </div>
         {% endfor %}
     {% else %}
-        <div class="ui red inverted segment" style="padding:10px;margin:10px;direction:rtl">
-            هیچ درخواستی وجود ندارد!
+        <div class="ui red inverted segment" style="padding:10px;margin:10px;direction:ltr">
+            There are no appointment requests.
         </div>
     {% endif %}
 </div>

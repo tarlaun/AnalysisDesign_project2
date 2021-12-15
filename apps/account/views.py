@@ -43,6 +43,7 @@ def signin(request):
             login(request, user)
             if being_doctor_check(user):
                 return redirect('expertise_orders_list')
+
             else:
                 return redirect('patient_orders_list')
         else:
@@ -104,6 +105,14 @@ class ExpertiseView(generic.ListView):
     def get_queryset(self):
         return Expertise.objects.all()
 
+
+class DoctorView(generic.ListView):
+    template_name = 'account/doctor_list.html'
+    context_object_name = 'doctor_list'
+
+    def get_queryset(self):
+        return Doctor.objects.all()
+
 # View Request Page After Choosing Expertise
 def request_for_chosen_expertise(request, exp_id):
     expertise = get_object_or_404(Expertise, pk=exp_id)
@@ -138,3 +147,9 @@ def rate_order(request):
         order.save()
         return JsonResponse({'success':'true', 'score': val}, safe=False)
     return JsonResponse({'success':'false'})
+
+def doctor_list(request, exp_id):
+
+    expertise = get_object_or_404(Expertise, pk=exp_id)
+    docs_list = Doctor.objects.filter(expertise=expertise)
+    return render(request, 'account/doctor_list.html', {'doctor_list': docs_list, 'exp_name':expertise.name})
