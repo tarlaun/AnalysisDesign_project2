@@ -105,7 +105,7 @@ if (one) {
                 url: '/accounts/rate/',
                 data: {
                     'csrfmiddlewaretoken': csrf[0].value,
-                    'el_id': id,
+                    'order_id': id,
                     'val': val_num,
                 },
                 success: function (response) {
