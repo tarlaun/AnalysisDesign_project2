@@ -46,14 +46,13 @@
 			
 			{% block content %}{% endblock content %}
 
-			{% include 'includes/footer.html' %}
+			{% comment %} {% include 'includes/footer.html' %} {% endcomment %}
 
 		</div>
         
 		{% if request.user.is_authenticated %}
 
 			<!-- Custom template | don't include it in your project! -->
-			{% include 'includes/configuration-plugin.html' %}
 
 		{% endif %}		
 
