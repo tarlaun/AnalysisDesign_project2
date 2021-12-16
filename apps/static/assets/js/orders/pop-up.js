@@ -6,7 +6,6 @@ var confirmBtn = document.getElementById("confirmBtn");
 
 // "Score" button opens the <dialog> modally
 updateButton.addEventListener("click", function onOpen() {
-  console.log("here");
   if (typeof favDialog.showModal === "function") {
     favDialog.showModal();
   } else {

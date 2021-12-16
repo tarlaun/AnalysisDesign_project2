@@ -6,6 +6,8 @@
 {% block content %}
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,500&amp;subset=latin-ext" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 <link rel="stylesheet" href="{% static 'assets/css/home/patient_orders_list.css' %}">
 <script src="{% static 'assets/js/orders/stars.js' %}" defer></script>
 <script src="{% static 'assets/js/orders/pop-up.js' %}" defer></script>
@@ -49,7 +51,7 @@
 
                 <div style="text-align: left;">
                     <dialog id="favDialog">
-                        <form class="rate-form" action="" method="POST" id="1">
+                        <form class="rate-form" action="" method="POST" id="{{order.id}}">
                             {% csrf_token %}
                             <button type="submit" class="fa fa-star fa-3x my-btn" id="first"></button>
                             <button type="submit" class="fa fa-star fa-3x my-btn" id="second"></button>
@@ -68,12 +70,14 @@
                 </div>
 
 
-                {% comment %} <button type="button" class="btn btn-outline-light mt-3">
+                {% comment %}
+                <button type="button" class="btn btn-outline-light mt-3">
                     <div class="card__apply">
                         <b><a class="card__link">Apply Now
                         </a></b>
                     </div>
-                </button> {% endcomment %}
+                </button>
+                {% endcomment %}
                 <button id="Score" type="button" class="btn btn-outline-warning mt-3">
                     <b>Score</b>
                 </button>
