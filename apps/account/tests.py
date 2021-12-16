@@ -89,5 +89,10 @@ class OrderTest(TestCase):
         )
 
     def test_comment_order(self):
-        # TODO
-        pass
+        comment = "از سرویس راضی بودم ممنون"
+        response = self.client.post("/accounts/comment/1", {"comment": comment})
+        self.assertEqual(response.status_code, 200)
+        self.assertJSONEqual(
+            str(response.content, encoding="utf8"),
+            {"success": "true", "comment": comment},
+        )

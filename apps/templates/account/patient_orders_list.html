@@ -70,14 +70,13 @@
                         </dialog>
                     </div>
                     <div style="text-align: left;">
-                        <button id="Score" class="button white ui">امتیاز</button>
+                        <button id="Score" class="Score button white ui">امتیاز</button>
                     </div>
                     <br/>
 
-
                     <div style="text-align: left;">
                         <dialog id="CommentDialog">
-                            <form class="comment-form" action="{% url 'comment-view' order.id %}" method=post id="{order.id}">
+                            <form class="comment-form" action="{% url 'comment-view' order.id %}" method=post>
                                 {% csrf_token %}
                                 <div class="field" style="text-align: center;">
                                     <label style="font-size: 15px">Please tell us about your experience with DociCom</label>
@@ -92,7 +91,7 @@
                         </dialog>
                     </div>
                     <div style="text-align: left;">
-                        <button id="Comment" class="button white ui">ثبت نظر</button>
+                        <button class="Comment button white ui">ثبت نظر</button>
                     </div>
 
                 </div>
