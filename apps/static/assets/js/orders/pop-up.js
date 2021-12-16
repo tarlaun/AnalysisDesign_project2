@@ -1,11 +1,11 @@
-var updateButton = document.getElementById('Score');
-var favDialog = document.getElementById('favDialog');
-var outputBox = document.querySelector('output');
-var selectEl = document.querySelector('select');
-var confirmBtn = document.getElementById('confirmBtn');
+var updateButton = document.getElementById("Score");
+var favDialog = document.getElementById("favDialog");
+var outputBox = document.querySelector("output");
+var selectEl = document.querySelector("select");
+var confirmBtn = document.getElementById("confirmBtn");
 
 // "Score" button opens the <dialog> modally
-updateButton.addEventListener('click', function onOpen() {
+updateButton.addEventListener("click", function onOpen() {
   if (typeof favDialog.showModal === "function") {
     favDialog.showModal();
   } else {
