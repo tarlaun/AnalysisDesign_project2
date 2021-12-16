@@ -19,9 +19,6 @@
     <table class="table table-dark">
         <thead>
         <tr>
-            {% comment %}
-            <th><abbr title="ID">ID</abbr></th>
-            {% endcomment %}
             <th>Name</th>
             <th>Last Name</th>
             <th>Phone Number</th>
@@ -32,9 +29,6 @@
         {% for doc in doctor_list%}
 
         <tr>
-            {% comment %}
-            <th>{{ doc.user.id }}</th>
-            {% endcomment %}
             <td>{{ doc.user.first_name }}</td>
             <td>{{ doc.user.last_name }}</td>
             <td>{{ doc.user.phone_number }}</td>
