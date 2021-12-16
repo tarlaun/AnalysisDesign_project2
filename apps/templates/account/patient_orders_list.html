@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <script src="{% static 'assets/js/orders/stars.js' %}" defer></script>
     <script src="{% static 'assets/js/orders/pop-up.js' %}" defer></script>
+    <script src="{% static 'assets/js/orders/comment-pop-up.js' %}" defer></script>
     <title>سوابق درخواست پیشین</title>
 </head>
 <div class="ui raised very padded text container segment">
@@ -76,9 +77,15 @@
 
                     <div style="text-align: left;">
                         <dialog id="CommentDialog">
-                            <form class="comment-form" action="" method="POST" id="{{order.id}}">
+                            <form class="comment-form" action="" method="POST" id="{order.id}">
                                 {% csrf_token %}
-                                <p>"hi"</p>
+                                <div class="field" style="text-align: center;">
+                                    <label style="font-size: 15px">Please tell us about your experience with DociCom</label>
+                                    <br/>
+                                    <label>
+                                        <textarea rows="2" name="comment" style="direction:rtl;"></textarea>
+                                    </label>
+                                </div>
                             </form>
                             <div id="conf-box"></div>
                             <a href="{% url 'patient_orders_list' %}"><button value="cancel" class="button white ui">Cancel</button></a>
