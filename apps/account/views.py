@@ -125,7 +125,7 @@ def add_order(request, exp_id):
 # View Patient's Previous Orders List
 def patient_orders_list(request):
     orders_list = Order.objects.filter(user_id=request.user.id)
-    orders_list = [1, 2, 3, 4, 5]
+    # orders_list = [1, 2, 3, 4, 5]
     return render(request, 'account/patient_orders_list.html', {'orders_list': orders_list[::-1]})
 
 # save a score for orders

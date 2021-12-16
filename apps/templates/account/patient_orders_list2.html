@@ -57,7 +57,7 @@
                 {{ order.details }}
             </a>
             <br/>
-            {% comment %} <div style="text-align: left;">
+            <div style="text-align: left;">
                 <dialog id="favDialog">
                     <form class="rate-form" action="" method="POST" id="{{order.id}}">
                         {% csrf_token %}
@@ -75,7 +75,7 @@
                         <button id="confirmBtn" class="button white ui">Submit</button>
                     </a>
                 </dialog>
-            </div> {% endcomment %}
+            </div>
             <div style="text-align: left;">
                 <button id="Score" class="button white ui">امتیاز</button>
             </div>
