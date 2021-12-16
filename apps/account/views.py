@@ -140,12 +140,11 @@ def rate_order(request):
     return JsonResponse({'success':'false'})
 
 # save comment for orders
-def comment_for_order(request):
+def comment_for_order(request, order_id):
     if request.method == 'POST':
-        order_id = request.POST.get('order_id')
-        comment = request.POST.get('val')
-        order = Order.objects.get(id=order_id)
+        order = request.POST.get('order_id')
+        comment = request.POST.get('comment')
         order.comment = comment
         order.save()
-        return JsonResponse({'success': 'true', 'comment': comment}, safe=False)
+        return JsonResponse({'success':'true', 'comment': comment}, safe=False)
     return JsonResponse({'success': 'false'})
