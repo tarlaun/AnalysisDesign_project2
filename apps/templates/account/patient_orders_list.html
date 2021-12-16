@@ -89,7 +89,7 @@
                             </form>
                             <div id="conf-box"></div>
                             <a href="{% url 'patient_orders_list' %}"><button value="cancel" class="button white ui">Cancel</button></a>
-                            <a href="{% url 'patient_orders_list' %}"><button id="confBtn" class="button white ui">Submit</button></a>
+                            <a href="{% url 'comment-view' order.id %}"><button id="confBtn" class="button white ui">Submit</button></a>
                         </dialog>
                     </div>
                     <div style="text-align: left;">
