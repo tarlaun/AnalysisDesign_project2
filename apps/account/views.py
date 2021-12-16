@@ -68,6 +68,7 @@ def home(request):
 # @login_required
 # @user_passes_test(being_doctor_check)
 def expertise_orders_list(request):
+    print("whaaaaat?")
     if not request.user.is_authenticated:
         return HttpResponse("Log in")
     if request.user.user_type == UserType.PATIENT:
@@ -75,6 +76,7 @@ def expertise_orders_list(request):
     doctor = Doctor.objects.get(user=request.user)
     expertise = doctor.expertise
     orders_list = Order.objects.filter(expertise=expertise, doctor=None)
+    print("************",orders_list)
     return render(request, 'account/expertise_orders_list.html', {'orders_list': orders_list})
 
 

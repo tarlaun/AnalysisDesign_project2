@@ -77,19 +77,21 @@
 
                     <div style="text-align: left;">
                         <dialog id="CommentDialog">
-                            <form class="comment-form" action="" method="POST" id="{order.id}">
+                            <form class="comment-form" action="{% url 'comment-view' order.id %}"  method="POST" >
                                 {% csrf_token %}
                                 <div class="field" style="text-align: center;">
                                     <label style="font-size: 15px">Please tell us about your experience with DociCom</label>
                                     <br/>
                                     <label>
-                                        <textarea rows="2" name="comment" style="direction:rtl;"></textarea>
+                                        <textarea id="comment" rows="2" name="comment" style="direction:rtl;"></textarea>
                                     </label>
                                 </div>
+                            <a href="{% url 'patient_orders_list' %}"><button value="cancel" class="button white ui">Cancel</button></a>
+                            <a><button id="btn-click" type="submit" id="confBtn" class="button white ui">Submit</button></a>
                             </form>
                             <div id="conf-box"></div>
-                            <a href="{% url 'patient_orders_list' %}"><button value="cancel" class="button white ui">Cancel</button></a>
-                            <a href="{% url 'comment-view' order.id %}"><button id="confBtn" class="button white ui">Submit</button></a>
+                            
+                            
                         </dialog>
                     </div>
                     <div style="text-align: left;">
