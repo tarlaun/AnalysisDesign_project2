@@ -141,10 +141,8 @@ def rate_order(request):
 
 # save comment for orders
 def comment_for_order(request, order_id):
-    print(request.method)
     order = Order.objects.get(id=order_id)
     comment = request.POST.get('comment')
     order.comment = comment
     order.save()
-    # return JsonResponse({'success':'true', 'comment': comment}, safe=False)
     return patient_orders_list(request)
