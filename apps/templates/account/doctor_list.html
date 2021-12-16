@@ -16,7 +16,7 @@
     </div>
 
     <h3 class="ui block black header" style="text-align: center;">
-       Expertise:
+        Expertise:
         <b>{{ exp_name }}</b>
 
         <i class="heartbeat red icon"></i>
@@ -44,7 +44,17 @@
                                 <td>{{ doc.user.first_name }}</td>
                                 <td>{{ doc.user.last_name }}</td>
                                 <td>{{ doc.user.phone_number }}</td>
+
+                                <td>
+                                    <button class="ui button blue">
+                                        <i class="sign out alternate icon white"></i>
+                                        <a onclick="window.location='{% url 'req_for_doc' doc.user.id %}'"
+                                           style="color: white;">Request appointment</a>
+                                    </button>
+                                </td>
                             </tr>
+
+
                             </tbody>
                         </table>
                     </div>

@@ -1,0 +1,40 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
+<head>
+    <meta charset="utf-8">
+    <title>Request an appointment</title>
+</head>
+<div class="ui raised very padded text container segment">
+    <div class="ui vertical labeled icon buttons">
+        <button class="ui button red">
+            <i class="sign out alternate icon white"></i>
+            <a onclick="window.location='{% url 'signout' %}'" style="color: white;">Logout</a>
+        </button>
+    </div>
+    <div class="ui blue message" style="text-align: left;">
+
+        <i class="first aid red icon"></i>
+        You are now submitting a request for Doctor
+        <b style="font-size: 22px">{{ doc_name }}</b>
+        <b style="font-size: 22px">{{ doc_lname }}</b>
+        <br>
+        Field of expertise:
+        <b style="font-size: 22px">{{ exp }}</b>
+
+    </div>
+    <form class="ui form" action="{% url 'add_order' doc_id %}" method="post">
+        {% csrf_token %}
+        <div class="field" style="text-align: left;">
+            <label style="font-size: 15px">Address</label>
+            <label>
+                <textarea rows="2" required="required" name="address" style="direction:ltr;"></textarea>
+            </label>
+        </div>
+        <div class="field" style="text-align: left;">
+            <label style="font-size: 15px"> Details</label>
+            <label>
+                <textarea required="required" name="details" style="direction:ltr;"></textarea>
+            </label>
+        </div>
+        <button class="ui button blue" type="submit">Submit request</button>
+    </form>
+</div>
