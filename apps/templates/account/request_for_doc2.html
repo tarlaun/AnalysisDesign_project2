@@ -1,27 +1,30 @@
-{% extends "layouts/base.html" %}
-{% load static %}
-
-{% block title %} DociCom - Expertises {% endblock %}
-
-{% block content %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
-<link rel="stylesheet" href="{% static 'assets/css/home/request_for_doc.css' %}">
-
-<div class="ui raised very padded text container segment" id="container">
+<head>
+    <meta charset="utf-8">
+    <title>Request an appointment</title>
+</head>
+<div class="ui raised very padded text container segment">
+    <div class="ui vertical labeled icon buttons">
+        <button class="ui button red">
+            <i class="sign out alternate icon white"></i>
+            <a onclick="window.location='{% url 'signout' %}'" style="color: white;">Logout</a>
+        </button>
+    </div>
     <div class="ui blue message" style="text-align: left;">
 
-        <i class="ambulance large icon"></i>
+        <i class="first aid red icon"></i>
         You are now submitting a request for Doctor
-        <b>{{ doc_name }}</b>
-        <b>{{ doc_lname }}</b>
-        with field of expertise
-        <b> {{ exp }}</b>
+        <b style="font-size: 22px">{{ doc_name }}</b>
+        <b style="font-size: 22px">{{ doc_lname }}</b>
+        <br>
+        Field of expertise:
+        <b style="font-size: 22px">{{ exp }}</b>
 
     </div>
     <form class="ui form" action="{% url 'add_order' doc_id %}" method="post">
         {% csrf_token %}
         <div class="field" style="text-align: left;">
-            <label style="font-size: 15px; color: black">Address</label>
+            <label style="font-size: 15px">Address</label>
             <label>
                 <textarea rows="2" required="required" name="address" style="direction:ltr;"></textarea>
             </label>
@@ -32,8 +35,6 @@
                 <textarea required="required" name="details" style="direction:ltr;"></textarea>
             </label>
         </div>
-        <button type="submit" class="btn btn-outline-success">Submit request</button>
+        <button class="ui button blue" type="submit">Submit request</button>
     </form>
 </div>
-
-{% endblock content %}
