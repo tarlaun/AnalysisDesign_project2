@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="{% static 'assets/css/home/patient_orders_list.css' %}">
 <script src="{% static 'assets/js/orders/stars.js' %}" defer></script>
 <script src="{% static 'assets/js/orders/pop-up.js' %}" defer></script>
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
 
 <div class="content">
     <div class="panel-header bg-primary-gradient">
@@ -59,13 +60,16 @@
                             <button type="submit" class="fa fa-star fa-3x my-btn" id="fourth"></button>
                             <button type="submit" class="fa fa-star fa-3x my-btn" id="fifth"></button>
                         </form>
-                        <div id="confirm-box"></div>
-                        <a href="{% url 'patient_orders_list' %}">
-                            <button value="cancel" class="button white ui">Cancel</button>
-                        </a>
-                        <a href="{% url 'patient_orders_list' %}">
-                            <button id="confirmBtn" class="button white ui">Submit</button>
-                        </a>
+                        <div id="confirm-box" class="mt-3">
+
+                        </div>
+                        <button onclick="window.location='{% url 'patient_orders_list' %}'" type="button"
+                                class="btn btn-danger">Cancel
+                        </button>
+                        <button id="confirmBtn" onclick="window.location='{% url 'patient_orders_list' %}'"
+                                type="button" class="btn btn-success">Submit
+                        </button>
+
                     </dialog>
                 </div>
 
