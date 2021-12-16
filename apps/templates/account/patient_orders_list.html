@@ -30,6 +30,7 @@
 
     {% comment %} <i class="fas fa-user-md"></i> {% endcomment %}
     <div class="cards-container">
+        {% if orders_list%}
         {% for order in orders_list %}
         <div class="card profile-card">
             <div class="card-body pt-4">
@@ -87,6 +88,9 @@
             </div>
         </div>
         {% endfor %}
+        {% else%}
+        There are no requests submitted.
+        {% endif%}
     </div>
 </div>
 
