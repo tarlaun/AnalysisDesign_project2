@@ -6,9 +6,19 @@ const four = document.getElementById('fourth')
 const five = document.getElementById('fifth')
 
 // get the form, confirm-box and csrf token
-const form = document.querySelector('.rate-form')
+const form = document.querySelector('#rate-form')
 const confirmBox = document.getElementById('confirm-box')
 const csrf = document.getElementsByName('csrfmiddlewaretoken')
+const favDialog = document.getElementById("favDialog");
+
+// "Score" button opens the <dialog> modally
+$(".Score").click(function onOpen() {
+    if (typeof favDialog.showModal === "function") {
+        favDialog.showModal();
+    } else {
+        alert("The <dialog> API is not supported by this browser");
+    }
+});
 
 // color all the stars with less value than the one over which mouse is
 const handleStarSelect = (size) => {
@@ -77,46 +87,48 @@ const getNumericValue = (stringValue) => {
     return numericValue
 }
 
-if (one) {
-    const arr = [one, two, three, four, five]
+function score(order_id) {
 
-    arr.forEach(item => item.addEventListener('mouseover', (event) => {
-        handleSelect(event.target.id)
-    }))
 
-    arr.forEach(item => item.addEventListener('click', (event) => {
-        // value of the rating not numeric
-        const val = event.target.id
+    if (one) {
+        const arr = [one, two, three, four, five]
 
-        let isSubmit = false
-        form.addEventListener('submit', e => {
-            e.preventDefault()
-            if (isSubmit) {
-                return
-            }
-            isSubmit = true
-            // order id
-            const id = e.target.id
-            // value of the rating translated into numeric
-            const val_num = getNumericValue(val)
+        arr.forEach(item => item.addEventListener('mouseover', (event) => {
+            handleSelect(event.target.id)
+        }))
 
-            $.ajax({
-                type: 'POST',
-                url: '/accounts/rate/',
-                data: {
-                    'csrfmiddlewaretoken': csrf[0].value,
-                    'el_id': id,
-                    'val': val_num,
-                },
-                success: function (response) {
-                    console.log(response)
-                    confirmBox.innerHTML = `<h6>Successfully rated with ${response.score}</h6>`
-                },
-                error: function (error) {
-                    console.log(error)
-                    confirmBox.innerHTML = '<h6>Ops... something went wrong</h6>'
+        arr.forEach(item => item.addEventListener('click', (event) => {
+            // value of the rating not numeric
+            const val = event.target.id
+
+            let isSubmit = false
+            form.addEventListener('submit', e => {
+                e.preventDefault()
+                if (isSubmit) {
+                    return
                 }
+                isSubmit = true
+                // value of the rating translated into numeric
+                const val_num = getNumericValue(val)
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/accounts/rate/',
+                    data: {
+                        'csrfmiddlewaretoken': csrf[0].value,
+                        'el_id': order_id,
+                        'val': val_num,
+                    },
+                    success: function (response) {
+                        console.log(response)
+                        confirmBox.innerHTML = `<h6>Successfully rated with ${response.score}</h6>`
+                    },
+                    error: function (error) {
+                        console.log(error)
+                        confirmBox.innerHTML = '<h6>Ops... something went wrong</h6>'
+                    }
+                })
             })
-        })
-    }))
+        }))
+    }
 }
