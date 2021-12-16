@@ -97,6 +97,7 @@ def accept_order(request, order_id):
     doctor.save()
     return render(request, 'account/accept_order.html', {'order': order})
 
+
 # View Expertise List For Patient
 class ExpertiseView(generic.ListView):
     template_name = 'account/expertise_list.html'
@@ -113,28 +114,33 @@ class DoctorView(generic.ListView):
     def get_queryset(self):
         return Doctor.objects.all()
 
+
 # View Request Page After Choosing Expertise
 def request_for_chosen_expertise(request, exp_id):
     expertise = get_object_or_404(Expertise, pk=exp_id)
     return render(request, 'account/request_for_expertise.html', {'expertise': expertise})
 
+
 # ADD Order Into DB
-def add_order(request, exp_id):
+def add_order(request, doc_id):
     if not request.user.is_authenticated:
         return HttpResponse("Log in")
     if request.user.user_type != UserType.PATIENT:
         return HttpResponse("You are not a Patient")
-    expertise = get_object_or_404(Expertise, pk=exp_id)
+    doctor = get_object_or_404(Doctor, pk=doc_id)
+    exp_id = doctor.expertise.id
     address = request.POST['address']
     details = request.POST['details']
-    o = Order(user_id=request.user.id, expertise_id=expertise.id, address=address, details=details)
+    o = Order(user_id=request.user.id, expertise_id=exp_id, doctor_id=doctor.user.id, address=address, details=details)
     o.save()
     return HttpResponseRedirect(reverse('patient_orders_list'))
+
 
 # View Patient's Previous Orders List
 def patient_orders_list(request):
     orders_list = Order.objects.filter(user_id=request.user.id)
     return render(request, 'account/patient_orders_list.html', {'orders_list': orders_list[::-1]})
+
 
 # save a score for orders
 def rate_order(request):
@@ -145,11 +151,17 @@ def rate_order(request):
         order = Order.objects.get(id=el_id)
         order.score = val
         order.save()
-        return JsonResponse({'success':'true', 'score': val}, safe=False)
-    return JsonResponse({'success':'false'})
+        return JsonResponse({'success': 'true', 'score': val}, safe=False)
+    return JsonResponse({'success': 'false'})
+
 
 def doctor_list(request, exp_id):
-
     expertise = get_object_or_404(Expertise, pk=exp_id)
     docs_list = Doctor.objects.filter(expertise=expertise)
-    return render(request, 'account/doctor_list.html', {'doctor_list': docs_list, 'exp_name':expertise.name})
+    return render(request, 'account/doctor_list.html', {'doctor_list': docs_list, 'exp_name': expertise.name})
+
+
+def request_for_chosen_doctor(request, doc_id):
+    doctor = get_object_or_404(Doctor, pk=doc_id)
+    return render(request, 'account/request_for_doc.html',
+                  {'doc_name': doctor.user.first_name, 'doc_lname': doctor.user.last_name, 'doc_id': doctor.user.id})
