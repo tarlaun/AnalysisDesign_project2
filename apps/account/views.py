@@ -142,7 +142,7 @@ def rate_order(request):
 # save comment for orders
 def comment_for_order(request, order_id):
     if request.method == 'POST':
-        order = request.POST.get('order_id')
+        order = Order.objects.get(id=order_id)
         comment = request.POST.get('comment')
         order.comment = comment
         order.save()
