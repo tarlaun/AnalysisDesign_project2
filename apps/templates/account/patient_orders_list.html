@@ -22,36 +22,19 @@
             </div>
         </div>
     </div>
-    <div>
-        <div class="container bootstrap snippets bootdeys">
-            <div class="row">
-                <div class="col-md-4 col-sm-6 content-card">
-                    <div class="card-big-shadow">
-                        <div class="card card-just-text" data-background="color" data-color="blue" data-radius="none">
-                            <div class="content">
-                                <h6 class="category">Best cards</h6>
-                                <h4 class="title"><a href="#">Blue Card</a></h4>
-                                <p class="description">What all of these have in common is that they're pulling
-                                    information out of the app or the service and making it relevant to the moment. </p>
-                            </div>
-                        </div> <!-- end card -->
-                    </div>
-                </div>
-
-                <div class="col-md-4 col-sm-6 content-card">
-                    <div class="card-big-shadow">
-                        <div class="card card-just-text" data-background="color" data-color="green" data-radius="none">
-                            <div class="content">
-                                <h6 class="category">Best cards</h6>
-                                <h4 class="title"><a href="#">Green Card</a></h4>
-                                <p class="description">What all of these have in common is that they're pulling
-                                    information out of the app or the service and making it relevant to the moment. </p>
-                            </div>
-                        </div> <!-- end card -->
-                    </div>
-                </div>
+    <div class="cards-container">
+     {% for order in orders_list %}
+        <div class="card profile-card-2">
+            <div class="card-body pt-5">
+                <h5 class="card-title">Landon Hunt</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                    the card's content.</p>
+                <p class="card__apply">
+                    <a class="card__link">Apply Now <i class="fas fa-arrow-right"></i></a>
+                </p>
             </div>
         </div>
+    {% endfor %}
     </div>
 </div>
 
@@ -396,7 +379,8 @@
                             </div>
                             <div class="item-list">
                                 <div class="avatar">
-                                    <img src="/static/assets/img/talha.jpg" alt="..." class="avatar-img rounded-circle">
+                                    <img src="/static/assets/img/talha.jpg" alt="..."
+                                         class="avatar-img rounded-circle">
                                 </div>
                                 <div class="info-user ml-3">
                                     <div class="username">Talha</div>
@@ -408,7 +392,8 @@
                             </div>
                             <div class="item-list">
                                 <div class="avatar">
-                                    <img src="/static/assets/img/mlane.jpg" alt="..." class="avatar-img rounded-circle">
+                                    <img src="/static/assets/img/mlane.jpg" alt="..."
+                                         class="avatar-img rounded-circle">
                                 </div>
                                 <div class="info-user ml-3">
                                     <div class="username">John Doe</div>
@@ -420,7 +405,8 @@
                             </div>
                             <div class="item-list">
                                 <div class="avatar">
-                                    <img src="/static/assets/img/talha.jpg" alt="..." class="avatar-img rounded-circle">
+                                    <img src="/static/assets/img/talha.jpg" alt="..."
+                                         class="avatar-img rounded-circle">
                                 </div>
                                 <div class="info-user ml-3">
                                     <div class="username">Talha</div>
@@ -483,7 +469,8 @@
                             </li>
                             <li class="feed-item feed-item-info">
                                 <time class="date" datetime="9-23">Sep 23</time>
-                                <span class="text">Joined the group <a href="single-group.php">"Boardsmanship Forum"</a></span>
+                                <span class="text">Joined the group <a
+                                        href="single-group.php">"Boardsmanship Forum"</a></span>
                             </li>
                             <li class="feed-item feed-item-warning">
                                 <time class="date" datetime="9-21">Sep 21</time>
@@ -515,7 +502,8 @@
                                            role="tab" aria-selected="true">Today</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link active" id="pills-week" data-toggle="pill" href="#pills-week"
+                                        <a class="nav-link active" id="pills-week" data-toggle="pill"
+                                           href="#pills-week"
                                            role="tab" aria-selected="false">Week</a>
                                     </li>
                                     <li class="nav-item">
@@ -532,7 +520,8 @@
                                 <span class="avatar-title rounded-circle border border-white bg-info">J</span>
                             </div>
                             <div class="flex-1 ml-3 pt-1">
-                                <h6 class="text-uppercase fw-bold mb-1">Joko Subianto <span class="text-warning pl-3">pending</span>
+                                <h6 class="text-uppercase fw-bold mb-1">Joko Subianto <span
+                                        class="text-warning pl-3">pending</span>
                                 </h6>
                                 <span class="text-muted">I am facing some trouble with my viewport. When i start my</span>
                             </div>
@@ -546,7 +535,8 @@
                                 <span class="avatar-title rounded-circle border border-white bg-secondary">P</span>
                             </div>
                             <div class="flex-1 ml-3 pt-1">
-                                <h6 class="text-uppercase fw-bold mb-1">Prabowo Widodo <span class="text-success pl-3">open</span>
+                                <h6 class="text-uppercase fw-bold mb-1">Prabowo Widodo <span
+                                        class="text-success pl-3">open</span>
                                 </h6>
                                 <span class="text-muted">I have some query regarding the license issue.</span>
                             </div>
@@ -574,7 +564,8 @@
                                 <span class="avatar-title rounded-circle border border-white bg-secondary">P</span>
                             </div>
                             <div class="flex-1 ml-3 pt-1">
-                                <h6 class="text-uppercase fw-bold mb-1">Peter Parker <span class="text-success pl-3">open</span>
+                                <h6 class="text-uppercase fw-bold mb-1">Peter Parker <span
+                                        class="text-success pl-3">open</span>
                                 </h6>
                                 <span class="text-muted">I have some query regarding the license issue.</span>
                             </div>
@@ -705,6 +696,18 @@
 			lineColor: '#ffa534',
 			fillColor: 'rgba(255, 165, 52, .14)'
 		});
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
