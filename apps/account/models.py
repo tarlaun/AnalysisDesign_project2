@@ -64,7 +64,7 @@ class Order(models.Model):
             MinValueValidator(0),
         ]
     )
-    comment = models.TextField(default='lalala')
+    comment = models.TextField(null=True)
 
     def __str__(self):
         return f'{self.user.__str__()} {self.doctor.__str__()} {self.expertise.__str__()}'
