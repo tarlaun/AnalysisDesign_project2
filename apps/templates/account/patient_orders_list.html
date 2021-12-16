@@ -38,7 +38,7 @@
                     <img src="{% static 'assets/img/doctor-icon.jpg' %}"/>
 
                 </div>
-                <h5 class="card-title">Expertise {{ order.expertise.name }}</h5>
+                <h5 class="card-title">Expertise: {{ order.expertise.name }}</h5>
                 <div>
                     <li class="card-text"><b>Doctor:</b> {% if order.doctor %}
                         {{ order.doctor }}
@@ -73,8 +73,6 @@
 
                     </dialog>
                 </div>
-
-
                 {% comment %}
                 <button type="button" class="btn btn-outline-light mt-3">
                     <div class="card__apply">
@@ -83,7 +81,7 @@
                     </div>
                 </button>
                 {% endcomment %}
-                <button id="Score" type="button" class="btn btn-outline-warning mt-3">
+                <button type="button" class="btn btn-outline-warning mt-3 Score">
                     <b>Score</b>
                 </button>
             </div>
