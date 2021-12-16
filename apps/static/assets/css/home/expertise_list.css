@@ -1,0 +1,49 @@
+#container {
+  background-color: #6f9dd6;
+  margin: auto;
+  top: 20%;
+}
+
+.btn {
+  border-width: 3px;
+  border-radius: 10px;
+}
+
+.btn {
+  color: #b2bdd9;
+  border-color: #b2bdd9;
+}
+
+.btn:hover {
+  color: white;
+  border-color: #b2bdd9;
+  background-color: #b2bdd9;
+}
+
+.table {
+  color: white;
+  border-radius: 5px;
+}
+
+th,
+td {
+  font-size: 20px;
+}
+
+th {
+  color: yellow;
+}
+
+.expertise-header {
+  color: white;
+}
+
+.fa-heartbeat {
+  color: red;
+  font-size: 25px;
+}
+
+.fa-user-md {
+  color: #465c94;
+  font-size: 25px;
+}
