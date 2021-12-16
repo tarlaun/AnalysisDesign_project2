@@ -10,25 +10,29 @@
             <a onclick="window.location='{% url 'signout' %}'" style="color: white;">Logout</a>
         </button>
     </div>
-    <div class="ui blue message" style="text-align: right;">
+    <div class="ui blue message" style="text-align: left;">
+
+        <i class="first aid red icon"></i>
         You are now submitting a request for Doctor
         <b style="font-size: 22px">{{ doc_name }}</b>
         <b style="font-size: 22px">{{ doc_lname }}</b>
+        <br>
+        Field of expertise:
+        <b style="font-size: 22px">{{ exp }}</b>
 
-        <i class="first aid red icon"></i>
     </div>
     <form class="ui form" action="{% url 'add_order' doc_id %}" method="post">
         {% csrf_token %}
-        <div class="field" style="text-align: right;">
+        <div class="field" style="text-align: left;">
             <label style="font-size: 15px">َََAddress</label>
             <label>
-                <textarea rows="2" required="required" name="address" style="direction:rtl;"></textarea>
+                <textarea rows="2" required="required" name="address" style="direction:ltr;"></textarea>
             </label>
         </div>
-        <div class="field" style="text-align: right;">
-            <label style="font-size: 15px" Details</label>
+        <div class="field" style="text-align: left;">
+            <label style="font-size: 15px"> Details</label>
             <label>
-                <textarea required="required" name="details" style="direction:rtl;"></textarea>
+                <textarea required="required" name="details" style="direction:ltr;"></textarea>
             </label>
         </div>
         <button class="ui button blue" type="submit">Submit request</button>

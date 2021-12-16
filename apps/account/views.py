@@ -163,5 +163,6 @@ def doctor_list(request, exp_id):
 
 def request_for_chosen_doctor(request, doc_id):
     doctor = get_object_or_404(Doctor, pk=doc_id)
+    exp = doctor.expertise.name
     return render(request, 'account/request_for_doc.html',
-                  {'doc_name': doctor.user.first_name, 'doc_lname': doctor.user.last_name, 'doc_id': doctor.user.id})
+                  {'doc_name': doctor.user.first_name, 'doc_lname': doctor.user.last_name, 'doc_id': doctor.user.id, 'exp':exp})
