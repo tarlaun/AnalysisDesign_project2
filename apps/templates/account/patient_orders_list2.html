@@ -1,0 +1,97 @@
+{% load static %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
+<head>
+    <meta charset="utf-8">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,500&amp;subset=latin-ext" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="{% static 'assets/css/home/patient_orders_list.css' %}">
+    <script src="{% static 'assets/js/orders/stars.js' %}" defer></script>
+    <script src="{% static 'assets/js/orders/pop-up.js' %}" defer></script>
+    <title>History of appointments:</title>
+</head>
+<div class="ui raised very padded text container segment" id="container">
+    <div class="ui vertical labeled icon buttons" style="float:right">
+        <button class="ui button blue">
+            <i class="plus icon"></i>
+            <a onclick="window.location='{% url 'expertise_list' %}'" style="color: white;">Submit an appointment
+                request:</a>
+        </button>
+    </div>
+    <div class="ui vertical labeled icon buttons">
+        <button class="ui button red">
+            <i class="sign out alternate icon white"></i>
+            <a onclick="window.location='{% url 'signout' %}'" style="color: white;">Logout</a>
+        </button>
+    </div>
+    <h3 class="ui block black header" style="text-align: left;">
+        History of appointments:
+        <i class="id badge red icon"></i>
+    </h3>
+    {% if orders_list %}
+    {% for order in orders_list %}
+    <div class="ui segment" style="direction:rtl;background-color:floralwhite;">
+        <div>
+            <b style="font-size: 20px; color: palevioletred;">Expertise
+                {{ order.expertise.name }}</b>
+        </div>
+        <div class="list">
+            <a class="item">
+                <a>Doctor's name:</a>
+                {% if order.doctor %}
+                {{ order.doctor }}
+                {% else %}
+                Your request has not been accepted by a doctor yet.
+                {% endif %}
+            </a>
+            <br/>
+            <a class="item">
+                <a class="label">Address:</a>
+                {{ order.address }}
+            </a>
+            <br/>
+            <a class="item">
+                <a>Details:</a>
+                {{ order.details }}
+            </a>
+            </dialog>
+        </div>
+        <div style="text-align: left;">
+            <button id="Score" class="button white ui">امتیاز</button>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="ui red inverted segment" style="padding:10px;margin:10px;direction:ltr">
+            There are no appointment requests.
+
+        </div>
+        {% endif %}
+
+        {% comment %}
+        <div class="card card-custom bg-white border-white border-0">
+            <div class="card-custom-img"
+                 style="background-image: url(http://res.cloudinary.com/d3/image/upload/c_scale,q_auto:good,w_1110/trianglify-v1-cs85g_cc5d2i.jpg);"></div>
+            <div class="card-custom-avatar">
+                <img class="img-fluid"
+                     src="http://res.cloudinary.com/d3/image/upload/c_pad,g_center,h_200,q_auto:eco,w_200/bootstrap-logo_u3c8dx.jpg"
+                     alt="Avatar"/>
+            </div>
+            <div class="card-body" style="overflow-y: auto">
+                <h4 class="card-title">Card title</h4>
+                <p class="card-text">Card has minimum height set but will expand if more space is needed for card body
+                    content. You can use Bootstrap <a
+                            href="https://getbootstrap.com/docs/4.0/components/card/#card-decks"
+                            target="_blank">card-decks</a> to align multiple cards nicely in a
+                    row.</p>
+            </div>
+            <div class="card-footer" style="background: inherit; border-color: inherit;">
+                <a href="#" class="btn btn-primary">Option</a>
+                <a href="#" class="btn btn-outline-primary">Other option</a>
+            </div>
+        </div>
+        {% endcomment %}
+    </div>
