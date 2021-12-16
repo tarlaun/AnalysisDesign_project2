@@ -1,0 +1,34 @@
+#container {
+  background-color: #6f9dd6;
+  margin: auto;
+  top: 20%;
+}
+
+.btn {
+  border-width: 3px;
+  border-radius: 10px;
+}
+
+.btn {
+  color: #1a2035;
+  border-color: #1a2035;
+}
+
+.btn:hover {
+  color: white;
+  border-color: #1a2035;
+  background-color: #1a2035;
+}
+
+.table {
+  color: white;
+}
+
+th,
+td {
+  font-size: 20px;
+}
+
+th {
+  /* color: #1a2035; */
+}
