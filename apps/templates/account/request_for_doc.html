@@ -24,7 +24,7 @@
     <form class="ui form" action="{% url 'add_order' doc_id %}" method="post">
         {% csrf_token %}
         <div class="field" style="text-align: left;">
-            <label style="font-size: 15px">َََAddress</label>
+            <label style="font-size: 15px">Address</label>
             <label>
                 <textarea rows="2" required="required" name="address" style="direction:ltr;"></textarea>
             </label>
