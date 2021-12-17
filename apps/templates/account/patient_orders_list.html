@@ -10,7 +10,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 <link rel="stylesheet" href="{% static 'assets/css/home/patient_orders_list.css' %}">
 <script src="{% static 'assets/js/orders/stars.js' %}" defer></script>
-{% comment %} <script src="{% static 'assets/js/orders/pop-up.js' %}" defer></script> {% endcomment %}
+{% comment %}
+<script src="{% static 'assets/js/orders/pop-up.js' %}" defer></script> {% endcomment %}
 <script src="{% static 'assets/js/orders/comment-pop-up.js' %}" defer></script>
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
@@ -52,8 +53,10 @@
                     <li class="card-text"><b>Score:</b> {{ order.score }}</li>
                 </div>
 
-                <div style="text-align: left;">
+                <div style="text-align: center;">
                     <dialog id="favDialog">
+                        <div class="rate-header"><b>Please rate this request</b></div>
+                        <br />
                         <form id="rate-form" action="" method="POST" id="{{order.id}}">
                             {% csrf_token %}
                             <button type="submit" class="fa fa-star fa-3x my-btn" id="first"></button>
@@ -64,55 +67,71 @@
                         </form>
                         <div id="confirm-box" class="mt-3"></div>
                         <button onclick="window.location='{% url 'patient_orders_list' %}'" type="button"
-                                class="btn btn-danger">Cancel
+                                class="btn btn-light btn-sm">Cancel
                         </button>
                         <button id="confirmBtn" onclick="window.location='{% url 'patient_orders_list' %}'"
-                                type="button" class="btn btn-success">Submit
+                                type="button" class="btn btn-primary btn-sm">Submit
                         </button>
                     </dialog>
                 </div>
-                {% comment %}
-                <button type="button" class="btn btn-outline-light mt-3">
-                    <div class="card__apply">
-                        <b><a class="card__link">Apply Now
-                        </a></b>
-                    </div>
-                </button>
-                {% endcomment %}
+
+                <div style="text-align: center;">
+                    <dialog id="comDialog">
+                        <form id="comment-form" action="" method="POST">
+                            {% csrf_token %}
+                            <div class="field" style="text-align: center;">
+                                {% comment %} <label for="comment" style="font-size: 15px">Please tell us about your experience with
+                                    DociCom</label> {% endcomment %}
+                                {% comment %} <br/> {% endcomment %}
+                                {% comment %} <input
+                                        type="text"
+                                        id="comment"
+                                        name="comment"
+                                        placeholder="Your Comment"
+                                        style="direction:rtl;"
+                                /> {% endcomment %}
+
+                                <textarea id="comment" placeholder="Please tell us about your experience with DociCom ..." class="form-control" rows="5"></textarea>
+                            </div>
+                            {% comment %} <button onclick="window.location='{% url 'patient_orders_list' %}'" value="cancel"
+                                    class="button white ui">Cancel
+                            </button>
+                            <button onclick="window.location='{% url 'patient_orders_list' %}'" id="confBtn"
+                                    class="button white ui" type="submit">Submit
+                            </button> {% endcomment %}
+
+                            <div class="action-buttons">
+                                <button type="button" onclick="window.location='{% url 'patient_orders_list' %}'"
+                                    value="cancel" class="btn btn-light btn-sm"><b>Cancel</b>
+                            </button>
+                            <button type="submit" onclick="window.location='{% url 'patient_orders_list' %}'"
+                                    id="confBtn" class="btn btn-primary btn-sm"><b>Submit</b>
+                            </button>
+                            </div>
+                        </form>
+                    </dialog>
+                </div>
+
                 <button type="button" class="btn btn-outline-warning mt-3 Score" onclick="score({{order.id}})">
                     <b>Score</b>
                 </button>
 
-                <div style="text-align: left;">
-                        <dialog id="comDialog">
-                            <form id="comment-form" action="" method="POST">
-                                {% csrf_token %}
-                                <div class="field" style="text-align: center;">
-                                    <label for="comment" style="font-size: 15px">Please tell us about your experience with DociCom</label>
-                                    <br/>
-                                    <input
-                                      type="text"
-                                      id="comment"
-                                      name="comment"
-                                      placeholder="Your Comment"
-                                      style="direction:rtl;"
-                                    />
-                                </div>
-                                <button onclick="window.location='{% url 'patient_orders_list' %}'" value="cancel" class="button white ui">Cancel</button>
-                                <button onclick="window.location='{% url 'patient_orders_list' %}'" id="confBtn" class="button white ui" type="submit">Submit</button>
-                            </form>
-                        </dialog>
-                    </div>
-                    <div style="text-align: left;">
-                        <button class="Comment button white ui" onclick="commenting({{order.id}})">ثبت نظر</button>
-                    </div>
+                <button type="button" class="btn btn-outline-light mt-3 Comment" onclick="commenting({{order.id}})">
+                    <b>Comment</b>
+                </button>
 
+                {% comment %}
+                <div style="text-align: left;">
+                    <button class="Comment button white ui" onclick="commenting({{order.id}})">ثبت نظر</button>
                 </div>
+                {% endcomment %}
+
             </div>
-            {% endfor %}
-            {% else%}
-            There are no requests submitted.
-            {% endif%}
+        </div>
+        {% endfor %}
+        {% else%}
+        There are no requests submitted.
+        {% endif%}
     </div>
 </div>
 
