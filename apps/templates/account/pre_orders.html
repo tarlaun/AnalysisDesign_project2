@@ -1,0 +1,104 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Accepted Orders {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+	<div class="content">
+		<div class="page-inner">
+			<div class="page-header">
+				<h4 class="page-title">Accepted Orders</h4>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card">
+						<div class="card-header">
+							<h4 class="card-title">Orders</h4>
+						</div>
+						<div class="card-body">
+							<div class="table-responsive">
+								<table id="multi-filter-select" class="display table table-striped table-hover" >
+									<thead>
+										<tr>
+											<th>First Name</th>
+											<th>Last Name</th>
+											<th>Address</th>
+											<th>Email</th>
+											<th>Phone Number</th>
+											<th>Score</th>
+										</tr>
+									</thead>
+                                    <tfoot>
+										<tr>
+											<th>First Name</th>
+											<th>Last Name</th>
+											<th>Address</th>
+											<th>Email</th>
+											<th>Phone Number</th>
+											<th>Score</th>
+										</tr>
+									</tfoot>
+									<tbody>
+                                        {% if orders_list %}
+                                            {% for order in orders_list %}
+                                                <tr>
+                                                    <td>{{ order.user.first_name }}</td>
+                                                    <td>{{ order.user.last_name }}</td>
+                                                    <td>{{ order.address }}</td>
+                                                    <td>{{ order.user.email }}</td>
+                                                    <td>{{ order.user.phone_number }}</td>
+                                                    <td>{{ order.score }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        {% else %}
+                                            There are no accepted orders.
+                                        {% endif %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+	<!-- Atlantis DEMO methods, don't include it in your project! -->
+	<script src="/static/assets/js/setting-demo2.js"></script>
+	<script >
+		$(document).ready(function() {
+			$('#multi-filter-select').DataTable( {
+				"pageLength": 5,
+				initComplete: function () {
+					this.api().columns().every( function () {
+						var column = this;
+						var select = $('<select class="form-control"><option value=""></option></select>')
+						.appendTo( $(column.footer()).empty() )
+						.on( 'change', function () {
+							var val = $.fn.dataTable.util.escapeRegex(
+								$(this).val()
+								);
+
+							column
+							.search( val ? '^'+val+'$' : '', true, false )
+							.draw();
+						} );
+
+						column.data().unique().sort().each( function ( d, j ) {
+							select.append( '<option value="'+d+'">'+d+'</option>' )
+						} );
+					} );
+				}
+			});
+		});
+	</script>
+
+{% endblock javascripts %}
