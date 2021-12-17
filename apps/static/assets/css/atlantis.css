@@ -1477,6 +1477,10 @@ body {
   align-items: center;
   margin-bottom: 20px;
 }
+
+.register-page-inner > .page-header {
+  width: 60%;
+}
 .main-panel .page-header .page-title {
   margin-bottom: 0px;
 }
@@ -1572,6 +1576,11 @@ body {
 .login-container {
   margin: auto;
   width: 40%;
+}
+
+.register-container {
+  margin: auto;
+  width: 60%;
 }
 
 @media (min-width: 576px) {
