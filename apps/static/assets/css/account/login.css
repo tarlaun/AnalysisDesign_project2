@@ -1,0 +1,23 @@
+/* .container {
+  background-color: red;
+} */
+
+.login-card {
+  /* align-content: center;
+  margin: auto;
+  left: 0; */
+  /* background-color: blueviolet; */
+}
+
+/* .login {
+  background-color: red;
+}
+
+.page-inner {
+  background-color: red;
+} */
+
+.card-body {
+  align-content: center;
+  margin: auto;
+}
