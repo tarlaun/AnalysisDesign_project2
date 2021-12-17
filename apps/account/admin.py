@@ -42,4 +42,3 @@ class DoctorAdmin(admin.ModelAdmin):
 
 admin.site.register(Expertise)
 admin.site.register(Order)
- 
