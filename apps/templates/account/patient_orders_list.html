@@ -50,13 +50,21 @@
                     </li>
                     <li class="card-text"><b>Address:</b> {{ order.address }}</li>
                     <li class="card-text"><b>Present Illness:</b> {{ order.details }}</li>
-                    <li class="card-text"><b>Score:</b> {{ order.score }}</li>
+                    <li class="card-text"><b>Score: </b> {% if order.score == 0 %} <b style="color: #edb321">You have
+                        not rated yet.</b> {% else %} {{ order.score }} {% endif %}
+                    </li>
+                    <li class="card-text"><b>Comment: </b> {% if not order.comment %} <b style="color: #edb321">There
+                        are no comments yet.</b>{% else %} {{ order.comment }} {% endif %}
+                    </li>
+                    {% if not order.accepted %}
+                        <li class="card-text" style="color: #ff8a8a">Your request has not been accepted by doctor <b>{{order.doctor}}</b> yet.</li>
+                    {% endif %}
                 </div>
 
                 <div style="text-align: center;">
                     <dialog id="favDialog">
                         <div class="rate-header"><b>Please rate this request</b></div>
-                        <br />
+                        <br/>
                         <form id="rate-form" action="" method="POST" id="{{order.id}}">
                             {% csrf_token %}
                             <button type="submit" class="fa fa-star fa-3x my-btn" id="first"></button>
@@ -80,33 +88,38 @@
                         <form id="comment-form" action="" method="POST">
                             {% csrf_token %}
                             <div class="field" style="text-align: center;">
-                                {% comment %} <label for="comment" style="font-size: 15px">Please tell us about your experience with
-                                    DociCom</label> {% endcomment %}
+                                {% comment %} <label for="comment" style="font-size: 15px">Please tell us about your
+                                experience with
+                                DociCom</label> {% endcomment %}
                                 {% comment %} <br/> {% endcomment %}
                                 {% comment %} <input
-                                        type="text"
-                                        id="comment"
-                                        name="comment"
-                                        placeholder="Your Comment"
-                                        style="direction:rtl;"
-                                /> {% endcomment %}
+                                    type="text"
+                                    id="comment"
+                                    name="comment"
+                                    placeholder="Your Comment"
+                                    style="direction:rtl;"
+                            /> {% endcomment %}
 
-                                <textarea id="comment" placeholder="Please tell us about your experience with DociCom ..." class="form-control" rows="5"></textarea>
+                                <textarea id="comment"
+                                          placeholder="Please tell us about your experience with DociCom ..."
+                                          class="form-control" rows="5"></textarea>
                             </div>
-                            {% comment %} <button onclick="window.location='{% url 'patient_orders_list' %}'" value="cancel"
+                            {% comment %}
+                            <button onclick="window.location='{% url 'patient_orders_list' %}'" value="cancel"
                                     class="button white ui">Cancel
                             </button>
                             <button onclick="window.location='{% url 'patient_orders_list' %}'" id="confBtn"
                                     class="button white ui" type="submit">Submit
-                            </button> {% endcomment %}
+                            </button>
+                            {% endcomment %}
 
                             <div class="action-buttons">
                                 <button type="button" onclick="window.location='{% url 'patient_orders_list' %}'"
-                                    value="cancel" class="btn btn-light btn-sm"><b>Cancel</b>
-                            </button>
-                            <button type="submit" onclick="window.location='{% url 'patient_orders_list' %}'"
-                                    id="confBtn" class="btn btn-primary btn-sm"><b>Submit</b>
-                            </button>
+                                        value="cancel" class="btn btn-light btn-sm"><b>Cancel</b>
+                                </button>
+                                <button type="submit" onclick="window.location='{% url 'patient_orders_list' %}'"
+                                        id="confBtn" class="btn btn-primary btn-sm"><b>Submit</b>
+                                </button>
                             </div>
                         </form>
                     </dialog>
