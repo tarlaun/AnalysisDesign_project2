@@ -240,6 +240,7 @@ dialog {
   background-color: #1a2035;
   border-color: #1a2035;
   border-radius: 5px;
+  box-shadow: 0 0 10px 5px #424e6b;
 }
 
 #comment {
