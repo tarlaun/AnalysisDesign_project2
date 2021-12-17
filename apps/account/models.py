@@ -3,9 +3,6 @@ from django.contrib.auth.models import AbstractUser
 from django.db.models.enums import IntegerChoices
 from django.core.validators import RegexValidator, MaxValueValidator, MinValueValidator
 
-
-# Create your models here.
-
 class UserType(IntegerChoices):
     DOCTOR = 1,
     PATIENT = 2
@@ -65,6 +62,8 @@ class Order(models.Model):
         ]
     )
     comment = models.TextField()
+
+    # NEW: added this field to show if doctor has accepted request or not
     accepted = models.BooleanField(default=False)
 
     def __str__(self):
