@@ -2,47 +2,59 @@
 
 <!DOCTYPE html>
 <html lang="fa">
-  <head>
-    <meta charset="utf-8" />
-    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
+<head>
+    <meta charset="utf-8"/>
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
     <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, maximum-scale=2, user-scalable=no"
+            name="viewport"
+            content="width=device-width, initial-scale=1, maximum-scale=2, user-scalable=no"
     />
     <meta
-      name="description"
-      content="Semantic-UI-Forest, collection of design, themes and templates for Semantic-UI."
+            name="description"
+            content="Semantic-UI-Forest, collection of design, themes and templates for Semantic-UI."
     />
-    <meta name="keywords" content="Semantic-UI, Theme, Design, Template" />
-    <meta name="author" content="PPType" />
-    <meta name="theme-color" content="#ffffff" />
+    <meta name="keywords" content="Semantic-UI, Theme, Design, Template"/>
+    <meta name="author" content="PPType"/>
+    <meta name="theme-color" content="#ffffff"/>
     <title>DociCom</title>
     <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
-      type="text/css"
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+            type="text/css"
     />
     <link rel="stylesheet" href="{% static 'assets/css/home/home.css' %}">
-  </head>
+</head>
 
-  <body id="root">
-    <div class="ui inverted vertical center aligned segment" id="container">
-      <nav class="ui container">
+<body id="root">
+<div class="ui inverted vertical center aligned segment" id="container">
+    <nav class="ui container">
         <div class="ui borderless inverted compact menu">
-          <a class="active item" href="">Home</a> <a class="item" href="/accounts/signup/">Register</a>
-          <a class="item" href="/accounts/signin/">Login</a>
+            <a class="active item" href="">Home</a> <a class="item" href="/accounts/signup/">Register</a>
+            <a class="item" href="/accounts/signin/">Login</a>
         </div>
-      </nav>
-      <div class="ui content container">
+    </nav>
+    <div class="ui content container">
         <h1 class="ui inverted header">Docicom</h1>
-        <p dir="rtl">
-          سامانه درمان سیار (Docicom) چندی است که برای یاری مردم ایران در ایام سخت کرونا شروع به کار کرده است تا بتواند حضور مردم را در مراکز پر خطری مانند بیمارستان‌ها و درمانگاه‌ها کاهش دهد. این نسخه از سامانه در حال حاضر به صورت آزمایشی و برای برطرف نمودن مشکلات آن است. از همکاری شما هم‌وطن عزیز برای بهبود این سامانه کمال تشکر را داریم.
+        <p dir="ltr">
+            DociCom is an online healthcare system which was created during the COVID-19 pandemic in order to help
+            deliver medical services at the comfort of your home and eliminate the need for visiting crowded and
+            high-risk hospitals and clinics. The current version of DociCom is still under development and we appreciate
+            any feedback for improving our services. Thank you very much for supporting DociCom and helping us make
+            medical service available at minimum cost to everyone.
         </p>
-        <p style="color: red">
-          We should translate this text to English
+
+        <a href="/account/signup/">
+            <div class="ui huge button">Register</div>
+        </a>
+        <br>
+        <br>
+        <p>
+            Already have an account?
         </p>
-        <a href="accounts/signup"><div class="ui huge button">ثبت نام کنید</div></a>
-      </div>
+        <a href="/account/signin/">
+            <div class="ui huge button" >Login</div>
+        </a>
     </div>
-  </body>
+</div>
+</body>
 </html>
