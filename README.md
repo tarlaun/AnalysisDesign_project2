@@ -26,16 +26,26 @@
 ## بیماران
 ![landing](images/landing.png)
 ### امکان ورود و ثبت نام بیماران در سامانه
+![login](images/login.png)
 ![signup](images/signup.png)
 ### امکان انتخاب خدمات مورد نیاز از میان لیست خدمات موجود
-![orders](images/orders.png)
+![expertises](images/expertises.png)
 ### امکان مشاهده درخواست‌های داده شده
+![orders](images/orders.png)
+### امکان ثبت امتیاز
+![score](images/score.png)
+### امکان ثبت نظر
+![comment](images/comment.png)
+### امکان مشاهده پزشکان هر تخصص
+![expertise'sDoctor](images/expertise'sDoctor.png)
+### امکان ثبت درخواست
+![submitOrder](images/submitOrder.png)
 
 ## پزشکان
 
 ### امکان ورود به سامانه 
 ![login](images/login.png)
 ### امکان مشاهده درخواست‌های موجود مرتبط با تخصص
-
-### امکان انتخاب درخواست از میان درخواست‌های موجود
 ![orders](images/doctor.png)
+### امکان مشاهده درخواست‌های پذیرفته شده
+![accepted](images/accepted.png)
