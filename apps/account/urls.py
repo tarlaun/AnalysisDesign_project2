@@ -21,4 +21,5 @@ urlpatterns = [
 
     path('doctor_list/<int:exp_id>', views.doctor_list, name='doctor_list'),
     path('rate/', views.rate_order, name='rate-view'),
+    path('comment/', views.comment_for_order, name='comment-view'),
 ]

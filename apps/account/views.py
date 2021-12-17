@@ -43,7 +43,6 @@ def signin(request):
             login(request, user)
             if being_doctor_check(user):
                 return redirect('expertise_orders_list')
-
             else:
                 return redirect('patient_orders_list')
         else:
@@ -97,7 +96,6 @@ def accept_order(request, order_id):
     doctor.save()
     return render(request, 'account/accept_order.html', {'order': order})
 
-
 # View Expertise List For Patient
 class ExpertiseView(generic.ListView):
     template_name = 'account/expertise_list.html'
@@ -120,7 +118,6 @@ def request_for_chosen_expertise(request, exp_id):
     expertise = get_object_or_404(Expertise, pk=exp_id)
     return render(request, 'account/request_for_expertise.html', {'expertise': expertise})
 
-
 # ADD Order Into DB
 def add_order(request, doc_id):
     if not request.user.is_authenticated:
@@ -135,24 +132,34 @@ def add_order(request, doc_id):
     o.save()
     return HttpResponseRedirect(reverse('patient_orders_list'))
 
-
 # View Patient's Previous Orders List
 def patient_orders_list(request):
     orders_list = Order.objects.filter(user_id=request.user.id)
-    # orders_list = [1, 2, 3, 4, 5]
     return render(request, 'account/patient_orders_list.html', {'orders_list': orders_list[::-1]})
-
 
 # save a score for orders
 def rate_order(request):
     if request.method == 'POST':
-        el_id = request.POST.get('el_id')
+        order_id = request.POST.get('order_id')
         val = request.POST.get('val')
-        order = Order.objects.get(id=el_id)
+        # print("***************", el_id, val, "********************")
+        order = Order.objects.get(id=order_id)
         order.score = val
         order.save()
-        return JsonResponse({'success': 'true', 'score': val}, safe=False)
-    return JsonResponse({'success': 'false'})
+        return JsonResponse({'success':'true', 'score': val}, safe=False)
+    return JsonResponse({'success':'false'})
+
+# save comment for orders
+def comment_for_order(request):
+    if request.method == 'POST':
+        order_id = request.POST.get('order_id')
+        order = Order.objects.get(id=order_id)
+        comment = request.POST.get('comment')
+        print(order_id, comment)
+        order.comment = comment
+        order.save()
+        return JsonResponse({'success':'true'}, safe=False)
+    return JsonResponse({'success':'false'})
 
 
 def doctor_list(request, exp_id):

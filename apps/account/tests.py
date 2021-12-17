@@ -80,9 +80,18 @@ class OrderTest(TestCase):
     def test_rate_order(self):
         test_order = self.create_order()
         score_val = "4"
-        response = self.client.post("/accounts/rate/", {"el_id": 1, "val": score_val})
+        response = self.client.post("/accounts/rate/", {"order_id": 1, "val": score_val})
         self.assertEqual(response.status_code, 200)
         self.assertJSONEqual(
             str(response.content, encoding="utf8"),
             {"success": "true", "score": score_val},
+        )
+
+    def test_comment_order(self):
+        comment = "از سرویس راضی بودم ممنون"
+        response = self.client.post("/accounts/comment/1", {"comment": comment})
+        self.assertEqual(response.status_code, 200)
+        self.assertJSONEqual(
+            str(response.content, encoding="utf8"),
+            {"success": "true", "comment": comment},
         )

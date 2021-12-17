@@ -64,7 +64,7 @@ class Order(models.Model):
             MinValueValidator(0),
         ]
     )
-    comment = models.TextField()
+    comment = models.TextField(null=True)
     accepted = models.BooleanField(default=False)
 
     def __str__(self):

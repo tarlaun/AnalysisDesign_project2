@@ -1,9 +1,9 @@
 // get all the stars
-const one = document.getElementById('first')
-const two = document.getElementById('second')
-const three = document.getElementById('third')
-const four = document.getElementById('fourth')
-const five = document.getElementById('fifth')
+const one = document.getElementById("first");
+const two = document.getElementById("second");
+const three = document.getElementById("third");
+const four = document.getElementById("fourth");
+const five = document.getElementById("fifth");
 
 // get the form, confirm-box and csrf token
 const form = document.querySelector('#rate-form')
