@@ -30,7 +30,6 @@
         </div>
     </div>
 
-    {% comment %} <i class="fas fa-user-md"></i> {% endcomment %}
     <div class="cards-container">
         {% if orders_list%}
         {% for order in orders_list %}
@@ -88,30 +87,10 @@
                         <form id="comment-form" action="" method="POST">
                             {% csrf_token %}
                             <div class="field" style="text-align: center;">
-                                {% comment %} <label for="comment" style="font-size: 15px">Please tell us about your
-                                experience with
-                                DociCom</label> {% endcomment %}
-                                {% comment %} <br/> {% endcomment %}
-                                {% comment %} <input
-                                    type="text"
-                                    id="comment"
-                                    name="comment"
-                                    placeholder="Your Comment"
-                                    style="direction:rtl;"
-                            /> {% endcomment %}
-
                                 <textarea id="comment"
                                           placeholder="Please tell us about your experience with DociCom ..."
                                           class="form-control" rows="5"></textarea>
                             </div>
-                            {% comment %}
-                            <button onclick="window.location='{% url 'patient_orders_list' %}'" value="cancel"
-                                    class="button white ui">Cancel
-                            </button>
-                            <button onclick="window.location='{% url 'patient_orders_list' %}'" id="confBtn"
-                                    class="button white ui" type="submit">Submit
-                            </button>
-                            {% endcomment %}
 
                             <div class="action-buttons">
                                 <button type="button" onclick="window.location='{% url 'patient_orders_list' %}'"
