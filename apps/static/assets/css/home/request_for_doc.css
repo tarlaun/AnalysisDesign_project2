@@ -1,0 +1,17 @@
+#container {
+  background-color: #6f9dd6;
+  top: 10%;
+}
+
+.btn-outline-success {
+  border-color: white;
+  color: white;
+  border-width: 5px;
+  border-radius: 6px;
+}
+
+.btn-outline-success:hover {
+  border-color: #33a656;
+
+  color: white;
+}

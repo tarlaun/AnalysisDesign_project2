@@ -1,0 +1,53 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% block title %} DociCom - Expertises {% endblock %}
+
+{% block content %}
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
+<link rel="stylesheet" href="{% static 'assets/css/home/expertise_list.css' %}">
+
+<div class="ui raised very padded text container segment" id="container">
+    <h3 class="ui block black header" style="text-align: left;">
+        <i class="heartbeat red icon"></i>
+        Choose your desired field of expertise:
+    </h3>
+    {% if expertise_list %}
+
+    <table class="table table-dark">
+        <thead>
+        <tr>
+            <th scope="col">Expertise</th>
+            <th scope="col">Price</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for exp in expertise_list %}
+
+        <tr>
+            <td>{{ exp.name }}</td>
+            <td>{{ exp.price }} <a style="font-size: 10px; color: yellow">(Toman)</a></td>
+            <td>
+                <button type="button" onclick="window.location='{% url 'doctor_list' exp.id %}'"
+                        class="btn btn-outline-secondary btn-sm">
+                    <i class="fa fa-check-circle"></i>
+                    <b>choose</b>
+                </button>
+            </td>
+        </tr>
+
+        {% endfor %}
+
+        </tbody>
+    </table>
+    {% else %}
+    <p>Unfortunately no doctors are available at the moment. We apologize for the inconvenience.
+        <i class="frown blue icon"></i>
+    </p>
+    {% endif %}
+</div>
+
+{% endblock content %}
