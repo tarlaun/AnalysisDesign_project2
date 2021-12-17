@@ -1,6 +1,5 @@
 from django.test import TestCase
 from .models import Account, Expertise, Doctor, Order
-from django.urls import reverse
 from .views import rate_order
 
 
