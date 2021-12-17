@@ -33,30 +33,18 @@
     <div class="cards-container">
         {% if orders_list%}
         {% for order in orders_list %}
-            <div class="card profile-card">
-                <div class="card-body pt-4">
-                    <div class="card__icon">
-                        <img src="{% static 'assets/img/doctor-icon.jpg' %}"/>
+        <div class="card profile-card">
+            <div class="card-body pt-4">
+                <div class="card__icon">
+                    <img src="{% static 'assets/img/doctor-icon.jpg' %}"/>
 
-                    </div>
-                    <h5 class="card-title">Expertise: {{ order.expertise.name }}</h5>
-                    <div>
-                        <li class="card-text"><b>Doctor:</b> {% if order.doctor %}
-                            {{ order.doctor }}
-                            {% else %}
-                            درخواست شما هنوز توسط هیچ پزشکی تایید نشده‌است.
-                            {% endif %}
-                        </li>
-                        <li class="card-text"><b>Address:</b> {{ order.address }}</li>
-                        <li class="card-text"><b>Present Illness:</b> {{ order.details }}</li>
-                        <li class="card-text"><b>Score: </b> {% if order.score == 0 %} <b style="color: #edb321">You have
-                            not rated yet.</b> {% else %} {{ order.score }} {% endif %}
-                        </li>
-                        <li class="card-text"><b>Comment: </b> {% if not order.comment %} <b style="color: #edb321">There
-                            are no comments yet.</b>{% else %} {{ order.comment }} {% endif %}
-                        </li>
-                        {% if not order.accepted %}
-                            <li class="card-text" style="color: #ff8a8a">Your request has not been accepted by doctor <b>{{order.doctor}}</b> yet.</li>
+                </div>
+                <h5 class="card-title">Expertise: {{ order.expertise.name }}</h5>
+                <div>
+                    <li class="card-text"><b>Doctor:</b> {% if order.doctor %}
+                        {{ order.doctor }}
+                        {% else %}
+                        درخواست شما هنوز توسط هیچ پزشکی تایید نشده‌است.
                         {% endif %}
                         </li>
                         <li class="card-text"><b>Address:</b> {{ order.address }}</li>
@@ -72,49 +60,49 @@
                         {% endif %}
                 </div>
 
-                    <div style="text-align: center;">
-                        <dialog id="favDialog">
-                            <div class="rate-header"><b>Please rate this request</b></div>
-                            <br/>
-                            <form id="rate-form" action="" method="POST" id="{{order.id}}">
-                                {% csrf_token %}
-                                <button type="submit" class="fa fa-star fa-3x my-btn" id="first"></button>
-                                <button type="submit" class="fa fa-star fa-3x my-btn" id="second"></button>
-                                <button type="submit" class="fa fa-star fa-3x my-btn" id="third"></button>
-                                <button type="submit" class="fa fa-star fa-3x my-btn" id="fourth"></button>
-                                <button type="submit" class="fa fa-star fa-3x my-btn" id="fifth"></button>
-                            </form>
-                            <div id="confirm-box" class="mt-3"></div>
-                            <button onclick="window.location='{% url 'patient_orders_list' %}'" type="button"
-                                    class="btn btn-light btn-sm">Cancel
-                            </button>
-                            <button id="confirmBtn" onclick="window.location='{% url 'patient_orders_list' %}'"
-                                    type="button" class="btn btn-primary btn-sm">Submit
-                            </button>
-                        </dialog>
-                    </div>
+                <div style="text-align: center;">
+                    <dialog id="favDialog">
+                        <div class="rate-header"><b>Please rate this request</b></div>
+                        <br/>
+                        <form id="rate-form" action="" method="POST" id="{{order.id}}">
+                            {% csrf_token %}
+                            <button type="submit" class="fa fa-star fa-3x my-btn" id="first"></button>
+                            <button type="submit" class="fa fa-star fa-3x my-btn" id="second"></button>
+                            <button type="submit" class="fa fa-star fa-3x my-btn" id="third"></button>
+                            <button type="submit" class="fa fa-star fa-3x my-btn" id="fourth"></button>
+                            <button type="submit" class="fa fa-star fa-3x my-btn" id="fifth"></button>
+                        </form>
+                        <div id="confirm-box" class="mt-3"></div>
+                        <button onclick="window.location='{% url 'patient_orders_list' %}'" type="button"
+                                class="btn btn-light btn-sm">Cancel
+                        </button>
+                        <button id="confirmBtn" onclick="window.location='{% url 'patient_orders_list' %}'"
+                                type="button" class="btn btn-primary btn-sm">Submit
+                        </button>
+                    </dialog>
+                </div>
 
-                    <div style="text-align: center;">
-                        <dialog id="comDialog">
-                            <form id="comment-form" action="" method="POST">
-                                {% csrf_token %}
-                                <div class="field" style="text-align: center;">
-                                    <textarea id="comment"
-                                            placeholder="Please tell us about your experience with DociCom ..."
-                                            class="form-control" rows="5"></textarea>
-                                </div>
+                <div style="text-align: center;">
+                    <dialog id="comDialog">
+                        <form id="comment-form" action="" method="POST">
+                            {% csrf_token %}
+                            <div class="field" style="text-align: center;">
+                                <textarea id="comment"
+                                          placeholder="Please tell us about your experience with DociCom ..."
+                                          class="form-control" rows="5"></textarea>
+                            </div>
 
-                                <div class="action-buttons">
-                                    <button type="button" onclick="window.location='{% url 'patient_orders_list' %}'"
-                                            value="cancel" class="btn btn-light btn-sm"><b>Cancel</b>
-                                    </button>
-                                    <button type="submit" onclick="window.location='{% url 'patient_orders_list' %}'"
-                                            id="confBtn" class="btn btn-primary btn-sm"><b>Submit</b>
-                                    </button>
-                                </div>
-                            </form>
-                        </dialog>
-                    </div>
+                            <div class="action-buttons">
+                                <button type="button" onclick="window.location='{% url 'patient_orders_list' %}'"
+                                        value="cancel" class="btn btn-light btn-sm"><b>Cancel</b>
+                                </button>
+                                <button type="submit" onclick="window.location='{% url 'patient_orders_list' %}'"
+                                        id="confBtn" class="btn btn-primary btn-sm"><b>Submit</b>
+                                </button>
+                            </div>
+                        </form>
+                    </dialog>
+                </div>
 
                 <button type="button" class="btn btn-outline-warning mt-3 Score" onclick="score({{order.id}})">
                     <b>Score</b>
@@ -125,9 +113,10 @@
                 </button>
 
             </div>
+        </div>
         {% endfor %}
         {% else%}
-            There are no requests submitted.
+        There are no requests submitted.
         {% endif%}
     </div>
 </div>
