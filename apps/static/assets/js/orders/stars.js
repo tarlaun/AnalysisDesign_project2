@@ -88,8 +88,6 @@ const getNumericValue = (stringValue) => {
 }
 
 function score(order_id) {
-
-
     if (one) {
         const arr = [one, two, three, four, five]
 
@@ -116,7 +114,7 @@ function score(order_id) {
                     url: '/accounts/rate/',
                     data: {
                         'csrfmiddlewaretoken': csrf[0].value,
-                        'el_id': order_id,
+                        'order_id': order_id,
                         'val': val_num,
                     },
                     success: function (response) {
