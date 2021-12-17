@@ -1,47 +1,39 @@
-<!DOCTYPE html>
+{% extends "layouts/base.html" %}
+{% load static %}
 
-<html>
+{% block title %} Dashboard {% endblock %}
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
+{% block content %}
 
-<head>
-    <meta charset="utf-8">
-    <title>نمایش لیست درخواست‌ها</title>
-</head>
-<body>
-<div class="ui vertical labeled icon buttons">
-    <button class="ui button red">
-        <i class="sign out alternate icon white"></i>
-        <a onclick="window.location='{% url 'signout' %}'" style="color: white;">خروج</a>
-    </button>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,500&amp;subset=latin-ext" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+<link rel="stylesheet" href="{% static 'assets/css/home/patient_orders_list.css' %}">
+
+<div class="content">
+    <div class="cards-container">
+        {% if orders_list %}
+            {% for order in orders_list %}
+                <div class="card profile-card">
+                    <div class="card-body pt-4">
+                        <div class="card__icon">
+                            <img src="{% static 'assets/img/patient_icon.png' %}"/>
+                        </div>
+                        <h5 class="card-title">Patient: {{ order.user.first_name }} {{order.user.last_name}}</h5>
+                        <div>
+                            <li class="card-text"><b>Address:</b> {{ order.address }}</li>
+                            <li class="card-text"><b>Description:</b> {{ order.details }}</li>
+                            <li class="card-text"><b>Score:</b> {{ order.score }}</li>
+                        </div>
+                        <button type="button" class="btn mt-3" onclick="window.location='{% url 'accept_order' order.id %}'">
+                            <b>Accept</b>
+                        </button>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else%}
+            There are no requests submitted.
+        {% endif%}
+    </div>
 </div>
-{% if orders_list %}
-
-{% for order in orders_list %}
-<div class="ui segment" style="padding:10px;margin:10px;direction:rtl;background-color:floralwhite;">
-    <a class="item">
-        <div class="ui horizontal label">نام:</div>
-        {{ order.user }}
-    </a>
-    <a class="item">
-        <div class="ui horizontal label">آدرس:</div>
-        {{ order.address }}
-    </a>
-    <a class="item">
-        <div class="ui horizontal label">شرح مشکل:</div>
-        {{ order.details }}
-    </a>
-    <button class="ui green button" onclick="window.location='{% url 'accept_order' order.id %}'">
-        قبول
-    </button>
-</div>
-{% endfor %}
-
-{% else %}
-<div class="ui red inverted segment" style="padding:10px;margin:10px;direction:rtl">
-    هیچ درخواستی وجود ندارد!
-</div>
-{% endif %}
-</body>
-
-</html>
+{% endblock content %}

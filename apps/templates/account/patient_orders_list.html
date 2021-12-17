@@ -46,18 +46,18 @@
                         {% else %}
                         درخواست شما هنوز توسط هیچ پزشکی تایید نشده‌است.
                         {% endif %}
-                    </li>
-                    <li class="card-text"><b>Address:</b> {{ order.address }}</li>
-                    <li class="card-text"><b>Present Illness:</b> {{ order.details }}</li>
-                    <li class="card-text"><b>Score: </b> {% if order.score == 0 %} <b style="color: #edb321">You have
-                        not rated yet.</b> {% else %} {{ order.score }} {% endif %}
-                    </li>
-                    <li class="card-text"><b>Comment: </b> {% if not order.comment %} <b style="color: #edb321">There
-                        are no comments yet.</b>{% else %} {{ order.comment }} {% endif %}
-                    </li>
-                    {% if not order.accepted %}
-                        <li class="card-text" style="color: #b50000">Your request has not been accepted by doctor <b>{{order.doctor}}</b> yet.</li>
-                    {% endif %}
+                        </li>
+                        <li class="card-text"><b>Address:</b> {{ order.address }}</li>
+                        <li class="card-text"><b>Present Illness:</b> {{ order.details }}</li>
+                        <li class="card-text"><b>Score: </b> {% if order.score == 0 %} <b style="color: #edb321">You have
+                            not rated yet.</b> {% else %} {{ order.score }} {% endif %}
+                        </li>
+                        <li class="card-text"><b>Comment: </b> {% if not order.comment %} <b style="color: #edb321">There
+                            are no comments yet.</b>{% else %} {{ order.comment }} {% endif %}
+                        </li>
+                        {% if not order.accepted %}
+                            <li class="card-text" style="color: #b50000">Your request has not been accepted by doctor <b>{{order.doctor}}</b> yet.</li>
+                        {% endif %}
                 </div>
 
                 <div style="text-align: center;">

@@ -94,7 +94,7 @@ def accept_order(request, order_id):
     order.save()
     doctor.not_processed_income += order.expertise.price
     doctor.save()
-    return render(request, 'account/accept_order.html', {'order': order})
+    return redirect('expertise_orders_list')
 
 # View Expertise List For Patient
 class ExpertiseView(generic.ListView):
@@ -155,7 +155,7 @@ def comment_for_order(request):
         order_id = request.POST.get('order_id')
         order = Order.objects.get(id=order_id)
         comment = request.POST.get('comment')
-        print(order_id, comment)
+        # print(order_id, comment)
         order.comment = comment
         order.save()
         return JsonResponse({'success':'true'}, safe=False)
@@ -174,3 +174,9 @@ def request_for_chosen_doctor(request, doc_id):
     return render(request, 'account/request_for_doc.html',
                   {'doc_name': doctor.user.first_name, 'doc_lname': doctor.user.last_name, 'doc_id': doctor.user.id,
                    'exp': exp})
+
+def previous_orders(request):
+    doctor = Doctor.objects.get(user=request.user)
+    expertise = doctor.expertise
+    orders_list = Order.objects.filter(expertise=expertise, doctor=doctor, accepted=True)
+    return render(request, 'account/pre_orders.html', {'orders_list': orders_list})

@@ -6,10 +6,10 @@
 				{% if request.user.is_authenticated %}	
 					<ul class="nav nav-primary">
 						<li class="nav-item {% if 'index' in segment %} active {% endif %}">
-							<a data-toggle="collapse" href="#dashboard" class="collapsed" aria-expanded="false">
+							<a aria-expanded="false">
 								<i class="fas fa-home"></i>
 								<p>Dashboard</p>
-								<span class="caret"></span>
+								{% comment %} <span class="caret"></span> {% endcomment %}
 							</a>
 							<div class="collapse" id="dashboard">
 								<ul class="nav nav-collapse">
@@ -20,6 +20,12 @@
 									</li>
 								</ul>
 							</div>
+						</li>
+						<li class="nav-item {% if 'index' in segment %} active {% endif %}">
+							<a href="{% url 'pre_orders' %}" aria-expanded="false">
+								<i class="fas fa-layer-group"></i>
+								<p>Accepted Orders</p>
+							</a>
 						</li>
 					</ul>
 				{% else %}
