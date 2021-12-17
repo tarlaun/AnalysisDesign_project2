@@ -142,7 +142,6 @@ def rate_order(request):
     if request.method == 'POST':
         order_id = request.POST.get('order_id')
         val = request.POST.get('val')
-        # print("***************", el_id, val, "********************")
         order = Order.objects.get(id=order_id)
         order.score = val
         order.save()
@@ -155,19 +154,19 @@ def comment_for_order(request):
         order_id = request.POST.get('order_id')
         order = Order.objects.get(id=order_id)
         comment = request.POST.get('comment')
-        # print(order_id, comment)
         order.comment = comment
         order.save()
         return JsonResponse({'success':'true'}, safe=False)
     return JsonResponse({'success':'false'})
 
 
+# gives list of all doctors
 def doctor_list(request, exp_id):
     expertise = get_object_or_404(Expertise, pk=exp_id)
     docs_list = Doctor.objects.filter(expertise=expertise)
     return render(request, 'account/doctor_list.html', {'doctor_list': docs_list, 'exp_name': expertise.name})
 
-
+# get all requests for doctor which she/he has not accepted yet
 def request_for_chosen_doctor(request, doc_id):
     doctor = get_object_or_404(Doctor, pk=doc_id)
     exp = doctor.expertise.name
@@ -175,6 +174,7 @@ def request_for_chosen_doctor(request, doc_id):
                   {'doc_name': doctor.user.first_name, 'doc_lname': doctor.user.last_name, 'doc_id': doctor.user.id,
                    'exp': exp})
 
+# get requests for doctor which she/he accepted
 def previous_orders(request):
     doctor = Doctor.objects.get(user=request.user)
     expertise = doctor.expertise
