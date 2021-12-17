@@ -65,6 +65,7 @@ class Order(models.Model):
         ]
     )
     comment = models.TextField()
+    accepted = models.BooleanField(default=False)
 
     def __str__(self):
         return f'{self.user.__str__()} {self.doctor.__str__()} {self.expertise.__str__()}'
