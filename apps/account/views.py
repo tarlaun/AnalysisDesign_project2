@@ -142,9 +142,13 @@ def rate_order(request):
     return JsonResponse({'success':'false'})
 
 # save comment for orders
-def comment_for_order(request, order_id):
-    order = Order.objects.get(id=order_id)
-    comment = request.POST.get('comment')
-    order.comment = comment
-    order.save()
-    return patient_orders_list(request)
+def comment_for_order(request):
+    if request.method == 'POST':
+        order_id = request.POST.get('order_id')
+        order = Order.objects.get(id=order_id)
+        comment = request.POST.get('comment')
+        print(order_id, comment)
+        order.comment = comment
+        order.save()
+        return JsonResponse({'success':'true'}, safe=False)
+    return JsonResponse({'success':'false'})

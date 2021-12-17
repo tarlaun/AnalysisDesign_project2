@@ -54,6 +54,11 @@
                         {{ order.details }}
                     </a>
                     <br/>
+                    <a class="item">
+                        <a>نظر:</a>
+                        {{ order.comment }}
+                    </a>
+                    <br/>
                     <div style="text-align: left;">
                         <dialog id="favDialog">
                             <form class="rate-form" action="" method="POST" id="{{order.id}}">
@@ -75,23 +80,27 @@
                     <br/>
 
                     <div style="text-align: left;">
-                        <dialog id="CommentDialog">
-                            <form class="comment-form" action="{% url 'comment-view' order.id %}" method=post>
+                        <dialog id="comDialog">
+                            <form id="comment-form" action="" method="POST">
                                 {% csrf_token %}
                                 <div class="field" style="text-align: center;">
-                                    <label style="font-size: 15px">Please tell us about your experience with DociCom</label>
+                                    <label for="comment" style="font-size: 15px">Please tell us about your experience with DociCom</label>
                                     <br/>
-                                    <label>
-                                        <textarea rows="2" name="comment" style="direction:rtl;"></textarea>
-                                    </label>
+                                    <input
+                                      type="text"
+                                      id="comment"
+                                      name="comment"
+                                      placeholder="Your Comment"
+                                      style="direction:rtl;"
+                                    />
                                 </div>
-                                <a href="{% url 'patient_orders_list' %}"><button value="cancel" class="button white ui">Cancel</button></a>
-                                <a href="{% url 'comment-view' order.id %}"><button id="confBtn" class="button white ui" type="submit">Submit</button></a>
+                                <button onclick="window.location='{% url 'patient_orders_list' %}'" value="cancel" class="button white ui">Cancel</button>
+                                <button onclick="window.location='{% url 'patient_orders_list' %}'" id="confBtn" class="button white ui" type="submit">Submit</button>
                             </form>
                         </dialog>
                     </div>
                     <div style="text-align: left;">
-                        <button class="Comment button white ui">ثبت نظر</button>
+                        <button class="Comment button white ui" onclick="commenting({{order.id}})">ثبت نظر</button>
                     </div>
 
                 </div>
