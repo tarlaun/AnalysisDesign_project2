@@ -52,7 +52,6 @@ def signin(request):
     # form = AccountCreationForm()
     form = LoginForm()
     context = {"form": form}
-    # print("----- form:", form)
     return render(request, 'account/login.html', context)
 
 
@@ -75,7 +74,7 @@ def expertise_orders_list(request):
         return HttpResponse("You are not a doctor")
     doctor = Doctor.objects.get(user=request.user)
     expertise = doctor.expertise
-    orders_list = Order.objects.filter(expertise=expertise, doctor=None)
+    orders_list = Order.objects.filter(expertise=expertise, doctor=doctor, accepted=False)
     return render(request, 'account/expertise_orders_list.html', {'orders_list': orders_list})
 
 
@@ -88,10 +87,11 @@ def accept_order(request, order_id):
     if request.user.user_type == UserType.PATIENT:
         return HttpResponse("You are not a doctor")
     order = Order.objects.get(id=order_id)
-    if order.doctor:
+    if order.accepted:
         return HttpResponse("This Order was accepted by another doctor!")
     doctor = Doctor.objects.get(user=request.user)
-    order.doctor = doctor
+    # order.doctor = doctor
+    order.accepted = True
     order.save()
     doctor.not_processed_income += order.expertise.price
     doctor.save()
@@ -148,7 +148,6 @@ def rate_order(request):
     if request.method == 'POST':
         el_id = request.POST.get('el_id')
         val = request.POST.get('val')
-        # print("***************", el_id, val, "********************")
         order = Order.objects.get(id=el_id)
         order.score = val
         order.save()
@@ -166,4 +165,5 @@ def request_for_chosen_doctor(request, doc_id):
     doctor = get_object_or_404(Doctor, pk=doc_id)
     exp = doctor.expertise.name
     return render(request, 'account/request_for_doc.html',
-                  {'doc_name': doctor.user.first_name, 'doc_lname': doctor.user.last_name, 'doc_id': doctor.user.id, 'exp':exp})
+                  {'doc_name': doctor.user.first_name, 'doc_lname': doctor.user.last_name, 'doc_id': doctor.user.id,
+                   'exp': exp})
