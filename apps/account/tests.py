@@ -50,6 +50,7 @@ class OrderTest(TestCase):
         details="I am sick",
         score="3",
         comment="Not bad!",
+        complaint='very late'
     ):
         return Order.objects.create(
             user=self.create_user(),
@@ -59,6 +60,7 @@ class OrderTest(TestCase):
             details=details,
             score=score,
             comment=comment,
+            complaint=complaint
         )
 
     def test_order_creation(self):
@@ -100,7 +102,7 @@ class OrderTest(TestCase):
     def test_complaint_order(self):
         test_order = self.create_order()
         complaint = "هزینه بسیار زیاد بود."
-        response = self.client.post("/accounts/complaint/", {"order_id": 1, "comment": complaint})
+        response = self.client.post("/accounts/complaint/", {"order_id": 1, "complaint": complaint})
         self.assertEqual(response.status_code, 200)
         self.assertJSONEqual(
             str(response.content, encoding="utf8"),
