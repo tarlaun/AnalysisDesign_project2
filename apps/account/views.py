@@ -160,6 +160,18 @@ def comment_for_order(request):
     return JsonResponse({'success':'false'})
 
 
+# save complaint for orders
+def complaint_for_order(request):
+    if request.method == 'POST':
+        order_id = request.POST.get('order_id')
+        order = Order.objects.get(id=order_id)
+        complaint = request.POST.get('complaint')
+        order.complaint = complaint
+        order.save()
+        return JsonResponse({'success':'true'}, safe=False)
+    return JsonResponse({'success':'false'})
+
+
 # gives list of all doctors
 def doctor_list(request, exp_id):
     expertise = get_object_or_404(Expertise, pk=exp_id)
