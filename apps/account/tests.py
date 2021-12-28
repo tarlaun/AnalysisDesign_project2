@@ -96,3 +96,13 @@ class OrderTest(TestCase):
             str(response.content, encoding="utf8"),
             {"success": "true"},
         )
+
+    def test_complaint_order(self):
+        test_order = self.create_order()
+        complaint = "هزینه بسیار زیاد بود."
+        response = self.client.post("/accounts/complaint/", {"order_id": 1, "comment": complaint})
+        self.assertEqual(response.status_code, 200)
+        self.assertJSONEqual(
+            str(response.content, encoding="utf8"),
+            {"success": "true"},
+        )

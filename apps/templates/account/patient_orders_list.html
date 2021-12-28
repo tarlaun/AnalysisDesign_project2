@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="{% static 'assets/css/home/patient_orders_list.css' %}">
 <script src="{% static 'assets/js/orders/stars.js' %}" defer></script>
 <script src="{% static 'assets/js/orders/comment-pop-up.js' %}" defer></script>
+<script src="{% static 'assets/js/orders/complaint-pop-up.js' %}" defer></script>
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
 <div class="content">
@@ -52,6 +53,9 @@
                         </li>
                         <li class="card-text"><b>Comment: </b> {% if not order.comment %} <b style="color: #edb321">There
                             are no comments yet.</b>{% else %} {{ order.comment }} {% endif %}
+                        </li>
+                        <li class="card-text"><b>Complaint: </b> {% if not order.complaint %} <b style="color: #edb321">There
+                            are no complaints yet.</b>{% else %} {{ order.complaint }} {% endif %}
                         </li>
                         {% if not order.accepted %}
                             <li class="card-text" style="color: #b50000"><b>Your request has not been accepted by doctor {{order.doctor}} yet.</b></li>
@@ -102,12 +106,38 @@
                     </dialog>
                 </div>
 
+                <div style="text-align: center;">
+                    <dialog id="complaintDialog">
+                        <form id="complaint-form" action="" method="POST">
+                            {% csrf_token %}
+                            <div class="field" style="text-align: center;">
+                                <textarea id="complaint"
+                                          placeholder="If you have any complaints related to our service, please tell us ..."
+                                          class="form-control" rows="5"></textarea>
+                            </div>
+
+                            <div class="action-buttons">
+                                <button type="button" onclick="window.location='{% url 'patient_orders_list' %}'"
+                                        value="cancel" class="btn btn-light btn-sm"><b>Cancel</b>
+                                </button>
+                                <button type="submit" onclick="window.location='{% url 'patient_orders_list' %}'"
+                                        id="conBtn" class="btn btn-primary btn-sm"><b>Submit</b>
+                                </button>
+                            </div>
+                        </form>
+                    </dialog>
+                </div>
+
                 <button type="button" class="btn btn-outline-warning mt-3 Score" onclick="score({{order.id}})">
                     <b>Score</b>
                 </button>
 
                 <button type="button" class="btn btn-outline-light mt-3 Comment" onclick="commenting({{order.id}})">
                     <b>Comment</b>
+                </button>
+
+                <button type="button" class="btn btn-outline-danger mt-3 Complaint" onclick="set_complaint({{order.id}})">
+                    <b>Complaint</b>
                 </button>
 
             </div>
