@@ -69,6 +69,7 @@ class Order(models.Model):
         ]
     )
     comment = models.TextField()
+    complaint = models.TextField()
 
     # NEW: added this field to show if doctor has accepted request or not
     accepted = models.BooleanField(default=False)
