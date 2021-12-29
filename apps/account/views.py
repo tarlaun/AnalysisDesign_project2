@@ -194,4 +194,5 @@ def previous_orders(request):
     return render(request, 'account/pre_orders.html', {'orders_list': orders_list})
 
 def all_doctors(request):
-    return render(request, 'account/list_of_doctors.html')
+    doctors_list = Doctor.objects.all()
+    return render(request, 'account/list_of_doctors.html', {'doctors_list': doctors_list})
