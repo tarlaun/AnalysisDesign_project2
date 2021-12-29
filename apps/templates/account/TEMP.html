@@ -1,6 +1,6 @@
 {% extends "layouts/base.html" %}
 
-{% block title %} Doctors {% endblock %} 
+{% block title %} Doctors {% endblock %}
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}{% endblock stylesheets %}
@@ -9,31 +9,48 @@
 
 	<div class="content">
 		<div class="page-inner">
-
+			<div class="page-header-doctor-dashboard">
+				<h4 class="page-title">Doctors</h4>
+			</div>
 			<div class="row">
 				<div class="col-md-12">
 					<div class="card">
 						<div class="card-header">
-							<h4 class="card-title">Dr. {{doctor.user.first_name}} {{ doctor.user.last_name }}</h4>
+							<h4 class="card-title">List of Doctors</h4>
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
 								<table id="multi-filter-select" class="display table table-striped table-hover" >
 									<thead>
 										<tr>
+											<th>First Name</th>
+											<th>Last Name</th>
 											<th>Expertise</th>
 											<th>Work Experience</th>
 											<th>Degree</th>
+                                            <th>Profile</th>
                                             <th>Submit Request</th>
 										</tr>
 									</thead>
+                                    <tfoot>
+										<tr>
+											<th>First Name</th>
+											<th>Last Name</th>
+											<th>Expertise</th>
+											<th>Work Experience</th>
+											<th>Degree</th>
+										</tr>
+									</tfoot>
 									<tbody>
                                         {% if doctor %}
                                                 <tr>
+                                                    <td>{{ doctor.user.first_name }}</td>
+                                                    <td>{{ doctor.user.last_name }}</td>
                                                     <td>{{ doctor.expertise }}</td>
                                                     <td>{{ doctor.work_experience }}</td>
 													<td>{{ doctor.get_degree_type_display }}</td>
-
+                                                    <td>
+                                                    </td>
                                                     <td>
                                                         <div class="form-button-action">
                                                             <button type="button" onclick="window.location='{% url 'req_for_doc' doctor.user.id %}'"
@@ -59,3 +76,36 @@
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+	<!-- Atlantis DEMO methods, don't include it in your project! -->
+	<script src="/static/assets/js/setting-demo2.js"></script>
+	<script >
+		$(document).ready(function() {
+			$('#multi-filter-select').DataTable( {
+				"pageLength": 5,
+				initComplete: function () {
+					this.api().columns().every( function () {
+						var column = this;
+						var select = $('<select class="form-control"><option value=""></option></select>')
+						.appendTo( $(column.footer()).empty() )
+						.on( 'change', function () {
+							var val = $.fn.dataTable.util.escapeRegex(
+								$(this).val()
+								);
+
+							column
+							.search( val ? '^'+val+'$' : '', true, false )
+							.draw();
+						} );
+
+						column.data().unique().sort().each( function ( d, j ) {
+							select.append( '<option value="'+d+'">'+d+'</option>' )
+						} );
+					} );
+				}
+			});
+		});
+	</script>
+
+{% endblock javascripts %}
