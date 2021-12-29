@@ -192,3 +192,6 @@ def previous_orders(request):
     expertise = doctor.expertise
     orders_list = Order.objects.filter(expertise=expertise, doctor=doctor, accepted=True)
     return render(request, 'account/pre_orders.html', {'orders_list': orders_list})
+
+def all_doctors(request):
+    return render(request, 'account/list_of_doctors.html')

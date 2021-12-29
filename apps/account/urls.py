@@ -23,5 +23,6 @@ urlpatterns = [
     path('rate/', views.rate_order, name='rate-view'),
     path('comment/', views.comment_for_order, name='comment-view'),
     path('complaint/', views.complaint_for_order, name='complaint-view'),
-    path('pre_orders/', views.previous_orders, name='pre_orders')
+    path('pre_orders/', views.previous_orders, name='pre_orders'),
+    path('all_doctors/', views.all_doctors, name='all_doctors')
 ]
