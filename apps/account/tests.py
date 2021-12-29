@@ -1,6 +1,7 @@
 from django.test import TestCase
 from .models import Account, Expertise, Doctor, Order
-from .views import rate_order
+from django.urls import reverse
+
 
 
 class OrderTest(TestCase):
@@ -108,3 +109,9 @@ class OrderTest(TestCase):
             str(response.content, encoding="utf8"),
             {"success": "true"},
         )
+        
+    def test_all_doctors(self):
+        url = reverse('all_doctors')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'List of Doctors')
