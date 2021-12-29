@@ -52,7 +52,7 @@
 													<td>{{ doctor.get_degree_type_display }}</td>
                                                     <td>
                                                         <div class="form-button-action">
-                                                            <button type="button"
+                                                            <button type="button" onclick="window.location='{% url 'doctor_profile' doctor.user.id %}'"
                                                                     class="btn btn-outline-secondary btn-sm">
                                                                 <i class="fa flaticon-users"></i>
                                                             </button>
