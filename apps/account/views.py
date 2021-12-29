@@ -202,12 +202,15 @@ def doc_pro(request, doc_id):
     scores = 0
     count = 0
     orders_list = Order.objects.filter(doctor=doctor, accepted=True)
+    final_orders = []
     for order in orders_list:
-        if order.score is not None:
-            scores+=order.score
-            count+=1
+        if order.score > 0:
+            scores += order.score
+            count += 1
+            final_orders.append(order)
+
     score_mean = scores/count
     score_mean = round(score_mean, 1)
 
     return render(request, 'account/doctor_profile.html',
-                  {'doctor':doctor, 'orders': orders_list, 'score_mean':score_mean})
+                  {'doctor':doctor, 'orders': final_orders, 'score_mean':score_mean})
