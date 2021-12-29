@@ -28,6 +28,7 @@
 											<th>Expertise</th>
 											<th>Work Experience</th>
 											<th>Degree</th>
+                                            <th>Profile</th>
                                             <th>Submit Request</th>
 										</tr>
 									</thead>
@@ -38,7 +39,6 @@
 											<th>Expertise</th>
 											<th>Work Experience</th>
 											<th>Degree</th>
-                                            <th>Submit Request</th>
 										</tr>
 									</tfoot>
 									<tbody>
@@ -52,10 +52,17 @@
 													<td>{{ doctor.get_degree_type_display }}</td>
                                                     <td>
                                                         <div class="form-button-action">
+                                                            <button type="button"
+                                                                    class="btn btn-outline-secondary btn-sm">
+                                                                <i class="fa flaticon-users"></i>
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-button-action">
                                                             <button type="button" onclick="window.location='{% url 'req_for_doc' doctor.user.id %}'"
                                                                     class="btn btn-outline-secondary btn-sm">
                                                                 <i class="fa fa-check-circle"></i>
-                                                                <b>choose</b>
                                                             </button>
                                                         </div>
                                                     </td>
