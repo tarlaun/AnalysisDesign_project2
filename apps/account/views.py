@@ -201,5 +201,4 @@ def doc_pro(request, doc_id):
     doctor = get_object_or_404(Doctor, pk=doc_id)
     exp = doctor.expertise.name
     return render(request, 'account/doctor_profile.html',
-                  {'doc_name': doctor.user.first_name, 'doc_lname': doctor.user.last_name, 'doc_id': doctor.user.id,
-                   'exp': exp})
+                  {'doctor':doctor})
