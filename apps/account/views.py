@@ -199,6 +199,15 @@ def all_doctors(request):
 
 def doc_pro(request, doc_id):
     doctor = get_object_or_404(Doctor, pk=doc_id)
-    exp = doctor.expertise.name
+    scores = 0
+    count = 0
+    orders_list = Order.objects.filter(doctor=doctor, accepted=True)
+    for order in orders_list:
+        if order.score is not None:
+            scores+=order.score
+            count+=1
+    score_mean = scores/count
+    score_mean = round(score_mean, 1)
+
     return render(request, 'account/doctor_profile.html',
-                  {'doctor':doctor})
+                  {'doctor':doctor, 'orders': orders_list, 'score_mean':score_mean})

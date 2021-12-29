@@ -39,6 +39,7 @@
                                                             <button type="button" onclick="window.location='{% url 'req_for_doc' doctor.user.id %}'"
                                                                     class="btn btn-outline-secondary btn-sm">
                                                                 <i class="fa fa-clipboard-check"></i>
+                                                                Submit Request
                                                             </button>
                                                         </div>
                                                     </td>
@@ -46,8 +47,36 @@
                                         {% else %}
                                             Unfortunately no doctors have registered in DociCome yet.
                                         {% endif %}
+
 									</tbody>
 								</table>
+                            Average Score for this doctor: {{ score_mean }}
+                            <div class="card-body">
+							<div class="table-responsive">
+								<table id="multi-filter-select" class="display table table-striped table-hover" >
+									<thead>
+										<tr>
+											<th>Score</th>
+											<th>Review</th>
+
+										</tr>
+									</thead>
+									<tbody>
+
+                            {% if orders %}
+                                            {% for order in orders %}
+                                                <tr>
+                                                    <td>{{  order.score}}</td>
+                                                    <td>{{ order.comment }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        {% else %}
+                                            No reviews have been posted for Dr. {{ doctor.user.first_name }} {{ doctor.user.last_name }} yet.
+                                        {% endif %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            </div>
 							</div>
 						</div>
 					</div>
