@@ -127,19 +127,19 @@
                         </form>
                     </dialog>
                 </div>
+                {% if order.accepted %}
+                    <button type="button" class="btn btn-outline-warning mt-3 Score" onclick="score({{order.id}})">
+                        <b>Score</b>
+                    </button>
 
-                <button type="button" class="btn btn-outline-warning mt-3 Score" onclick="score({{order.id}})">
-                    <b>Score</b>
-                </button>
+                    <button type="button" class="btn btn-outline-light mt-3 Comment" onclick="commenting({{order.id}})">
+                        <b>Comment</b>
+                    </button>
 
-                <button type="button" class="btn btn-outline-light mt-3 Comment" onclick="commenting({{order.id}})">
-                    <b>Comment</b>
-                </button>
-
-                <button type="button" class="btn btn-outline-danger mt-3 Complaint" onclick="set_complaint({{order.id}})">
-                    <b>Complaint</b>
-                </button>
-
+                    <button type="button" class="btn btn-outline-danger mt-3 Complaint" onclick="set_complaint({{order.id}})">
+                        <b>Complaint</b>
+                    </button>
+                {% endif %}
             </div>
         </div>
         {% endfor %}

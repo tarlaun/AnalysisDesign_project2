@@ -23,7 +23,6 @@
                         <div>
                             <li class="card-text"><b>Address:</b> {{ order.address }}</li>
                             <li class="card-text"><b>Description:</b> {{ order.details }}</li>
-                            <li class="card-text"><b>Score:</b> {{ order.score }}</li>
                         </div>
                         <button type="button" class="btn mt-3" onclick="window.location='{% url 'accept_order' order.id %}'">
                             <b>Accept</b>
