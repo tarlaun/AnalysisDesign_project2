@@ -196,3 +196,21 @@ def previous_orders(request):
 def all_doctors(request):
     doctors_list = Doctor.objects.all()
     return render(request, 'account/list_of_doctors.html', {'doctors_list': doctors_list})
+
+def doc_pro(request, doc_id):
+    doctor = get_object_or_404(Doctor, pk=doc_id)
+    scores = 0
+    count = 0
+    orders_list = Order.objects.filter(doctor=doctor, accepted=True)
+    final_orders = []
+    for order in orders_list:
+        if order.score > 0:
+            scores += order.score
+            count += 1
+            final_orders.append(order)
+
+    score_mean = scores/count
+    score_mean = round(score_mean, 1)
+
+    return render(request, 'account/doctor_profile.html',
+                  {'doctor':doctor, 'orders': final_orders, 'score_mean':score_mean})

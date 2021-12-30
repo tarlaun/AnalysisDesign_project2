@@ -24,5 +24,6 @@ urlpatterns = [
     path('comment/', views.comment_for_order, name='comment-view'),
     path('complaint/', views.complaint_for_order, name='complaint-view'),
     path('pre_orders/', views.previous_orders, name='pre_orders'),
-    path('all_doctors/', views.all_doctors, name='all_doctors')
+    path('all_doctors/', views.all_doctors, name='all_doctors'),
+    path('doctor_profile/<int:doc_id>/', views.doc_pro, name='doctor_profile'),
 ]
