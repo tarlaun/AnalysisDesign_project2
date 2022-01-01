@@ -7,7 +7,10 @@ class UserType(IntegerChoices):
     DOCTOR = 1,
     PATIENT = 2
 
-
+class DEGREE_TYPES(IntegerChoices):
+    Specialist = 1,
+    SubSpecialist = 2
+    
 # Our Custom User Model
 class Account(AbstractUser):
     user_type = models.SmallIntegerField('user_type', choices=UserType.choices, default=UserType.PATIENT)

@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from .models import Account, UserType
+from .models import Account, UserType, DEGREE_TYPES
+from django.core.validators import MaxValueValidator, MinValueValidator
+
 
 class AccountCreationForm(UserCreationForm):
     class Meta:
@@ -74,6 +76,26 @@ class SignUpForm(forms.ModelForm):
             attrs={"placeholder": "Phone Number (+9999999999)", "class": "form-control"}
         )
     )
+    user_type = forms.ChoiceField(
+        widget=forms.Select(),
+        required=True,
+        choices=UserType.choices,
+        label="User Type",
+    )
+    degree_type = forms.ChoiceField(
+        widget=forms.Select(),
+        required=True,
+        choices=DEGREE_TYPES.choices,
+        label="Degree",
+    )
+    work_experience = forms.IntegerField(
+        required=True,
+        min_value=1, 
+        max_value=100,
+        widget=forms.NumberInput(
+            attrs={"placeholder": "Work Experiance (in years)", "class": "form-control"}
+        )
+    )
 
     class Meta:
         model = Account
@@ -85,4 +107,7 @@ class SignUpForm(forms.ModelForm):
             "password1",
             "password2",
             "phone_number",
+            "user_type",
+            "degree_type",
+            "work_experience"
         )

@@ -106,9 +106,58 @@
                                 <span class="text-danger">{{ form.phone_number.errors }}</span>
                             </div>
 
-                            <div class="col"></div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="fas fa-hospital"></i>
+                                                </span>
+                                        </div>
+                                        <select class="form-select" onchange="show_degree(this)">
+                                            <option value="1">Doctor</option>
+                                            <option value="2">Patient</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <script>
+                                    function show_degree(val){
+                                        document.getElementById("doctor").style.display = (val.value == 1 ? 'block' : 'none');
+                                        document.getElementById("work_exp").style.display = (val.value == 1 ? 'block' : 'none');
+                                    }
+                                </script>
+                                <span class="text-danger">{{ form.user_type.errors }}</span>
+                            </div>
                         </div>
 
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group" id="work_exp">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="fas fa-calendar-alt"></i>
+                                                </span>
+                                        </div>
+                                        {{ form.work_experience }}
+                                    </div>
+                                </div>
+                                <span class="text-danger">{{ form.work_experience.errors }}</span>
+                            </div>
+                            <div class="col">
+                                <div class="form-group" id="doctor">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="fas fa-id-card-alt"></i>
+                                                </span>
+                                        </div>
+                                        {{ form.degree_type }}
+                                    </div>
+                                </div>
+                            </div>
+                        <span class="text-danger">{{ form.degree_type.errors }}</span>
+                        </div>
 
                         <div class="row">
                             <div class="col">
