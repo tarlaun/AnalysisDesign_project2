@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from .models import Account, UserType, DEGREE_TYPES
+from .models import Account, UserType, DEGREE_TYPES, Expertise
 from django.core.validators import MaxValueValidator, MinValueValidator
 
 
@@ -77,24 +77,31 @@ class SignUpForm(forms.ModelForm):
         )
     )
     user_type = forms.ChoiceField(
-        widget=forms.Select(),
+        widget=forms.Select(attrs={"class": "form-control"}),
         required=True,
         choices=UserType.choices,
         label="User Type",
     )
     degree_type = forms.ChoiceField(
-        widget=forms.Select(),
+        widget=forms.Select(attrs={"class": "form-control"}),
         required=True,
         choices=DEGREE_TYPES.choices,
         label="Degree",
     )
     work_experience = forms.IntegerField(
         required=True,
-        min_value=1, 
+        min_value=0, 
         max_value=100,
         widget=forms.NumberInput(
             attrs={"placeholder": "Work Experiance (in years)", "class": "form-control"}
         )
+    )
+    expertise_list = [(i+1, e.name) for i, e in enumerate(Expertise.objects.all())]
+    expertises = forms.ChoiceField(
+        widget=forms.Select(attrs={"class": "form-control"}),
+        required=True,
+        choices=expertise_list,
+        label="Expertises",
     )
 
     class Meta:
@@ -109,5 +116,6 @@ class SignUpForm(forms.ModelForm):
             "phone_number",
             "user_type",
             "degree_type",
-            "work_experience"
+            "work_experience",
+            "expertises"
         )

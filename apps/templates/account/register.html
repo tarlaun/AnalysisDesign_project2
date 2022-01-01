@@ -114,7 +114,8 @@
                                                     <i class="fas fa-hospital"></i>
                                                 </span>
                                         </div>
-                                        <select class="form-select" onchange="show_degree(this)">
+                                        {% comment %} {{ form.user_type }} {% endcomment %}
+                                        <select class="form-group" onchange="show_degree(this)">
                                             <option value="1">Doctor</option>
                                             <option value="2">Patient</option>
                                         </select>
@@ -124,6 +125,7 @@
                                     function show_degree(val){
                                         document.getElementById("doctor").style.display = (val.value == 1 ? 'block' : 'none');
                                         document.getElementById("work_exp").style.display = (val.value == 1 ? 'block' : 'none');
+                                        document.getElementById("expertise").style.display = (val.value == 1 ? 'block' : 'none');
                                     }
                                 </script>
                                 <span class="text-danger">{{ form.user_type.errors }}</span>
@@ -155,8 +157,19 @@
                                         {{ form.degree_type }}
                                     </div>
                                 </div>
+                                <span class="text-danger">{{ form.degree_type.errors }}</span>
+                                <div class="form-group" id="expertise">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="fas fa-user-tag"></i>
+                                                </span>
+                                        </div>
+                                        {{ form.expertises }}
+                                    </div>
+                                </div>
+                                <span class="text-danger">{{ form.expertises.errors }}</span>
                             </div>
-                        <span class="text-danger">{{ form.degree_type.errors }}</span>
                         </div>
 
                         <div class="row">
