@@ -57,18 +57,11 @@ class Doctor(models.Model):
 
 
 class FavDoctors(models.Model):
-    # user = models.ForeignKey(Account, on_delete=models.PROTECT, null=False)
     user = models.ForeignKey(Account, on_delete=models.PROTECT, null=False)
     favorite_doctors = models.ManyToManyField(Doctor)
-    # favorite_doctors = models.ManyToManyField(Doctor, through='FavRelation', through_fields=('user', 'doctor'))
 
     def __str__(self):
         return f'{self.user.__str__()}'
-
-# class FavRelation(models.Model):
-#     user = models.ForeignKey(Account, on_delete=models.CASCADE)
-#     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
-
 
 class Order(models.Model):
     user = models.ForeignKey(Account, on_delete=models.PROTECT, null=False)

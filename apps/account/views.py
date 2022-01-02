@@ -195,7 +195,13 @@ def previous_orders(request):
 
 def all_doctors(request):
     doctors_list = Doctor.objects.all()
-    return render(request, 'account/list_of_doctors.html', {'doctors_list': doctors_list, 'fav_doctors': fav_doctors.favorite_doctors.all()})
+    if FavDoctors.objects.filter(user = request.user).exists():
+        fav_doctors = get_object_or_404(FavDoctors, user=request.user)
+        all_fav_doctors = fav_doctors.favorite_doctors.all()
+    else:
+        all_fav_doctors = []
+
+    return render(request, 'account/list_of_doctors.html', {'doctors_list': doctors_list, 'fav_doctors': all_fav_doctors})
 
 def doc_pro(request, doc_id):
     doctor = get_object_or_404(Doctor, pk=doc_id)
@@ -219,20 +225,13 @@ def fav_doctor(request, doc_id):
     doctor = get_object_or_404(Doctor, pk=doc_id)
 
     if FavDoctors.objects.filter(user = request.user).exists():
-        print("exists")
         fav_doctors = get_object_or_404(FavDoctors, user=request.user)
     else:
         fav_doctors = FavDoctors(user=request.user)
         fav_doctors.save()
-        print("does not exist")
         
-    print("11------- ", fav_doctors)
     fav_doctors.favorite_doctors.add(doctor)
     fav_doctors.save()
-
-    print("22------ ", fav_doctors.favorite_doctors.all())
-    for doctor in fav_doctors.favorite_doctors.all():
-        print(doctor)
 
     doctors_list = Doctor.objects.all()
     return render(request, 'account/list_of_doctors.html', {'doctors_list': doctors_list, 'fav_doctors': fav_doctors.favorite_doctors.all()})
