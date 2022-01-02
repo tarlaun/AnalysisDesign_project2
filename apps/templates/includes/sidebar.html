@@ -63,6 +63,13 @@
                     </a>
                 </li>
 
+                <li class="nav-item {% if 'index' in segment %} active {% endif %}">
+                    <a href="{% url 'favorite_doctors' %}" aria-expanded="false">
+                        <i class="fa fa-heartbeat"></i>
+                        <p>Favorite Doctors</p>
+                    </a>
+                </li>
+
 
                 {% endif %}
 

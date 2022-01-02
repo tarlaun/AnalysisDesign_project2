@@ -246,3 +246,7 @@ def unfav_doctor(request, doc_id):
 
     return redirect('all_doctors')
 
+def favorite_doctors(request):
+    print("hereeeee")
+    return render(request, 'account/fav-doctors.html', {})
+    pass
