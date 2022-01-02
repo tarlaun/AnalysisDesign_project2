@@ -53,7 +53,8 @@
                                                 <tr>
 													<td>
 													 {% comment %} <i class="fa fa-heart"></i> {% endcomment %}
-													 <i class="far fa-heart" id="heart-icon" aria-hidden></i>
+													 <i class="far fa-heart" id="heart-icon" aria-hidden 
+													 		onclick="window.location='{% url 'favorite_doctor' doctor.user.id %}'"></i>
 													</td>
                                                     <td>{{ doctor.user.first_name }}</td>
                                                     <td>{{ doctor.user.last_name }}</td>

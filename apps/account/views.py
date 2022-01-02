@@ -7,7 +7,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import user_passes_test
 from .forms import AccountCreationForm, LoginForm, SignUpForm
 from django.contrib import messages
-from .models import UserType, Doctor, Account, Order, Expertise
+from .models import UserType, Doctor, Account, Order, Expertise, FavDoctors
 from django.views import generic
 
 
@@ -195,7 +195,7 @@ def previous_orders(request):
 
 def all_doctors(request):
     doctors_list = Doctor.objects.all()
-    return render(request, 'account/list_of_doctors.html', {'doctors_list': doctors_list})
+    return render(request, 'account/list_of_doctors.html', {'doctors_list': doctors_list, 'fav_doctors': fav_doctors.favorite_doctors.all()})
 
 def doc_pro(request, doc_id):
     doctor = get_object_or_404(Doctor, pk=doc_id)
@@ -218,6 +218,22 @@ def doc_pro(request, doc_id):
 def fav_doctor(request, doc_id):
     doctor = get_object_or_404(Doctor, pk=doc_id)
 
+    if FavDoctors.objects.filter(user = request.user).exists():
+        print("exists")
+        fav_doctors = get_object_or_404(FavDoctors, user=request.user)
+    else:
+        fav_doctors = FavDoctors(user=request.user)
+        fav_doctors.save()
+        print("does not exist")
+        
+    print("11------- ", fav_doctors)
+    fav_doctors.favorite_doctors.add(doctor)
+    fav_doctors.save()
+
+    print("22------ ", fav_doctors.favorite_doctors.all())
+    for doctor in fav_doctors.favorite_doctors.all():
+        print(doctor)
+
     doctors_list = Doctor.objects.all()
-    return render(request, 'account/list_of_doctors.html', {'doctors_list': doctors_list})
+    return render(request, 'account/list_of_doctors.html', {'doctors_list': doctors_list, 'fav_doctors': fav_doctors.favorite_doctors.all()})
 
