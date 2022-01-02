@@ -1,10 +1,18 @@
-from django.test import TestCase
-from .models import Account, Expertise, Doctor, Order
+from django.test import TestCase, RequestFactory
+from .models import Account, Expertise, Doctor, Order, FavDoctors
 from django.urls import reverse
+from .views import all_doctors, fav_doctor, unfav_doctor
 
 
 
 class OrderTest(TestCase):
+
+    def setUp(self):
+        self.factory = RequestFactory()
+        self.user = Account.objects.create(
+            username='baharkh', email='baharkh127@gmail.com', password='top_secret')
+
+
     def create_user(
         self,
         first_name="mmd",
@@ -64,6 +72,14 @@ class OrderTest(TestCase):
             complaint=complaint
         )
 
+    def create_fav_doctors(
+        self,
+        user
+    ):
+        return FavDoctors.objects.create(
+            user=user,
+        )
+
     def test_order_creation(self):
         test_order = self.create_order()
         self.assertTrue(isinstance(test_order, Order))
@@ -79,6 +95,11 @@ class OrderTest(TestCase):
     def test_doctor_creation(self):
         test_doctor = self.create_doctor()
         self.assertTrue(isinstance(test_doctor, Doctor))
+
+    def test_fav_doctors_creation(self):
+        test_user = self.create_user(username="X", user_type=1)
+        test_fav_doctos = self.create_fav_doctors(test_user)
+        self.assertTrue(isinstance(test_fav_doctos, FavDoctors))
 
     def test_rate_order(self):
         test_order = self.create_order()
@@ -111,7 +132,42 @@ class OrderTest(TestCase):
         )
         
     def test_all_doctors(self):
+        request = self.factory.get('/account/all_doctors/')
+        request.user = self.user
+
         url = reverse('all_doctors')
-        response = self.client.get(url)
+        # response = self.client.get(url)
+        response = all_doctors(request)
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'List of Doctors')
+
+    def test_favorite_doctor(self):
+        request = self.factory.get('/account/all_doctors/favorite/')
+        request.user = self.user
+
+        test_fav_doctors = self.create_fav_doctors(request.user)
+        test_doctor = self.create_doctor()
+
+        test_fav_doctors.favorite_doctors.add(test_doctor)
+
+        response = fav_doctor(request, test_doctor.user.id)
+
+        self.assertEqual(response.status_code, 302)
+
+    def test_unfavorite_doctor(self):
+        request = self.factory.get('/account/all_doctors/favorite/')
+        request.user = self.user
+
+        test_fav_doctors = self.create_fav_doctors(request.user)
+        test_doctor = self.create_doctor()
+
+        test_fav_doctors.favorite_doctors.add(test_doctor)
+
+        response = unfav_doctor(request, test_doctor.user.id)
+
+        self.assertEqual(response.status_code, 302)
+
+        
+
+
+        
