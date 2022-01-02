@@ -233,6 +233,16 @@ def fav_doctor(request, doc_id):
     fav_doctors.favorite_doctors.add(doctor)
     fav_doctors.save()
 
-    doctors_list = Doctor.objects.all()
-    return render(request, 'account/list_of_doctors.html', {'doctors_list': doctors_list, 'fav_doctors': fav_doctors.favorite_doctors.all()})
+    return redirect('all_doctors')
+    # return render(request, 'account/list_of_doctors.html', {'doctors_list': doctors_list, 'fav_doctors': fav_doctors.favorite_doctors.all()})
+
+def unfav_doctor(request, doc_id):
+
+    doctor = get_object_or_404(Doctor, pk=doc_id)
+    fav_doctors = get_object_or_404(FavDoctors, user=request.user)
+
+    fav_doctors.favorite_doctors.remove(doctor)
+    fav_doctors.save()
+
+    return redirect('all_doctors')
 
