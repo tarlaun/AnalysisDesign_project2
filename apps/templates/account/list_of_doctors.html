@@ -1,11 +1,15 @@
 {% extends "layouts/base.html" %}
 
+{% load static%}
+
 {% block title %} Doctors {% endblock %} 
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}{% endblock stylesheets %}
 
 {% block content %}
+
+<link rel="stylesheet" href="{% static 'assets/css/home/doctors-list.css' %}">
 
 	<div class="content">
 		<div class="page-inner">
@@ -23,6 +27,7 @@
 								<table id="multi-filter-select" class="display table table-striped table-hover" >
 									<thead>
 										<tr>
+											<th></th>
 											<th>First Name</th>
 											<th>Last Name</th>
 											<th>Expertise</th>
@@ -34,6 +39,7 @@
 									</thead>
                                     <tfoot>
 										<tr>
+											<th></th>
 											<th>First Name</th>
 											<th>Last Name</th>
 											<th>Expertise</th>
@@ -45,6 +51,10 @@
                                         {% if doctors_list %}
                                             {% for doctor in doctors_list %}
                                                 <tr>
+													<td>
+													 {% comment %} <i class="fa fa-heart"></i> {% endcomment %}
+													 <i class="far fa-heart" id="heart-icon" aria-hidden></i>
+													</td>
                                                     <td>{{ doctor.user.first_name }}</td>
                                                     <td>{{ doctor.user.last_name }}</td>
                                                     <td>{{ doctor.expertise }}</td>
