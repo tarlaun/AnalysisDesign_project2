@@ -56,6 +56,13 @@ class Doctor(models.Model):
         return self.user.__str__()
 
 
+class FavDoctors(models.Model):
+    user = models.ForeignKey(Account, on_delete=models.PROTECT, null=False)
+    favorite_doctors = models.ManyToManyField(Doctor)
+
+    def __str__(self):
+        return f'{self.user.__str__()}'
+
 class Order(models.Model):
     user = models.ForeignKey(Account, on_delete=models.PROTECT, null=False)
     doctor = models.ForeignKey(Doctor, null=True, blank=True, on_delete=models.PROTECT)

@@ -1,0 +1,13 @@
+#heart-icon {
+  font-size: 20px;
+  color: red;
+  cursor: pointer;
+}
+
+#heart-icon:hover {
+  color: #de5f59;
+}
+
+#heart-search-col {
+  visibility: hidden;
+}
