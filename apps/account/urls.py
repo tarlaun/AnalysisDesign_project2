@@ -26,4 +26,5 @@ urlpatterns = [
     path('pre_orders/', views.previous_orders, name='pre_orders'),
     path('all_doctors/', views.all_doctors, name='all_doctors'),
     path('doctor_profile/<int:doc_id>/', views.doc_pro, name='doctor_profile'),
+    path('all_doctors/favorite/<int:doc_id>/', views.fav_doctor, name="favorite_doctor")
 ]

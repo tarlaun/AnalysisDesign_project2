@@ -214,3 +214,10 @@ def doc_pro(request, doc_id):
 
     return render(request, 'account/doctor_profile.html',
                   {'doctor':doctor, 'orders': final_orders, 'score_mean':score_mean})
+
+def fav_doctor(request, doc_id):
+    doctor = get_object_or_404(Doctor, pk=doc_id)
+
+    doctors_list = Doctor.objects.all()
+    return render(request, 'account/list_of_doctors.html', {'doctors_list': doctors_list})
+
