@@ -210,9 +210,10 @@ def doc_pro(request, doc_id):
     orders_list = Order.objects.filter(doctor=doctor, accepted=True)
     final_orders = []
     for order in orders_list:
-        if order.score > 0:
-            scores += order.score
-            count += 1
+        if order.score > 0 or order.comment!="":
+            if order.score>0:
+                scores += order.score
+                count += 1
             final_orders.append(order)
 
     if count == 0:

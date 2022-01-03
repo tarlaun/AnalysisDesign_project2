@@ -155,8 +155,8 @@
 
                                                 {% if score_mean %}
                                                     <tr>
-                                                        <td>{{ score_mean }}
-                                                            <div style="width: calc(20% * {{ score_mean }})"></div>
+                                                        <td>
+                                                            <div style="width: calc(20% * {{ score_mean }} )"></div>
                                                             <img src="{% static 'assets/img/stars_3.png' %}"
                                                                  alt="{{ score_mean }}"
                                                                  title="{{ score_mean }}"></td>
@@ -186,12 +186,18 @@
 
                                     {% for order in orders %}
                                         <tr>
-                                            <td>{{ order.score }}
+                                            <td>
                                                 <div style="width: calc(20% * {{ order.score }})"></div>
+                                                {% if order.score > 0 %}
                                                 <img src="{% static 'assets/img/stars_3.png' %}"
                                                      alt="{{ video.stars_count }}"
-                                                     title="{{ video.stars_count }}"></td>
-                                            <td>{{ order.comment }}</td>
+                                                     title="{{ video.stars_count }}">
+                                            {% else %} ------
+                                            {% endif %}</td>
+                                            <td>{% if order.comment != "" %}
+                                                {{ order.comment }}
+                                            {% else %} ------
+                                            {% endif %}</td>
                                         </tr>
                                     {% endfor %}
                                 {% else %}
