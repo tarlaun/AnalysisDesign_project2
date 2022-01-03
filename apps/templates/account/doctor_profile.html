@@ -1,143 +1,214 @@
 {% extends "layouts/base.html" %}
 {% load static %}
-{% block title %} Doctors {% endblock %} 
+{% block title %} Doctors {% endblock %}
 
 <!-- Specific Page CSS goes HERE  -->
 
 
-{% block stylesheets %}<style>
-    table.ratings {
-        margin: 1em auto;
-        border-collapse: separate;
-        border-spacing: 0 35px;
+{% block stylesheets %}
+    <style>
+        table.ratings {
+            margin: 1em auto;
+            border-collapse: separate;
+            border-spacing: 0 35px;
 
-    }
-    table.ratings th,td{
+        }
 
-    padding: 0 15px;
-  }
+        table.ratings th, td {
 
-
-
-
-
-    table.ratings td:nth-child(1) {
-        width: 100px;
-        position: relative;
-    }
-
-    table.ratings td:nth-child(2) {
-        width: 1000px;
-        position: relative;
-    }
-    table.ratings td:nth-child(1) div {
-        background-color: gold;
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 17px;
-        z-index: 100;
-    }
-
-    table.ratings td:nth-child(1) img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        z-index: 110;
-    }
+            padding: 0 15px;
+        }
 
 
+        table.ratings td:nth-child(1) {
+            width: 100px;
+            position: relative;
+        }
+
+        table.ratings td:nth-child(2) {
+            width: 1000px;
+            position: relative;
+        }
+
+        table.ratings td:nth-child(1) div {
+            background-color: gold;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 17px;
+            z-index: 100;
+        }
+
+        table.ratings td:nth-child(1) img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 110;
+        }
 
 
 
+       table.ratings2 {
+            margin: 0em auto;
+            border-collapse: separate;
+            border-spacing: 0 35px;
 
-</style>
+        }
+
+        table.ratings2 th, td {
+
+            padding: 0 15px;
+        }
+
+
+        table.ratings2 td:nth-child(1) {
+            width: 150px;
+            position: relative;
+        }
+
+        table.ratings2 td:nth-child(2) {
+            width: 1000px;
+            position: relative;
+        }
+
+        table.ratings2 td:nth-child(1) div {
+            background-color: gold;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 26px;
+            z-index: 100;
+        }
+
+        table.ratings2 td:nth-child(1) img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 110;
+        }
+
+
+    </style>
 {% endblock stylesheets %}
 
 {% block content %}
 
-	<div class="content">
-		<div class="page-inner">
+    <div class="content">
+        <div class="page-inner">
 
-			<div class="row">
-				<div class="col-md-12">
-					<div class="card">
-						<div class="card-header">
-							<h4 class="card-title">Dr. {{doctor.user.first_name}} {{ doctor.user.last_name }}</h4>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Dr. {{ doctor.user.first_name }} {{ doctor.user.last_name }}</h4>
 
-						</div>
-						<div class="card-body">
-							<div class="table-responsive">
-								<table id="multi-filter-select" class="display table table-striped table-hover" >
-									<thead>
-										<tr>
-											<th>Expertise</th>
-											<th>Work Experience</th>
-											<th>Degree</th>
-                                            <th>Submit Request</th>
-										</tr>
-									</thead>
-									<tbody>
-                                        {% if doctor %}
-                                                <tr>
-                                                    <td>{{ doctor.expertise }}</td>
-                                                    <td>{{ doctor.work_experience }} &nbsp  years </td>
-													<td>{{ doctor.get_degree_type_display }}</td>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="multi-filter-select" class="display table table-striped table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>Expertise</th>
+                                        <th>Work Experience</th>
+                                        <th>Degree</th>
+                                        <th>Submit Request</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% if doctor %}
+                                        <tr>
+                                            <td>{{ doctor.expertise }}</td>
+                                            <td>{{ doctor.work_experience }} &nbsp years</td>
+                                            <td>{{ doctor.get_degree_type_display }}</td>
 
-                                                    <td>
-                                                        <div class="form-button-action">
-                                                            <button type="button" onclick="window.location='{% url 'req_for_doc' doctor.user.id %}'"
-                                                                    class="btn btn-outline-secondary btn-sm">
-                                                                <i class="fa fa-clipboard-check"></i>
-                                                                Submit Request
-                                                            </button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                        {% else %}
-                                            Unfortunately no doctors have registered in DociCome yet.
-                                        {% endif %}
+                                            <td>
+                                                <div class="form-button-action">
+                                                    <button type="button"
+                                                            onclick="window.location='{% url 'req_for_doc' doctor.user.id %}'"
+                                                            class="btn btn-outline-secondary btn-sm">
+                                                        <i class="fa fa-clipboard-check"></i>
+                                                        Submit Request
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {% else %}
+                                        Unfortunately no doctors have registered in DociCome yet.
+                                    {% endif %}
 
-									</tbody>
-								</table>
-                            {% if orders %}
-                            <div class="card-body">
-							<div class="table-responsive">
-								<table id="multi-filter-select" class="ratings" >
-									<thead>
-										<tr>
-											<th>Score</th>
-											<th>Review</th>
-
-										</tr>
-									</thead>
-									<tbody>
-
-
-                            Average Score for this doctor: {{ score_mean }}
-                                            {% for order in orders %}
-                                                <tr>
-                                                    <td>{{  order.score}} <div style="width: calc(20% * {{ order.score }})"></div>
-            <img src="{% static 'assets/img/stars_3.png' %}" alt="{{ video.stars_count }}"
-                title="{{ video.stars_count }}"></td>
-                                                    <td>{{ order.comment }}</td>
-                                                </tr>
-                                            {% endfor %}
-                                        {% else %}
-                                            No reviews have been posted for Dr. {{ doctor.user.first_name }} {{ doctor.user.last_name }} yet.
-                                        {% endif %}
                                     </tbody>
                                 </table>
-                            </div>
-                            </div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                                {% if orders %}
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table id="multi-filter-select" class="ratings2">
+                                                <thead>
+                                                <tr>
+                                                    <th>Average Score: {{ score_mean }}</th>
+                                                    <th></th>
+
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                {% if score_mean %}
+                                                    <tr>
+                                                        <td>{{ score_mean }}
+                                                            <div style="width: calc(20% * {{ score_mean }})"></div>
+                                                            <img src="{% static 'assets/img/stars_3.png' %}"
+                                                                 alt="{{ score_mean }}"
+                                                                 title="{{ score_mean }}"></td>
+                                                    <td></td>
+                                                    </tr>
+                                                {% endif %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </div>
+                                    </div>
+                                    </div>
+                                    <div class="card-body">
+                                    <div class="table-responsive">
+
+                                    List of reviews posted for Dr. {{ doctor.user.first_name }} {{ doctor.user.last_name }}:
+                                    <table id="multi-filter-select" class="ratings">
+                                    <thead>
+                                    <tr>
+                                        <th>Score</th>
+                                        <th>Review</th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    {% for order in orders %}
+                                        <tr>
+                                            <td>{{ order.score }}
+                                                <div style="width: calc(20% * {{ order.score }})"></div>
+                                                <img src="{% static 'assets/img/stars_3.png' %}"
+                                                     alt="{{ video.stars_count }}"
+                                                     title="{{ video.stars_count }}"></td>
+                                            <td>{{ order.comment }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                {% else %}
+                                    No reviews have been posted for Dr. {{ doctor.user.first_name }}
+                                    {{ doctor.user.last_name }} yet.
+                                {% endif %}
+                                </tbody>
+                                </table>
+                                </div>
+                                </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
 
 {% endblock content %}
 

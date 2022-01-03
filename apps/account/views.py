@@ -220,6 +220,8 @@ def doc_pro(request, doc_id):
     else:
         score_mean = scores/count
     score_mean = round(score_mean, 1)
+    if len(final_orders)>0:
+        final_orders = final_orders[::-1]
 
     return render(request, 'account/doctor_profile.html',
                   {'doctor':doctor, 'orders': final_orders, 'score_mean':score_mean})
