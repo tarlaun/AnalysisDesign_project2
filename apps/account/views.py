@@ -215,7 +215,10 @@ def doc_pro(request, doc_id):
             count += 1
             final_orders.append(order)
 
-    score_mean = scores/count
+    if count == 0:
+        score_mean = 0
+    else:
+        score_mean = scores/count
     score_mean = round(score_mean, 1)
 
     return render(request, 'account/doctor_profile.html',
@@ -246,3 +249,11 @@ def unfav_doctor(request, doc_id):
 
     return redirect('all_doctors')
 
+def favorite_doctors(request):
+    if FavDoctors.objects.filter(user = request.user).exists():
+        fav_doctors = get_object_or_404(FavDoctors, user=request.user)
+        all_fav_doctors = fav_doctors.favorite_doctors.all()
+    else:
+        all_fav_doctors = []
+
+    return render(request, 'account/fav-doctors.html', {'fav_doctors_list': all_fav_doctors})

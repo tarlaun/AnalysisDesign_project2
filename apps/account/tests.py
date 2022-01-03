@@ -1,7 +1,7 @@
 from django.test import TestCase, RequestFactory
 from .models import Account, Expertise, Doctor, Order, FavDoctors
 from django.urls import reverse
-from .views import all_doctors, fav_doctor, unfav_doctor
+from .views import all_doctors, fav_doctor, unfav_doctor, favorite_doctors
 
 
 
@@ -136,7 +136,6 @@ class OrderTest(TestCase):
         request.user = self.user
 
         url = reverse('all_doctors')
-        # response = self.client.get(url)
         response = all_doctors(request)
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'List of Doctors')
@@ -147,7 +146,6 @@ class OrderTest(TestCase):
 
         test_fav_doctors = self.create_fav_doctors(request.user)
         test_doctor = self.create_doctor()
-
         test_fav_doctors.favorite_doctors.add(test_doctor)
 
         response = fav_doctor(request, test_doctor.user.id)
@@ -160,12 +158,22 @@ class OrderTest(TestCase):
 
         test_fav_doctors = self.create_fav_doctors(request.user)
         test_doctor = self.create_doctor()
-
         test_fav_doctors.favorite_doctors.add(test_doctor)
 
         response = unfav_doctor(request, test_doctor.user.id)
 
         self.assertEqual(response.status_code, 302)
+
+    def test_favorite_doctors_list(self):
+        request = self.factory.get('/account/fav_doctors/')
+        request.user = self.user
+
+        response = favorite_doctors(request)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'List of Favorite Doctors')
+
+
+    
 
         
 
