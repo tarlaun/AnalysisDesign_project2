@@ -50,7 +50,8 @@
 
 									</tbody>
 								</table>
-                            Average Score for this doctor: {{ score_mean }}
+
+                            {% if orders %}
                             <div class="card-body">
 							<div class="table-responsive">
 								<table id="multi-filter-select" class="display table table-striped table-hover" >
@@ -63,7 +64,8 @@
 									</thead>
 									<tbody>
 
-                            {% if orders %}
+
+                            Average Score for this doctor: {{ score_mean }}
                                             {% for order in orders %}
                                                 <tr>
                                                     <td>{{  order.score}}</td>
