@@ -1,9 +1,59 @@
 {% extends "layouts/base.html" %}
-
+{% load static %}
 {% block title %} Doctors {% endblock %} 
 
 <!-- Specific Page CSS goes HERE  -->
-{% block stylesheets %}{% endblock stylesheets %}
+
+
+{% block stylesheets %}<style>
+    table.ratings {
+        margin: 1em auto;
+        border-collapse: separate;
+        border-spacing: 0 35px;
+
+    }
+    table.ratings th,td{
+
+    padding: 0 15px;
+  }
+
+
+
+
+
+    table.ratings td:nth-child(1) {
+        width: 100px;
+        position: relative;
+    }
+
+    table.ratings td:nth-child(2) {
+        width: 1000px;
+        position: relative;
+    }
+    table.ratings td:nth-child(1) div {
+        background-color: gold;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 17px;
+        z-index: 100;
+    }
+
+    table.ratings td:nth-child(1) img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 110;
+    }
+
+
+
+
+
+
+</style>
+{% endblock stylesheets %}
 
 {% block content %}
 
@@ -15,6 +65,7 @@
 					<div class="card">
 						<div class="card-header">
 							<h4 class="card-title">Dr. {{doctor.user.first_name}} {{ doctor.user.last_name }}</h4>
+
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
@@ -50,11 +101,10 @@
 
 									</tbody>
 								</table>
-
                             {% if orders %}
                             <div class="card-body">
 							<div class="table-responsive">
-								<table id="multi-filter-select" class="display table table-striped table-hover" >
+								<table id="multi-filter-select" class="ratings" >
 									<thead>
 										<tr>
 											<th>Score</th>
@@ -68,7 +118,9 @@
                             Average Score for this doctor: {{ score_mean }}
                                             {% for order in orders %}
                                                 <tr>
-                                                    <td>{{  order.score}}</td>
+                                                    <td>{{  order.score}} <div style="width: calc(20% * {{ order.score }})"></div>
+            <img src="{% static 'assets/img/stars_3.png' %}" alt="{{ video.stars_count }}"
+                title="{{ video.stars_count }}"></td>
                                                     <td>{{ order.comment }}</td>
                                                 </tr>
                                             {% endfor %}
