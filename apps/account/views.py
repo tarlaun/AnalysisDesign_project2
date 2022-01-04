@@ -9,6 +9,8 @@ from .forms import AccountCreationForm, LoginForm, SignUpForm
 from django.contrib import messages
 from .models import UserType, Doctor, Account, Order, Expertise, FavDoctors
 from django.views import generic
+from django.views.decorators.csrf import csrf_protect
+
 
 
 def being_doctor_check(user):
@@ -16,6 +18,7 @@ def being_doctor_check(user):
 
 
 # register A User using Account Creation Form And django auth app
+@csrf_protect
 def register(request):
     # form = AccountCreationForm()
     form = SignUpForm()
@@ -33,7 +36,7 @@ def register(request):
 
     return render(request, 'account/register.html', context)
 
-
+@csrf_protect
 def signin(request):
     if request.method == 'POST':
         username = request.POST.get('username')
