@@ -6,10 +6,14 @@
 {% block content %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
 <link rel="stylesheet" href="{% static 'assets/css/home/request_for_doc.css' %}">
-{% comment %} raised very padded {% endcomment %}
-{% comment %} container {% endcomment %}
+
 <div class="ui text segment" id="container">
-    <div class="ui blue message" style="text-align: left;">
+    <div class="backg-image"></div>
+    
+    <form class="ui form" action="{% url 'add_order' doc_id %}" method="post">
+        {% csrf_token %}
+
+        <div class="ui blue message" style="text-align: left;">
 
         <i class="ambulance large icon"></i>
         You are now submitting a request for Doctor
@@ -19,18 +23,17 @@
         <b> {{ exp }}</b>
 
     </div>
-    <form class="ui form" action="{% url 'add_order' doc_id %}" method="post">
-        {% csrf_token %}
-        <div class="field" style="text-align: left;">
+
+        <div class="field">
             <label style="font-size: 15px; color: black">Address</label>
             <label>
-                <textarea rows="2" required="required" name="address" style="direction:ltr;"></textarea>
+                <textarea placeholder="Please Enter Your Address..." rows="2" required="required" name="address" style="direction:ltr;"></textarea>
             </label>
         </div>
-        <div class="field" style="text-align: left;">
+        <div class="field">
             <label style="font-size: 15px"> Details</label>
             <label>
-                <textarea required="required" name="details" style="direction:ltr;"></textarea>
+                <textarea placeholder="Please Enter Details..." required="required" name="details" style="direction:ltr;"></textarea>
             </label>
         </div>
         <button type="submit" class="btn btn-outline-success">Submit request</button>

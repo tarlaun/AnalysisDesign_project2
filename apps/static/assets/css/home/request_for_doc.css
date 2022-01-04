@@ -1,20 +1,52 @@
 #container {
   /* background-color: #6f9dd6; */
   margin: auto;
-  background-image: url(../../img/medical3.jpg);
-  filter: blur(2px);
-  -webkit-filter: blur(2px);
+  background-repeat: no-repeat;
   background-size: cover;
   top: 12%;
-  width: 80%;
+  width: 70%;
   height: 70%;
+  text-align: center;
+}
+
+/* .message {
+  width: 80%;
+  margin: auto;
+} */
+
+form {
+  width: 90%;
+  /* background-color: red; */
+  display: inline-block;
+  top: 30px;
+}
+
+.backg-image {
+  background-image: url(../../img/medical3.jpg);
+  filter: blur(2px);
+  /* -webkit-filter: blur(2px); */
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
 }
 
 .field {
-  width: 80%;
+  width: 100%;
+  opacity: 0.8;
+  text-align: left;
+  color: #33a656;
+}
+
+textarea {
+  resize: none !important;
+  background-color: #99ffff;
 }
 
 .btn-outline-success {
+  margin-top: 10px;
   border-color: white;
   color: white;
   border-width: 5px;
@@ -23,6 +55,5 @@
 
 .btn-outline-success:hover {
   border-color: #33a656;
-
   color: white;
 }
