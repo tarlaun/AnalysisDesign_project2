@@ -8,9 +8,28 @@
   text-align: center;
 }
 
-.message {
+#msg {
+  background-color: #dae3f2;
+  border-radius: 4px;
+  border-width: 1px;
+  border: 1.5px solid #2d4061;
+  text-align: left;
+  padding: 15px;
   opacity: 0.8;
-  margin-top: 30px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#msg > i {
+  color: #2d4061;
+  margin-right: 5px;
+  font-size: xx-large;
+}
+
+#msg > a {
+  color: #2d4061;
+  font-size: large;
+  font-weight: bold;
 }
 
 .label {
@@ -37,21 +56,29 @@ form {
   width: 100%;
 }
 
+h2 {
+  color: #2d4061;
+  font-weight: bold;
+}
+
 .field {
+  padding-top: 15px;
   font-size: 20px;
   width: 100%;
   text-align: left;
 }
 
 #textarea {
-  border: 1.5px solid #4287f5;
+  border: 1.5px solid #2d4061;
+  color: #2d4061;
   opacity: 0.8;
   resize: none !important;
   direction: ltr;
+  font-size: larger;
 }
 
 #textarea:focus {
-  border: 1.5px solid #425e8c;
+  border: 1.5px solid #4287f5;
   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
     rgba(0, 0, 0, 0.22) 0px 15px 12px !important;
 }
