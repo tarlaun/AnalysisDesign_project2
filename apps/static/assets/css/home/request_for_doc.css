@@ -56,7 +56,7 @@ form {
   width: 100%;
 }
 
-h2 {
+h3 {
   color: #2d4061;
   font-weight: bold;
 }
@@ -74,7 +74,7 @@ h2 {
   opacity: 0.8;
   resize: none !important;
   direction: ltr;
-  font-size: larger;
+  font-size: large;
 }
 
 #textarea:focus {
