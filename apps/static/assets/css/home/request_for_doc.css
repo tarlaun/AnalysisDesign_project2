@@ -1,6 +1,17 @@
 #container {
-  background-color: #6f9dd6;
-  top: 10%;
+  /* background-color: #6f9dd6; */
+  margin: auto;
+  background-image: url(../../img/medical3.jpg);
+  filter: blur(2px);
+  -webkit-filter: blur(2px);
+  background-size: cover;
+  top: 12%;
+  width: 80%;
+  height: 70%;
+}
+
+.field {
+  width: 80%;
 }
 
 .btn-outline-success {
