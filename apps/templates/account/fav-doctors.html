@@ -7,7 +7,6 @@
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,500&amp;subset=latin-ext" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 <link rel="stylesheet" href="{% static 'assets/css/home/fav-doctors-list.css' %}">
 
 <div class="content">
@@ -59,7 +58,7 @@
                                             <button type="button"
                                                     onclick="window.location='{% url 'req_for_doc' doctor.user.id %}'"
                                                     class="btn btn-outline-secondary btn-sm">
-                                                <i class="fa fa-clipboard-check"></i>
+                                                    <i class="fa fa-clipboard-check"></i>
                                             </button>
                                         </div>
                                     </td>
