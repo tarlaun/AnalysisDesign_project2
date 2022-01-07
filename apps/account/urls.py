@@ -28,5 +28,6 @@ urlpatterns = [
     path('doctor_profile/<int:doc_id>/', views.doc_pro, name='doctor_profile'),
     path('all_doctors/favorite/<int:doc_id>/', views.fav_doctor, name="favorite_doctor"),
     path('all_doctors/unfavorite/<int:doc_id>/', views.unfav_doctor, name="unfavorite_doctor"),
-    path('fav_doctors/', views.favorite_doctors, name="favorite_doctors")
+    path('fav_doctors/', views.favorite_doctors, name="favorite_doctors"),
+    path('fav_doctors/unfavorite/<int:doc_id>/', views.unfav_doctor_from_favs, name="unfav_doctor_from_favs")
 ]

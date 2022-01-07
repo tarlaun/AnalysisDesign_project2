@@ -323,7 +323,6 @@ def unfav_doctor(request, doc_id):
 
     return redirect("all_doctors")
 
-
 @login_required(login_url=LOGIN_REDIRECT_URL)
 def favorite_doctors(request):
     if FavDoctors.objects.filter(user=request.user).exists():
@@ -335,3 +334,14 @@ def favorite_doctors(request):
     return render(
         request, "account/fav-doctors.html", {"fav_doctors_list": all_fav_doctors}
     )
+
+@login_required(login_url=LOGIN_REDIRECT_URL)
+def unfav_doctor_from_favs(request, doc_id):
+
+    doctor = get_object_or_404(Doctor, pk=doc_id)
+    fav_doctors = get_object_or_404(FavDoctors, user=request.user)
+
+    fav_doctors.favorite_doctors.remove(doctor)
+    fav_doctors.save()
+
+    return redirect("favorite_doctors")

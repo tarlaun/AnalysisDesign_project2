@@ -8,6 +8,8 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,500&amp;subset=latin-ext" rel="stylesheet">
 <link rel="stylesheet" href="{% static 'assets/css/home/fav-doctors-list.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/home/doctors-list.css' %}">
+
 
 <div class="content">
     <div class="page-inner">
@@ -26,6 +28,7 @@
                                 {% if fav_doctors_list %}
                                 <thead>
                                 <tr>
+                                    <th></th>
                                     <th>First Name</th>
                                     <th>Last Name</th>
                                     <th>Expertise</th>
@@ -39,6 +42,10 @@
                                 <tbody>
                                 {% for doctor in fav_doctors_list %}
                                 <tr>
+                                    <td>
+                                        <i class="fa fa-heart" id="heart-icon" aria-hidden
+                                           onclick="window.location='{% url 'unfav_doctor_from_favs' doctor.user.id %}'"></i>
+                                    </td>
                                     <td>{{ doctor.user.first_name }}</td>
                                     <td>{{ doctor.user.last_name }}</td>
                                     <td>{{ doctor.expertise }}</td>
