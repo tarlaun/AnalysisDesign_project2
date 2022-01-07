@@ -28,7 +28,7 @@
 											<th>Address</th>
 											<th>Email</th>
 											<th>Phone Number</th>
-											<th>Score</th>
+											<th>Description</th>
 										</tr>
 									</thead>
                                     <tfoot>
@@ -38,7 +38,7 @@
 											<th>Address</th>
 											<th>Email</th>
 											<th>Phone Number</th>
-											<th>Score</th>
+											<th>Description</th>
 										</tr>
 									</tfoot>
 									<tbody>
@@ -50,7 +50,7 @@
                                                     <td>{{ order.address }}</td>
                                                     <td>{{ order.user.email }}</td>
                                                     <td>{{ order.user.phone_number }}</td>
-                                                    <td>{{ order.score }}</td>
+													<td>{{ order.details }}</td>
                                                 </tr>
                                             {% endfor %}
                                         {% else %}

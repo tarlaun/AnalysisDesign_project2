@@ -7,32 +7,34 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
 <link rel="stylesheet" href="{% static 'assets/css/home/request_for_doc.css' %}">
 
-<div class="ui raised very padded text container segment" id="container">
-    <div class="ui blue message" style="text-align: left;">
-
-        <i class="ambulance large icon"></i>
-        You are now submitting a request for Doctor
-        <b>{{ doc_name }}</b>
-        <b>{{ doc_lname }}</b>
-        with field of expertise
-        <b> {{ exp }}</b>
-
-    </div>
+<div class="ui text segment" id="container">
+    <div class="backg-image"></div>
+    
     <form class="ui form" action="{% url 'add_order' doc_id %}" method="post">
         {% csrf_token %}
-        <div class="field" style="text-align: left;">
-            <label style="font-size: 15px; color: black">Address</label>
+
+        <div id="msg">
+            <i class="ambulance large icon"></i>
+            <a>You are now submitting a request for Doctor
+            <b>{{ doc_name }}</b>
+            <b>{{ doc_lname }}</b>
+            with field of expertise
+            <b> {{ exp }}</b></a>
+        </div>
+
+        <div class="field">
+            <h3>Address</h3>
             <label>
-                <textarea rows="2" required="required" name="address" style="direction:ltr;"></textarea>
+                <textarea id="textarea" placeholder="Please Enter Your Address..." rows="2" required="required" name="address"></textarea>
             </label>
         </div>
-        <div class="field" style="text-align: left;">
-            <label style="font-size: 15px"> Details</label>
+        <div class="field">
+            <h3>Details</h3>
             <label>
-                <textarea required="required" name="details" style="direction:ltr;"></textarea>
+                <textarea id="textarea" placeholder="Please Enter Details..." required="required" name="details"></textarea>
             </label>
         </div>
-        <button type="submit" class="btn btn-outline-success">Submit request</button>
+        <button type="submit" class="btn btn-success">Submit request</button>
     </form>
 </div>
 

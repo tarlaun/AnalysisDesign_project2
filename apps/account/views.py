@@ -7,8 +7,12 @@ from django.urls import reverse
 from django.contrib.auth.decorators import user_passes_test
 from .forms import AccountCreationForm, LoginForm, SignUpForm
 from django.contrib import messages
-from .models import UserType, Doctor, Account, Order, Expertise
+from .models import UserType, Doctor, Account, Order, Expertise, FavDoctors
 from django.views import generic
+from django.views.decorators.csrf import csrf_protect
+
+
+LOGIN_REDIRECT_URL = "/accounts/signin/"
 
 
 def being_doctor_check(user):
@@ -16,6 +20,7 @@ def being_doctor_check(user):
 
 
 # register A User using Account Creation Form And django auth app
+@csrf_protect
 def register(request):
     # form = AccountCreationForm()
     form = SignUpForm()
@@ -24,48 +29,54 @@ def register(request):
         form = AccountCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('signin')
+            return redirect("signin")
         else:
             # TODO error
             pass
 
     context = {"form": form}
 
-    return render(request, 'account/register.html', context)
+    return render(request, "account/register.html", context)
 
 
+@csrf_protect
 def signin(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+    if request.method == "POST":
+        username = request.POST.get("username")
+        password = request.POST.get("password")
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
             if being_doctor_check(user):
-                return redirect('expertise_orders_list')
+                return redirect("expertise_orders_list")
             else:
-                return redirect('patient_orders_list')
+                return redirect("patient_orders_list")
         else:
-            return HttpResponse('Username or Password is incorrect. <a href="">Return to login</a>')
+            return HttpResponse(
+                'Username or Password is incorrect. <a href="">Return to login</a>'
+            )
 
     # form = AccountCreationForm()
     form = LoginForm()
     context = {"form": form}
-    return render(request, 'account/login.html', context)
+    return render(request, "account/login.html", context)
 
 
 # log out from site
+@login_required(login_url=LOGIN_REDIRECT_URL)
 def signout(request):
     logout(request)
     return render(request, "home.html", {})
 
 
+@login_required(login_url=LOGIN_REDIRECT_URL)
 def home(request):
     return HttpResponse("Home Page")
 
 
 # @login_required
 # @user_passes_test(being_doctor_check)
+@login_required(login_url=LOGIN_REDIRECT_URL)
 def expertise_orders_list(request):
     if not request.user.is_authenticated:
         return HttpResponse("Log in")
@@ -73,13 +84,18 @@ def expertise_orders_list(request):
         return HttpResponse("You are not a doctor")
     doctor = Doctor.objects.get(user=request.user)
     expertise = doctor.expertise
-    orders_list = Order.objects.filter(expertise=expertise, doctor=doctor, accepted=False)
-    return render(request, 'account/expertise_orders_list.html', {'orders_list': orders_list})
+    orders_list = Order.objects.filter(
+        expertise=expertise, doctor=doctor, accepted=False
+    )
+    return render(
+        request, "account/expertise_orders_list.html", {"orders_list": orders_list}
+    )
 
 
 # @login_required
 # @user_passes_test(being_doctor_check)
 # Change Doctor Status of Order in DB
+@login_required(login_url=LOGIN_REDIRECT_URL)
 def accept_order(request, order_id):
     if not request.user.is_authenticated:
         return HttpResponse("Log in")
@@ -94,31 +110,38 @@ def accept_order(request, order_id):
     order.save()
     doctor.not_processed_income += order.expertise.price
     doctor.save()
-    return redirect('expertise_orders_list')
+    return redirect("expertise_orders_list")
+
 
 # View Expertise List For Patient
 class ExpertiseView(generic.ListView):
-    template_name = 'account/expertise_list.html'
-    context_object_name = 'expertise_list'
+    template_name = "account/expertise_list.html"
+    context_object_name = "expertise_list"
 
     def get_queryset(self):
         return Expertise.objects.all()
 
 
+@login_required(login_url=LOGIN_REDIRECT_URL)
 class DoctorView(generic.ListView):
-    template_name = 'account/doctor_list.html'
-    context_object_name = 'doctor_list'
+    template_name = "account/doctor_list.html"
+    context_object_name = "doctor_list"
 
     def get_queryset(self):
         return Doctor.objects.all()
 
 
 # View Request Page After Choosing Expertise
+@login_required(login_url=LOGIN_REDIRECT_URL)
 def request_for_chosen_expertise(request, exp_id):
     expertise = get_object_or_404(Expertise, pk=exp_id)
-    return render(request, 'account/request_for_expertise.html', {'expertise': expertise})
+    return render(
+        request, "account/request_for_expertise.html", {"expertise": expertise}
+    )
+
 
 # ADD Order Into DB
+@login_required(login_url=LOGIN_REDIRECT_URL)
 def add_order(request, doc_id):
     if not request.user.is_authenticated:
         return HttpResponse("Log in")
@@ -126,57 +149,199 @@ def add_order(request, doc_id):
         return HttpResponse("You are not a Patient")
     doctor = get_object_or_404(Doctor, pk=doc_id)
     exp_id = doctor.expertise.id
-    address = request.POST['address']
-    details = request.POST['details']
-    o = Order(user_id=request.user.id, expertise_id=exp_id, doctor_id=doctor.user.id, address=address, details=details)
+    address = request.POST["address"]
+    details = request.POST["details"]
+    o = Order(
+        user_id=request.user.id,
+        expertise_id=exp_id,
+        doctor_id=doctor.user.id,
+        address=address,
+        details=details,
+    )
     o.save()
-    return HttpResponseRedirect(reverse('patient_orders_list'))
+    return HttpResponseRedirect(reverse("patient_orders_list"))
+
 
 # View Patient's Previous Orders List
+@login_required(login_url=LOGIN_REDIRECT_URL)
 def patient_orders_list(request):
     orders_list = Order.objects.filter(user_id=request.user.id)
-    return render(request, 'account/patient_orders_list.html', {'orders_list': orders_list[::-1]})
+    return render(
+        request, "account/patient_orders_list.html", {"orders_list": orders_list[::-1]}
+    )
+
 
 # save a score for orders
+@login_required(login_url=LOGIN_REDIRECT_URL)
 def rate_order(request):
-    if request.method == 'POST':
-        order_id = request.POST.get('order_id')
-        val = request.POST.get('val')
+    if request.method == "POST":
+        order_id = request.POST.get("order_id")
+        val = request.POST.get("val")
         order = Order.objects.get(id=order_id)
         order.score = val
         order.save()
-        return JsonResponse({'success':'true', 'score': val}, safe=False)
-    return JsonResponse({'success':'false'})
+        return JsonResponse({"success": "true", "score": val}, safe=False)
+    return JsonResponse({"success": "false"})
+
 
 # save comment for orders
+@login_required(login_url=LOGIN_REDIRECT_URL)
 def comment_for_order(request):
-    if request.method == 'POST':
-        order_id = request.POST.get('order_id')
+    if request.method == "POST":
+        order_id = request.POST.get("order_id")
         order = Order.objects.get(id=order_id)
-        comment = request.POST.get('comment')
+        comment = request.POST.get("comment")
         order.comment = comment
         order.save()
-        return JsonResponse({'success':'true'}, safe=False)
-    return JsonResponse({'success':'false'})
+        return JsonResponse({"success": "true"}, safe=False)
+    return JsonResponse({"success": "false"})
+
+
+# save complaint for orders
+@login_required(login_url=LOGIN_REDIRECT_URL)
+def complaint_for_order(request):
+    if request.method == "POST":
+        order_id = request.POST.get("order_id")
+        order = Order.objects.get(id=order_id)
+        complaint = request.POST.get("complaint")
+        order.complaint = complaint
+        order.save()
+        return JsonResponse({"success": "true"}, safe=False)
+    return JsonResponse({"success": "false"})
 
 
 # gives list of all doctors
+@login_required(login_url=LOGIN_REDIRECT_URL)
 def doctor_list(request, exp_id):
     expertise = get_object_or_404(Expertise, pk=exp_id)
     docs_list = Doctor.objects.filter(expertise=expertise)
-    return render(request, 'account/doctor_list.html', {'doctor_list': docs_list, 'exp_name': expertise.name})
+    return render(
+        request,
+        "account/doctor_list.html",
+        {"doctor_list": docs_list, "exp_name": expertise.name},
+    )
+
 
 # get all requests for doctor which she/he has not accepted yet
+@login_required(login_url=LOGIN_REDIRECT_URL)
 def request_for_chosen_doctor(request, doc_id):
     doctor = get_object_or_404(Doctor, pk=doc_id)
     exp = doctor.expertise.name
-    return render(request, 'account/request_for_doc.html',
-                  {'doc_name': doctor.user.first_name, 'doc_lname': doctor.user.last_name, 'doc_id': doctor.user.id,
-                   'exp': exp})
+    return render(
+        request,
+        "account/request_for_doc.html",
+        {
+            "doc_name": doctor.user.first_name,
+            "doc_lname": doctor.user.last_name,
+            "doc_id": doctor.user.id,
+            "exp": exp,
+        },
+    )
+
 
 # get requests for doctor which she/he accepted
+@login_required(login_url=LOGIN_REDIRECT_URL)
 def previous_orders(request):
     doctor = Doctor.objects.get(user=request.user)
     expertise = doctor.expertise
-    orders_list = Order.objects.filter(expertise=expertise, doctor=doctor, accepted=True)
-    return render(request, 'account/pre_orders.html', {'orders_list': orders_list})
+    orders_list = Order.objects.filter(
+        expertise=expertise, doctor=doctor, accepted=True
+    )
+    return render(request, "account/pre_orders.html", {"orders_list": orders_list})
+
+
+@login_required(login_url=LOGIN_REDIRECT_URL)
+def all_doctors(request):
+    doctors_list = Doctor.objects.all()
+    if FavDoctors.objects.filter(user=request.user).exists():
+        fav_doctors = get_object_or_404(FavDoctors, user=request.user)
+        all_fav_doctors = fav_doctors.favorite_doctors.all()
+    else:
+        all_fav_doctors = []
+
+    return render(
+        request,
+        "account/list_of_doctors.html",
+        {"doctors_list": doctors_list, "fav_doctors": all_fav_doctors},
+    )
+
+
+@login_required(login_url=LOGIN_REDIRECT_URL)
+def doc_pro(request, doc_id):
+    doctor = get_object_or_404(Doctor, pk=doc_id)
+    scores = 0
+    count = 0
+    orders_list = Order.objects.filter(doctor=doctor, accepted=True)
+    final_orders = []
+    for order in orders_list:
+        if order.score > 0 or order.comment!="":
+            if order.score>0:
+                scores += order.score
+                count += 1
+            final_orders.append(order)
+
+    if count == 0:
+        score_mean = 0
+    else:
+        score_mean = scores / count
+    score_mean = round(score_mean, 1)
+    if len(final_orders) > 0:
+        final_orders = final_orders[::-1]
+
+    return render(
+        request,
+        "account/doctor_profile.html",
+        {"doctor": doctor, "orders": final_orders, "score_mean": score_mean},
+    )
+
+
+@login_required(login_url=LOGIN_REDIRECT_URL)
+def fav_doctor(request, doc_id):
+    doctor = get_object_or_404(Doctor, pk=doc_id)
+
+    if FavDoctors.objects.filter(user=request.user).exists():
+        fav_doctors = get_object_or_404(FavDoctors, user=request.user)
+    else:
+        fav_doctors = FavDoctors(user=request.user)
+        fav_doctors.save()
+
+    fav_doctors.favorite_doctors.add(doctor)
+    fav_doctors.save()
+
+    return redirect("all_doctors")
+    # return render(request, 'account/list_of_doctors.html', {'doctors_list': doctors_list, 'fav_doctors': fav_doctors.favorite_doctors.all()})
+
+
+@login_required(login_url=LOGIN_REDIRECT_URL)
+def unfav_doctor(request, doc_id):
+
+    doctor = get_object_or_404(Doctor, pk=doc_id)
+    fav_doctors = get_object_or_404(FavDoctors, user=request.user)
+
+    fav_doctors.favorite_doctors.remove(doctor)
+    fav_doctors.save()
+
+    return redirect("all_doctors")
+
+@login_required(login_url=LOGIN_REDIRECT_URL)
+def favorite_doctors(request):
+    if FavDoctors.objects.filter(user=request.user).exists():
+        fav_doctors = get_object_or_404(FavDoctors, user=request.user)
+        all_fav_doctors = fav_doctors.favorite_doctors.all()
+    else:
+        all_fav_doctors = []
+
+    return render(
+        request, "account/fav-doctors.html", {"fav_doctors_list": all_fav_doctors}
+    )
+
+@login_required(login_url=LOGIN_REDIRECT_URL)
+def unfav_doctor_from_favs(request, doc_id):
+
+    doctor = get_object_or_404(Doctor, pk=doc_id)
+    fav_doctors = get_object_or_404(FavDoctors, user=request.user)
+
+    fav_doctors.favorite_doctors.remove(doctor)
+    fav_doctors.save()
+
+    return redirect("favorite_doctors")

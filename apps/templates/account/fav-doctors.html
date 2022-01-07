@@ -1,0 +1,86 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% block title %} Dashboard {% endblock %}
+
+{% block content %}
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,500&amp;subset=latin-ext" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'assets/css/home/fav-doctors-list.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/home/doctors-list.css' %}">
+
+
+<div class="content">
+    <div class="page-inner">
+        <div class="page-header-doctor-dashboard">
+            <h4 class="page-title">Favorite Doctors</h4>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">List of Favorite Doctors</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="multi-filter-select" class="display table table-striped table-hover">
+                                {% if fav_doctors_list %}
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Expertise</th>
+                                    <th>Work Experience</th>
+                                    <th>Degree</th>
+                                    <th>Profile</th>
+                                    <th>Submit Request</th>
+                                </tr>
+                                </thead>
+                                
+                                <tbody>
+                                {% for doctor in fav_doctors_list %}
+                                <tr>
+                                    <td>
+                                        <i class="fa fa-heart" id="heart-icon" aria-hidden
+                                           onclick="window.location='{% url 'unfav_doctor_from_favs' doctor.user.id %}'"></i>
+                                    </td>
+                                    <td>{{ doctor.user.first_name }}</td>
+                                    <td>{{ doctor.user.last_name }}</td>
+                                    <td>{{ doctor.expertise }}</td>
+                                    <td>{{ doctor.work_experience }}</td>
+                                    <td>{{ doctor.get_degree_type_display }}</td>
+                                    <td>
+                                        <div class="form-button-action">
+                                            <button type="button"
+                                                    onclick="window.location='{% url 'doctor_profile' doctor.user.id %}'"
+                                                    class="btn btn-outline-secondary btn-sm">
+                                                <i class="fa flaticon-users"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-button-action">
+                                            <button type="button"
+                                                    onclick="window.location='{% url 'req_for_doc' doctor.user.id %}'"
+                                                    class="btn btn-outline-secondary btn-sm">
+                                                    <i class="fa fa-clipboard-check"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                                {% else %}
+                                You haven't added a doctor to favorite list yet.
+                                {% endif %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

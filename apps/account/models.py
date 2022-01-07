@@ -56,6 +56,13 @@ class Doctor(models.Model):
         return self.user.__str__()
 
 
+class FavDoctors(models.Model):
+    user = models.ForeignKey(Account, on_delete=models.PROTECT, null=False)
+    favorite_doctors = models.ManyToManyField(Doctor)
+
+    def __str__(self):
+        return f'{self.user.__str__()}'
+
 class Order(models.Model):
     user = models.ForeignKey(Account, on_delete=models.PROTECT, null=False)
     doctor = models.ForeignKey(Doctor, null=True, blank=True, on_delete=models.PROTECT)
@@ -69,6 +76,7 @@ class Order(models.Model):
         ]
     )
     comment = models.TextField()
+    complaint = models.TextField()
 
     # NEW: added this field to show if doctor has accepted request or not
     accepted = models.BooleanField(default=False)
