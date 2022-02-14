@@ -17,7 +17,7 @@ class AccountAdmin(UserAdmin):
         }),
          
         ('Additional info', {
-            'fields': ("user_type",)
+            'fields': ("user_type", 'wallet')
         })
     )
    
@@ -30,7 +30,7 @@ class AccountAdmin(UserAdmin):
         }),
          
         ('Additional info', {
-            'fields': ("user_type",)
+            'fields': ("user_type", 'wallet')
         })
     )
     list_display = Account.get_fields()
