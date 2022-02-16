@@ -345,3 +345,7 @@ def unfav_doctor_from_favs(request, doc_id):
     fav_doctors.save()
 
     return redirect("favorite_doctors")
+
+@login_required(login_url=LOGIN_REDIRECT_URL)
+def online_payment(request):
+    return render(request, 'account/payment-page.html', {})
