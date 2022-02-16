@@ -356,7 +356,7 @@ def unfav_doctor_from_favs(request, doc_id):
 
     return redirect("favorite_doctors")
 
-# View Request Page After Choosing Expertise
+# Finish the order aftre doctor confirmed payment
 @login_required(login_url=LOGIN_REDIRECT_URL)
 def finish_the_order(request, order_id):
     order = get_object_or_404(Order, pk=order_id)
