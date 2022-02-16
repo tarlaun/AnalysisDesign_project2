@@ -1,3 +1,4 @@
+from cgi import test
 from django.test import TestCase, RequestFactory
 from .models import Account, Expertise, Doctor, Order, FavDoctors
 from django.urls import reverse
@@ -199,14 +200,6 @@ class OrderTest(TestCase):
         response = unfav_doctor_from_favs(request, test_doctor.user.id)
 
         self.assertEqual(response.status_code, 302)
-
-    # def test_finish_the_order(self):
-    #     request = self.factory.get("/account/finish_the_order/")
-    #     test_order = self.create_order()
-    #     request.user = test_order.doctor.user        
-
-    #     response = finish_the_order(request, test_order.id)
-    #     self.assertEqual(response.status_code, 200)
         
     def test_active_orders(self):
         request = self.factory.get("/account/active_orders/")
