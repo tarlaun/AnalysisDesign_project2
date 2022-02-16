@@ -245,7 +245,7 @@ def active_orders(request):
     doctor = Doctor.objects.get(user=request.user)
     expertise = doctor.expertise
     orders_list = Order.objects.filter(
-        expertise=expertise, doctor=doctor, accepted=True
+        expertise=expertise, doctor=doctor, accepted=True, finished=False
     )
     return render(request, "account/active_orders.html", {"orders_list": orders_list})
 
