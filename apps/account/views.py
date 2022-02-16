@@ -357,9 +357,9 @@ def unfav_doctor_from_favs(request, doc_id):
     return redirect("favorite_doctors")
 
 @login_required(login_url=LOGIN_REDIRECT_URL)
-def online_payment(request, order_id):
-    order = get_object_or_404(Order, pk=order_id)
-    return render(request, 'account/payment-page.html', {"order": order})
+def online_payment(request):
+    return render(request, 'account/payment-page.html')
+
 # Finish the order aftre doctor confirmed payment
 @login_required(login_url=LOGIN_REDIRECT_URL)
 def finish_the_order(request, order_id):

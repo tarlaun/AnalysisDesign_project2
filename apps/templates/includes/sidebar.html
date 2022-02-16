@@ -71,6 +71,13 @@
                     </a>
                 </li>
 
+                <li class="nav-item {% if 'index' in segment %} active {% endif %}">
+                    <a href="{% url 'online-payment' %}" aria-expanded="false">
+                        <i class="fa fa-credit-card"></i>
+                        <p>Charge Your Wallet</p>
+                    </a>
+                </li>
+
 
                 {% endif %}
 
