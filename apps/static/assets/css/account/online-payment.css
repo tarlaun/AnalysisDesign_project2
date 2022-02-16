@@ -16,15 +16,15 @@ body {
 }
 
 h1 {
-  color: #963e7b;
+  color: #0071bd;
 }
 
 h2 {
-  color: #963e7b;
+  color: #0071bd;
 }
 
 p {
-  color: #963e7b;
+  color: #0071bd;
 }
 
 .card {
@@ -35,7 +35,7 @@ p {
   position: center;
   align-self: center;
   /* top: 50rem; */
-  /* top: 30px; */
+  top: 10px;
   border-radius: 1.5rem;
   box-shadow: 4px 3px 20px #3535358c;
   display: flex;
@@ -43,7 +43,8 @@ p {
 }
 
 .leftside {
-  background: #030303;
+  /* background: #030303; */
+  background-color: #2f3a57;
   width: 25rem;
   display: inline-flex;
   align-items: center;
@@ -54,8 +55,8 @@ p {
 
 .product {
   object-fit: cover;
-  width: 20em;
-  height: 20em;
+  width: 24em;
+  height: 24em;
   border-radius: 100%;
 }
 
@@ -113,7 +114,7 @@ p {
 }
 
 .button {
-  background: linear-gradient(135deg, #753370 0%, #298096 100%);
+  background: linear-gradient(135deg, #f5bf42 0%, #0071bd 100%);
   padding: 15px;
   border: none;
   border-radius: 50px;
@@ -124,6 +125,7 @@ p {
   width: 100%;
   letter-spacing: 0.11rem;
   outline: none;
+  cursor: pointer;
 }
 
 .button:hover {

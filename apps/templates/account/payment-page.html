@@ -20,7 +20,7 @@
             <div class="card">
                 <div class="leftside">
                     <img
-                            src="https://i.pinimg.com/originals/18/9d/dc/189ddc1221d9c1c779dda4ad37a35fa1.png"
+                            src="{% static 'assets/img/bill.jpg' %}"
                             class="product"
                             alt="Shoes"
                     />
@@ -29,8 +29,8 @@
                     <form action="">
                         <h1><b>CheckOut</b></h1>
                         <h2><b>Payment Information</b></h2>
-                        <p>Cardholder Name</p>
-                        <input type="text" class="inputbox" name="name" required/>
+                        <p>Amount to be paid: <b style="color: black">123 toman</b></p>
+                        {% comment %} <input type="text" class="inputbox" name="name" required/> {% endcomment %}
                         <p>Card Number</p>
                         <div class="card-number">
                             <input type="number"
