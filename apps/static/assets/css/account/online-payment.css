@@ -10,8 +10,6 @@ body {
   width: 100%;
   display: flex;
   flex-direction: column;
-  /* background-color: #dfdbe5; */
-  /* background-image: url("https://wallpaperaccess.com/full/3063067.png"); */
   color: #963e7b;
 }
 
@@ -29,12 +27,10 @@ p {
 
 .card {
   width: 60rem;
-  /* width: 100px; */
   margin: auto;
   background-color: white;
   position: center;
   align-self: center;
-  /* top: 50rem; */
   top: 10px;
   border-radius: 1.5rem;
   box-shadow: 4px 3px 20px #3535358c;
@@ -43,7 +39,6 @@ p {
 }
 
 .leftside {
-  /* background: #030303; */
   background-color: #2f3a57;
   width: 25rem;
   display: inline-flex;

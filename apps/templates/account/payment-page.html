@@ -26,11 +26,10 @@
                     />
                 </div>
                 <div class="rightside">
-                    <form action="">
+                    <form method="post" action="">
                         <h1><b>CheckOut</b></h1>
                         <h2><b>Payment Information</b></h2>
-                        <p>Amount to be paid: <b style="color: black">123 toman</b></p>
-                        {% comment %} <input type="text" class="inputbox" name="name" required/> {% endcomment %}
+                        <p>Amount to be paid: <b style="color: black">{{ order.doctor.expertise.price }} toman</b></p>
                         <p>Card Number</p>
                         <div class="card-number">
                             <input type="number"

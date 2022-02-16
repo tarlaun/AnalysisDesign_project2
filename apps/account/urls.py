@@ -32,6 +32,6 @@ urlpatterns = [
     path('fav_doctors/unfavorite/<int:doc_id>/', views.unfav_doctor_from_favs, name="unfav_doctor_from_favs"),
 
     # پرداخت آنلاین
-    path('online-payment/', views.online_payment, name="online-payment")
+    path('online-payment/<int:order_id>/', views.online_payment, name="online-payment")
 
 ]
