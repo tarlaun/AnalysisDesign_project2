@@ -10,8 +10,20 @@ body {
   width: 100%;
   display: flex;
   flex-direction: column;
-  background-color: #dfdbe5;
-  background-image: url("https://wallpaperaccess.com/full/3063067.png");
+  /* background-color: #dfdbe5; */
+  /* background-image: url("https://wallpaperaccess.com/full/3063067.png"); */
+  color: #963e7b;
+}
+
+h1 {
+  color: #963e7b;
+}
+
+h2 {
+  color: #963e7b;
+}
+
+p {
   color: #963e7b;
 }
 
@@ -88,9 +100,9 @@ p {
 }
 
 .expcvv {
-  display: flex;
-  justify-content: space-between;
-  padding-top: 0.6rem;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  column-gap: 5px;
 }
 
 .expcvv_text {
