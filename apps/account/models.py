@@ -46,7 +46,6 @@ class Doctor(models.Model):
     expertise = models.ForeignKey(Expertise, on_delete=models.PROTECT)
     user = models.OneToOneField(Account, on_delete=models.CASCADE, primary_key=True)
     not_processed_income = models.IntegerField(default=0)
-    wallet = models.IntegerField(default=0)
     work_experience = models.IntegerField(default=0)
     degree_type = models.CharField(max_length=20, choices=DEGREE_TYPES, default='1')
 
