@@ -7,6 +7,9 @@ from .views import (
     unfav_doctor,
     favorite_doctors,
     unfav_doctor_from_favs,
+    finish_the_order,
+    active_orders,
+    finished_orders,
 )
 
 
@@ -196,3 +199,29 @@ class OrderTest(TestCase):
         response = unfav_doctor_from_favs(request, test_doctor.user.id)
 
         self.assertEqual(response.status_code, 302)
+
+    # def test_finish_the_order(self):
+    #     request = self.factory.get("/account/finish_the_order/")
+    #     test_order = self.create_order()
+    #     request.user = test_order.doctor.user        
+
+    #     response = finish_the_order(request, test_order.id)
+    #     self.assertEqual(response.status_code, 200)
+        
+    def test_active_orders(self):
+        request = self.factory.get("/account/active_orders/")
+        test_doctor = self.create_doctor()
+        request.user = test_doctor.user
+        
+        response = active_orders(request)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Active Orders")
+        
+    def test_finished_orders(self):
+        request = self.factory.get("/account/finished_orders/")
+        test_doctor = self.create_doctor()
+        request.user = test_doctor.user
+
+        response = finished_orders(request)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Done Orders")
