@@ -108,7 +108,7 @@ def accept_order(request, order_id):
     # order.doctor = doctor
     order.accepted = True
     order.save()
-    doctor.not_processed_income += order.expertise.price
+    # doctor.not_processed_income += order.expertise.price
     doctor.save()
     return redirect("expertise_orders_list")
 
@@ -239,7 +239,7 @@ def request_for_chosen_doctor(request, doc_id):
     )
 
 
-# get requests for doctor which she/he accepted
+# get requests for doctor which she/he accepted but not finished
 @login_required(login_url=LOGIN_REDIRECT_URL)
 def active_orders(request):
     doctor = Doctor.objects.get(user=request.user)
@@ -249,7 +249,7 @@ def active_orders(request):
     )
     return render(request, "account/active_orders.html", {"orders_list": orders_list})
 
-# get requests for doctor which she/he accepted
+# get requests for doctor which she/he finished
 @login_required(login_url=LOGIN_REDIRECT_URL)
 def finished_orders(request):
     doctor = Doctor.objects.get(user=request.user)
@@ -355,3 +355,11 @@ def unfav_doctor_from_favs(request, doc_id):
     fav_doctors.save()
 
     return redirect("favorite_doctors")
+
+# View Request Page After Choosing Expertise
+@login_required(login_url=LOGIN_REDIRECT_URL)
+def finish_the_order(request, order_id):
+    order = get_object_or_404(Order, pk=order_id)
+    order.finished = True
+    order.save()
+    return redirect("active_orders")

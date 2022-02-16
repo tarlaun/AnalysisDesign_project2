@@ -29,6 +29,8 @@
 											<th>Email</th>
 											<th>Phone Number</th>
 											<th>Description</th>
+											<th>Online Payment</th>
+											<th>Done</th>
 										</tr>
 									</thead>
                                     <tfoot>
@@ -39,6 +41,7 @@
 											<th>Email</th>
 											<th>Phone Number</th>
 											<th>Description</th>
+											<th>Online Payment</th>
 										</tr>
 									</tfoot>
 									<tbody>
@@ -51,6 +54,20 @@
                                                     <td>{{ order.user.email }}</td>
                                                     <td>{{ order.user.phone_number }}</td>
 													<td>{{ order.details }}</td>
+													{% if order.payed %}
+														<td>Paid</td>
+													{% else %}
+														<td>Not Paid</td>
+													{% endif %}
+													<td>
+														<div class="form-button-action">
+															<button type="button"
+																	onclick="window.location='{% url 'finish_the_order' order.id %}'"
+																	class="btn btn-icon btn-round">
+																<i class="fa fa-check"></i>
+															</button>
+														</div>
+													</td>
                                                 </tr>
                                             {% endfor %}
                                         {% else %}

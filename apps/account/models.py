@@ -83,6 +83,7 @@ class Order(models.Model):
     # NEW: added this field to show if doctor has accepted request or not
     accepted = models.BooleanField(default=False)
     finished = models.BooleanField(default=False)
+    paid = models.BooleanField(default=False)
 
     def __str__(self):
         return f'{self.user.__str__()} {self.doctor.__str__()} {self.expertise.__str__()}'
