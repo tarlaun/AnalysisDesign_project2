@@ -1,20 +1,66 @@
 {% extends "layouts/base.html" %}
 
-{% block title %} Online Payment {% endblock %} 
+{% load static%}
+
+{% block title %} Online Payment {% endblock %}
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}{% endblock stylesheets %}
 
 {% block content %}
-    
+
+<link rel="stylesheet" href="{% static 'assets/css/account/online-payment.css' %}">
+
 <div class="content">
     <div class="page-inner">
         <div class="page-header-doctor-dashboard">
-            <h4 class="page-title">Online Payment</h4>
+            {% comment %} <h4 class="page-title">Online Payment</h4> {% endcomment %}
         </div>
         <div class="row">
-            salam
+            <div class="card">
+                <div class="leftside">
+                    <img
+                            src="https://i.pinimg.com/originals/18/9d/dc/189ddc1221d9c1c779dda4ad37a35fa1.png"
+                            class="product"
+                            alt="Shoes"
+                    />
+                </div>
+                <div class="rightside">
+                    <form action="">
+                        <h1>CheckOut</h1>
+                        <h2>Payment Information</h2>
+                        <p>Cardholder Name</p>
+                        <input type="text" class="inputbox" name="name" required/>
+                        <p>Card Number</p>
+                        <div class="card-number">
+                        <input type="number" class="inputbox" name="card_number" id="card_number1" required/>
+                        <input type="number" class="inputbox" name="card_number" id="card_number2" required/>
+                        <input type="number" class="inputbox" name="card_number" id="card_number3" required/>
+                        <input type="number" class="inputbox" name="card_number" id="card_number4" required/>
+                        </div>
+
+                        <p>Card Type</p>
+                        <select class="inputbox" name="card_type" id="card_type" required>
+                            <option value="">--Select a Card Type--</option>
+                            <option value="Visa">Visa</option>
+                            <option value="RuPay">RuPay</option>
+                            <option value="MasterCard">MasterCard</option>
+                        </select>
+                        <div class="expcvv">
+
+                            <p class="expcvv_text">Expiry</p>
+                            <input type="date" class="inputbox" name="exp_date" id="exp_date" required/>
+
+                            <p class="expcvv_text2">CVV</p>
+                            <input type="password" class="inputbox" name="cvv" id="cvv" required/>
+                        </div>
+                        <p></p>
+                        <button type="submit" class="button">CheckOut</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
 {% endblock content %}
