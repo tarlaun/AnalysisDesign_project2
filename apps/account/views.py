@@ -241,13 +241,23 @@ def request_for_chosen_doctor(request, doc_id):
 
 # get requests for doctor which she/he accepted
 @login_required(login_url=LOGIN_REDIRECT_URL)
-def previous_orders(request):
+def active_orders(request):
     doctor = Doctor.objects.get(user=request.user)
     expertise = doctor.expertise
     orders_list = Order.objects.filter(
         expertise=expertise, doctor=doctor, accepted=True
     )
-    return render(request, "account/pre_orders.html", {"orders_list": orders_list})
+    return render(request, "account/active_orders.html", {"orders_list": orders_list})
+
+# get requests for doctor which she/he accepted
+@login_required(login_url=LOGIN_REDIRECT_URL)
+def finished_orders(request):
+    doctor = Doctor.objects.get(user=request.user)
+    expertise = doctor.expertise
+    orders_list = Order.objects.filter(
+        expertise=expertise, doctor=doctor, accepted=True
+    )
+    return render(request, "account/finished_orders.html", {"orders_list": orders_list})
 
 
 @login_required(login_url=LOGIN_REDIRECT_URL)
