@@ -1,0 +1,73 @@
+{% extends "layouts/base.html" %}
+
+{% load static%}
+
+{% block title %} Online Payment {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'assets/css/account/online-payment.css' %}">
+
+<div class="content">
+    <div class="page-inner">
+        <div class="page-header-doctor-dashboard">
+            {% comment %} <h4 class="page-title">Online Payment</h4> {% endcomment %}
+        </div>
+        <div class="row">
+            <div class="card">
+                <div class="leftside">
+                    <img
+                            src="{% static 'assets/img/bill.jpg' %}"
+                            class="product"
+                            alt="Shoes"
+                    />
+                </div>
+                <div class="rightside">
+                    <form method="post" action="">
+                        <h1><b>CheckOut</b></h1>
+                        <h2><b>Payment Information</b></h2>
+                        <p>Amount to be paid: <b style="color: black">{{ order.doctor.expertise.price }} toman</b></p>
+                        <p>Card Number</p>
+                        <div class="card-number">
+                            <input type="number"
+                                   oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                   maxlength="4" class="inputbox" name="card_number" id="card_number1" required/>
+                            <input type="number"
+                                   oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                   maxlength="4" class="inputbox" name="card_number" id="card_number2" required/>
+                            <input type="number"
+                                   oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                   maxlength="4" class="inputbox" name="card_number" id="card_number3" required/>
+                            <input type="number"
+                                   oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                   maxlength="4" class="inputbox" name="card_number" id="card_number4" required/>
+                        </div>
+
+                        <p>Card Type</p>
+                        <select class="inputbox" name="card_type" id="card_type" required>
+                            <option value="">--Select a Card Type--</option>
+                            <option value="Visa">Visa</option>
+                            <option value="RuPay">RuPay</option>
+                            <option value="MasterCard">MasterCard</option>
+                        </select>
+                        <div class="expcvv">
+
+                            <p class="expcvv_text">Expiry</p>
+                            <input type="date" class="inputbox" name="exp_date" id="exp_date" required/>
+
+                            <p class="expcvv_text2">CVV</p>
+                            <input type="password" class="inputbox" name="cvv" id="cvv" required/>
+                        </div>
+                        <p></p>
+                        <button type="submit" class="button">CheckOut</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
