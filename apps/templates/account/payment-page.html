@@ -33,10 +33,18 @@
                         <input type="text" class="inputbox" name="name" required/>
                         <p>Card Number</p>
                         <div class="card-number">
-                        <input type="number" class="inputbox" name="card_number" id="card_number1" required/>
-                        <input type="number" class="inputbox" name="card_number" id="card_number2" required/>
-                        <input type="number" class="inputbox" name="card_number" id="card_number3" required/>
-                        <input type="number" class="inputbox" name="card_number" id="card_number4" required/>
+                            <input type="number"
+                                   oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                   maxlength="4" class="inputbox" name="card_number" id="card_number1" required/>
+                            <input type="number"
+                                   oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                   maxlength="4" class="inputbox" name="card_number" id="card_number2" required/>
+                            <input type="number"
+                                   oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                   maxlength="4" class="inputbox" name="card_number" id="card_number3" required/>
+                            <input type="number"
+                                   oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                   maxlength="4" class="inputbox" name="card_number" id="card_number4" required/>
                         </div>
 
                         <p>Card Type</p>
