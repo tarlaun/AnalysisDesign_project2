@@ -23,7 +23,8 @@ urlpatterns = [
     path('rate/', views.rate_order, name='rate-view'),
     path('comment/', views.comment_for_order, name='comment-view'),
     path('complaint/', views.complaint_for_order, name='complaint-view'),
-    path('pre_orders/', views.previous_orders, name='pre_orders'),
+    path('active_orders/', views.active_orders, name='active_orders'),
+    path('finished_orders/', views.finished_orders, name='finished_orders'),
     path('all_doctors/', views.all_doctors, name='all_doctors'),
     path('doctor_profile/<int:doc_id>/', views.doc_pro, name='doctor_profile'),
     path('all_doctors/favorite/<int:doc_id>/', views.fav_doctor, name="favorite_doctor"),
@@ -34,4 +35,5 @@ urlpatterns = [
     # پرداخت آنلاین
     path('online-payment/<int:order_id>/', views.online_payment, name="online-payment")
 
+    path('finish_the_order/<int:order_id>/', views.finish_the_order, name='finish_the_order'),
 ]
