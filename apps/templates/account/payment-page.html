@@ -29,8 +29,11 @@
                     <form method="post" action="">
                         <h1><b>CheckOut</b></h1>
                         <h2><b>Payment Information</b></h2>
-<!--                        TODO: field for price-->
-                        <p>Amount to be paid: <b style="color: black">0 toman</b></p>
+                        <p>Amount to be paid</p>
+                        <div class="amount-row">
+                            <input type="number" class="inputbox" name="amount" required
+                                   placeholder="Enter your amount of money"/><b style="color: black;font-size: large;">(Toman)</b>
+                        </div>
                         <p>Card Number</p>
                         <div class="card-number">
                             <input type="number"
