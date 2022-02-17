@@ -139,6 +139,14 @@
                     <button type="button" class="btn btn-outline-danger mt-3 Complaint" onclick="set_complaint({{order.id}})">
                         <b>Complaint</b>
                     </button>
+                    {% if not order.paid %}
+<!--                    TODO: logic for paying-->
+                    <button type="button" onclick="window.location='{% url 'online-payment' %}'"
+                        class="btn btn-success btn-lg mt-3" style="float: right;">
+                    <b>Pay Online</b>
+                    </button>
+                    {% endif %}
+
                 {% endif %}
             </div>
         </div>
