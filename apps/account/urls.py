@@ -34,6 +34,9 @@ urlpatterns = [
 
     # پرداخت آنلاین
     path('online-payment/', views.online_payment, name="online-payment"),
+    path('online-payment/<int:order_id>/', views.online_payment_order, name="online-payment-order"),
+    path('add-to-wallet/', views.add_to_wallet, name="add-to-wallet"),
+
     path('finish_the_order/<int:order_id>/', views.finish_the_order, name='finish_the_order'),
 
     path('help/', views.help, name='help'),

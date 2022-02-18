@@ -11,7 +11,6 @@ from .models import UserType, Doctor, Account, Order, Expertise, FavDoctors
 from django.views import generic
 from django.views.decorators.csrf import csrf_protect
 
-
 LOGIN_REDIRECT_URL = "/accounts/signin/"
 
 
@@ -249,6 +248,7 @@ def active_orders(request):
     )
     return render(request, "account/active_orders.html", {"orders_list": orders_list})
 
+
 # get requests for doctor which she/he finished
 @login_required(login_url=LOGIN_REDIRECT_URL)
 def finished_orders(request):
@@ -324,7 +324,6 @@ def fav_doctor(request, doc_id):
 
 @login_required(login_url=LOGIN_REDIRECT_URL)
 def unfav_doctor(request, doc_id):
-
     doctor = get_object_or_404(Doctor, pk=doc_id)
     fav_doctors = get_object_or_404(FavDoctors, user=request.user)
 
@@ -332,6 +331,7 @@ def unfav_doctor(request, doc_id):
     fav_doctors.save()
 
     return redirect("all_doctors")
+
 
 @login_required(login_url=LOGIN_REDIRECT_URL)
 def favorite_doctors(request):
@@ -345,9 +345,9 @@ def favorite_doctors(request):
         request, "account/fav-doctors.html", {"fav_doctors_list": all_fav_doctors}
     )
 
+
 @login_required(login_url=LOGIN_REDIRECT_URL)
 def unfav_doctor_from_favs(request, doc_id):
-
     doctor = get_object_or_404(Doctor, pk=doc_id)
     fav_doctors = get_object_or_404(FavDoctors, user=request.user)
 
@@ -356,9 +356,34 @@ def unfav_doctor_from_favs(request, doc_id):
 
     return redirect("favorite_doctors")
 
+
 @login_required(login_url=LOGIN_REDIRECT_URL)
 def online_payment(request):
     return render(request, 'account/payment-page.html')
+
+@login_required(login_url=LOGIN_REDIRECT_URL)
+def online_payment_order(request, order_id):
+    order = get_object_or_404(Order, pk=order_id)
+    return render(request, 'account/payment-page.html', context={"order": order})
+
+@login_required(login_url=LOGIN_REDIRECT_URL)
+def add_to_wallet(request):
+    if request.method == "POST":
+        user = request.user
+        current_wallet = user.wallet
+        user.wallet = current_wallet + int(request.POST.get("amount"))
+        user.save()
+        # print("---------", request.POST.get("amount"))
+        # print("---------", request.POST.get("card_number1"))
+        # print("---------", request.POST.get("card_number2"))
+        # print("---------", request.POST.get("card_number3"))
+        # print("---------", request.POST.get("card_number4"))
+        # print("---------", request.POST.get("card_type"))
+        # print("---------", request.POST.get("exp_date"))
+        # print("---------", request.POST.get("cvv"))
+
+        return redirect("patient_orders_list")
+    return JsonResponse({"success": "false"})
 
 # Finish the order aftre doctor confirmed payment
 @login_required(login_url=LOGIN_REDIRECT_URL)
