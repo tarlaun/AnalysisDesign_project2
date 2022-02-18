@@ -368,6 +368,8 @@ def online_payment_order(request, order_id):
 
 @login_required(login_url=LOGIN_REDIRECT_URL)
 def add_to_wallet(request):
+    print("+++++++++ request", request)
+    print(request.POST.get("amount"))
     if request.method == "POST":
         user = request.user
         current_wallet = user.wallet
