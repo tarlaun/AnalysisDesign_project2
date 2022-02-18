@@ -363,16 +363,19 @@ def online_payment(request):
 @login_required(login_url=LOGIN_REDIRECT_URL)
 def add_to_wallet(request):
     if request.method == "POST":
-        print("---------", request.POST.get("amount"))
-        print("---------", request.POST.get("card_number1"))
-        print("---------", request.POST.get("card_number2"))
-        print("---------", request.POST.get("card_number3"))
-        print("---------", request.POST.get("card_number4"))
-        print("---------", request.POST.get("card_type"))
-        print("---------", request.POST.get("exp_date"))
-        print("---------", request.POST.get("cvv"))
+        user = request.user
+        current_wallet = user.wallet
+        user.wallet = current_wallet + int(request.POST.get("amount"))
+        user.save()
+        # print("---------", request.POST.get("amount"))
+        # print("---------", request.POST.get("card_number1"))
+        # print("---------", request.POST.get("card_number2"))
+        # print("---------", request.POST.get("card_number3"))
+        # print("---------", request.POST.get("card_number4"))
+        # print("---------", request.POST.get("card_type"))
+        # print("---------", request.POST.get("exp_date"))
+        # print("---------", request.POST.get("cvv"))
 
-        # return JsonResponse({"success": "true"}, safe=False)
         return redirect("patient_orders_list")
     return JsonResponse({"success": "false"})
 
