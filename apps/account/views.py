@@ -11,7 +11,6 @@ from .models import UserType, Doctor, Account, Order, Expertise, FavDoctors
 from django.views import generic
 from django.views.decorators.csrf import csrf_protect
 
-
 LOGIN_REDIRECT_URL = "/accounts/signin/"
 
 
@@ -249,6 +248,7 @@ def active_orders(request):
     )
     return render(request, "account/active_orders.html", {"orders_list": orders_list})
 
+
 # get requests for doctor which she/he finished
 @login_required(login_url=LOGIN_REDIRECT_URL)
 def finished_orders(request):
@@ -284,8 +284,8 @@ def doc_pro(request, doc_id):
     orders_list = Order.objects.filter(doctor=doctor, accepted=True)
     final_orders = []
     for order in orders_list:
-        if order.score > 0 or order.comment!="":
-            if order.score>0:
+        if order.score > 0 or order.comment != "":
+            if order.score > 0:
                 scores += order.score
                 count += 1
             final_orders.append(order)
@@ -324,7 +324,6 @@ def fav_doctor(request, doc_id):
 
 @login_required(login_url=LOGIN_REDIRECT_URL)
 def unfav_doctor(request, doc_id):
-
     doctor = get_object_or_404(Doctor, pk=doc_id)
     fav_doctors = get_object_or_404(FavDoctors, user=request.user)
 
@@ -332,6 +331,7 @@ def unfav_doctor(request, doc_id):
     fav_doctors.save()
 
     return redirect("all_doctors")
+
 
 @login_required(login_url=LOGIN_REDIRECT_URL)
 def favorite_doctors(request):
@@ -345,9 +345,9 @@ def favorite_doctors(request):
         request, "account/fav-doctors.html", {"fav_doctors_list": all_fav_doctors}
     )
 
+
 @login_required(login_url=LOGIN_REDIRECT_URL)
 def unfav_doctor_from_favs(request, doc_id):
-
     doctor = get_object_or_404(Doctor, pk=doc_id)
     fav_doctors = get_object_or_404(FavDoctors, user=request.user)
 
@@ -356,14 +356,23 @@ def unfav_doctor_from_favs(request, doc_id):
 
     return redirect("favorite_doctors")
 
+
 @login_required(login_url=LOGIN_REDIRECT_URL)
 def online_payment(request):
     return render(request, 'account/payment-page.html')
 
-# Finish the order aftre doctor confirmed payment
+
+# Finish the order after doctor confirmed payment
 @login_required(login_url=LOGIN_REDIRECT_URL)
 def finish_the_order(request, order_id):
     order = get_object_or_404(Order, pk=order_id)
     order.finished = True
     order.save()
     return redirect("active_orders")
+
+
+@login_required(login_url=LOGIN_REDIRECT_URL)
+def delete_order(request, order_id):
+    order = get_object_or_404(Order, pk=order_id)
+    order.delete()
+    return redirect("patient_orders_list")
