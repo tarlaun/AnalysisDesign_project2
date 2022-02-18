@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function() {
     var i = alerts.length;
     for (let elem of alerts) {
       i--;
-      time = 1000 + 1000 * i;
+      time = 2000 + 1000 * i;
       setTimeout(function() {
         $(elem).fadeOut("slow");
       }, time);

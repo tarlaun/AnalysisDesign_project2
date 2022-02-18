@@ -404,11 +404,3 @@ def delete_order(request, order_id):
 
 def help(request):
     return render(request, 'account/help.html')
-
-def send_msg(request):
-    messages.add_message(request, messages.ERROR, 'ERROR')
-    messages.add_message(request, messages.INFO, 'INFO')
-    messages.add_message(request, messages.SUCCESS, 'SUCCESS')
-    messages.add_message(request, messages.WARNING, 'WARNING')
-
-    return redirect("patient_orders_list")
