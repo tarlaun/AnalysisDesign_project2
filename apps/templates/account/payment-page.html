@@ -35,6 +35,7 @@
                             <p>Price of your order: <b style="color: black">{{ order.expertise.price }} Toman</b></p>
                         {% endif %}
                         <h2><b>Payment Information</b></h2>
+                        <p>Wallet Credit: {{ request.user.wallet }} Toman </p>
                         <p>Amount to be paid</p>
                         <div class="amount-row">
                             <input type="number" class="inputbox" name="amount" required
