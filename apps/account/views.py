@@ -361,8 +361,31 @@ def unfav_doctor_from_favs(request, doc_id):
 def online_payment(request):
     return render(request, 'account/payment-page.html')
 
+@login_required(login_url=LOGIN_REDIRECT_URL)
+def online_payment_order(request, order_id):
+    order = get_object_or_404(Order, pk=order_id)
+    return render(request, 'account/payment-page.html', context={"order": order})
 
-# Finish the order after doctor confirmed payment
+@login_required(login_url=LOGIN_REDIRECT_URL)
+def add_to_wallet(request):
+    if request.method == "POST":
+        user = request.user
+        current_wallet = user.wallet
+        user.wallet = current_wallet + int(request.POST.get("amount"))
+        user.save()
+        # print("---------", request.POST.get("amount"))
+        # print("---------", request.POST.get("card_number1"))
+        # print("---------", request.POST.get("card_number2"))
+        # print("---------", request.POST.get("card_number3"))
+        # print("---------", request.POST.get("card_number4"))
+        # print("---------", request.POST.get("card_type"))
+        # print("---------", request.POST.get("exp_date"))
+        # print("---------", request.POST.get("cvv"))
+
+        return redirect("patient_orders_list")
+    return JsonResponse({"success": "false"})
+
+# Finish the order aftre doctor confirmed payment
 @login_required(login_url=LOGIN_REDIRECT_URL)
 def finish_the_order(request, order_id):
     order = get_object_or_404(Order, pk=order_id)
