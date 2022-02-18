@@ -399,3 +399,7 @@ def delete_order(request, order_id):
     order = get_object_or_404(Order, pk=order_id)
     order.delete()
     return redirect("patient_orders_list")
+
+
+def help(request):
+    return render(request, 'account/help.html')

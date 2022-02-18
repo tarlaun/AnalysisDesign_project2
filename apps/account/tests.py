@@ -11,7 +11,7 @@ from .views import (
     finish_the_order,
     active_orders,
     finished_orders,
-    add_to_wallet
+    add_to_wallet,
     delete_order
 )
 
