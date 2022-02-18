@@ -361,6 +361,11 @@ def online_payment(request):
     return render(request, 'account/payment-page.html')
 
 @login_required(login_url=LOGIN_REDIRECT_URL)
+def online_payment_order(request, order_id):
+    order = get_object_or_404(Order, pk=order_id)
+    return render(request, 'account/payment-page.html', context={"order": order})
+
+@login_required(login_url=LOGIN_REDIRECT_URL)
 def add_to_wallet(request):
     if request.method == "POST":
         user = request.user

@@ -31,6 +31,9 @@
                         {% csrf_token %}
 
                         <h1><b>CheckOut</b></h1>
+                        {% if order %}
+                            <p>Price of your order: <b style="color: black">{{ order.expertise.price }} Toman</b></p>
+                        {% endif %}
                         <h2><b>Payment Information</b></h2>
                         <p>Amount to be paid</p>
                         <div class="amount-row">
