@@ -32,7 +32,7 @@
 
                         <h1><b>CheckOut</b></h1>
                         {% if order %}
-                            <p>Price of your order: <b style="color: black">{{ order.expertise.price }} Toman</b></p>
+                        <p>Price of your order: <b style="color: black">{{ order.expertise.price }} Toman</b></p>
                         {% endif %}
                         <h2><b>Payment Information</b></h2>
                         <p>Wallet Credit: {{ request.user.wallet }} Toman </p>
@@ -73,7 +73,7 @@
                         </div>
                         <p></p>
                         {% comment %} onclick="window.location='{% url 'add-to-wallet' %}'" {% endcomment %}
-                        <button type="submit"  class="button">CheckOut</button>
+                        <button type="submit" class="button">CheckOut</button>
                     </form>
                 </div>
             </div>

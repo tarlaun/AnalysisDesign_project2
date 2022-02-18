@@ -42,4 +42,6 @@ urlpatterns = [
     path('help/', views.help, name='help'),
 
     path('delete_order/<int:order_id>', views.delete_order, name='delete_order'),
+
+    path('send-msg/', views.send_msg, name='send-msg')
 ]

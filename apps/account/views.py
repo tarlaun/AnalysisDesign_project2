@@ -6,10 +6,10 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import user_passes_test
 from .forms import AccountCreationForm, LoginForm, SignUpForm
-from django.contrib import messages
 from .models import UserType, Doctor, Account, Order, Expertise, FavDoctors
 from django.views import generic
 from django.views.decorators.csrf import csrf_protect
+from django.contrib import messages
 
 LOGIN_REDIRECT_URL = "/accounts/signin/"
 
@@ -403,3 +403,11 @@ def delete_order(request, order_id):
 
 def help(request):
     return render(request, 'account/help.html')
+
+def send_msg(request):
+    messages.add_message(request, messages.ERROR, 'ERROR')
+    messages.add_message(request, messages.INFO, 'INFO')
+    messages.add_message(request, messages.SUCCESS, 'SUCCESS')
+    messages.add_message(request, messages.WARNING, 'WARNING')
+    
+    return redirect("patient_orders_list")
