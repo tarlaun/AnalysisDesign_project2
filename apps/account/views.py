@@ -373,6 +373,7 @@ def add_to_wallet(request):
         current_wallet = user.wallet
         user.wallet = current_wallet + int(request.POST.get("amount"))
         user.save()
+        messages.add_message(request, messages.SUCCESS, 'Successfully added to you wallet')
         # print("---------", request.POST.get("amount"))
         # print("---------", request.POST.get("card_number1"))
         # print("---------", request.POST.get("card_number2"))
@@ -409,5 +410,5 @@ def send_msg(request):
     messages.add_message(request, messages.INFO, 'INFO')
     messages.add_message(request, messages.SUCCESS, 'SUCCESS')
     messages.add_message(request, messages.WARNING, 'WARNING')
-    
+
     return redirect("patient_orders_list")

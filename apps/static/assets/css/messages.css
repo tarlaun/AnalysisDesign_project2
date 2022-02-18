@@ -2,13 +2,13 @@
 .badge-light {
   margin-top: 2.5em;
 }
-.errorlist {
+/* .errorlist {
   list-style: none;
   padding-left: 0px;
   opacity: 0.8;
   color: #dc3545;
   font-size: 12px;
-}
+} */
 .msg {
   margin: 0 !important;
   margin-bottom: 4px !important;
@@ -26,8 +26,23 @@
 .alert {
   margin-top: 1rem;
 }
+
 .alert-error {
   background-color: #f2dede;
-  border-color: #ebcccc;
   color: #a94442;
+}
+
+.alert-info {
+  background-color: #d2e9f7;
+  color: #0293eb;
+}
+
+.alert-success {
+  background-color: #e0f5df;
+  color: #0fe605;
+}
+
+.alert-warning {
+  background-color: #f5f4df;
+  color: #e6ad05;
 }
