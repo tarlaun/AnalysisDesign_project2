@@ -1,7 +1,6 @@
 from django.urls import path
 from . import views
 
-
 urlpatterns = [
     # ورود و ثبت نام کاربر
     path('signup/', views.register, name='signup'),
@@ -38,4 +37,6 @@ urlpatterns = [
     path('add-to-wallet/', views.add_to_wallet, name="add-to-wallet"),
 
     path('finish_the_order/<int:order_id>/', views.finish_the_order, name='finish_the_order'),
+
+    path('delete_order/<int:order_id>', views.delete_order, name='delete_order'),
 ]

@@ -144,6 +144,12 @@
                         class="btn btn-success btn-lg mt-3" style="float: right;">
                     <b>Pay Online</b>
                     </button>
+
+                        <a type="button" href="{% url 'delete_order' order.id %}"
+                              onclick="return confirm('Are you sure you want to cancel this request?')"
+                        class="btn btn-danger btn-lg mt-3"  >
+                    <b>Cancel Request</b>
+                    </a>
                     {% endif %}
 
                 {% endif %}
@@ -157,3 +163,14 @@
 </div>
 
 {% endblock content %}
+<script>
+function myFunction() {
+  var txt;
+  if (confirm("Do you want to delete!")) {
+   //go to your delete path
+  } else {
+  //don't do anything
+  }
+
+}
+</script>
