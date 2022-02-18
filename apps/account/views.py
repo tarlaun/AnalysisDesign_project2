@@ -284,8 +284,8 @@ def doc_pro(request, doc_id):
     orders_list = Order.objects.filter(doctor=doctor, accepted=True)
     final_orders = []
     for order in orders_list:
-        if order.score > 0 or order.comment!="":
-            if order.score>0:
+        if order.score > 0 or order.comment != "":
+            if order.score > 0:
                 scores += order.score
                 count += 1
             final_orders.append(order)
@@ -367,6 +367,13 @@ def finish_the_order(request, order_id):
     order.finished = True
     order.save()
     return redirect("active_orders")
+
+
+@login_required(login_url=LOGIN_REDIRECT_URL)
+def delete_order(request, order_id):
+    order = get_object_or_404(Order, pk=order_id)
+    order.delete()
+    return redirect("patient_orders_list")
 
 
 def help(request):

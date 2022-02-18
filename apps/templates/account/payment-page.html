@@ -29,6 +29,7 @@
                     <form method="post" action="">
                         <h1><b>CheckOut</b></h1>
                         <h2><b>Payment Information</b></h2>
+                        <p>Wallet Credit: {{ request.user.wallet }} Toman </p>
                         <p>Amount to be paid</p>
                         <div class="amount-row">
                             <input type="number" class="inputbox" name="amount" required
