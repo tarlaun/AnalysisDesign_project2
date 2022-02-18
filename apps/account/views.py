@@ -364,7 +364,24 @@ def online_payment(request):
 @login_required(login_url=LOGIN_REDIRECT_URL)
 def online_payment_order(request, order_id):
     order = get_object_or_404(Order, pk=order_id)
-    return render(request, 'account/payment-page.html', context={"order": order})
+    order.paid = True
+    if order.expertise.price <= order.user.wallet:
+        order.doctor.user.wallet += order.expertise.price
+        order.user.wallet -= order.expertise.price
+        order.save()
+        order.user.save()
+        order.doctor.user.save()
+        return redirect("patient_orders_list")
+        # TODO notification for successful
+    else:
+        temp = order.expertise.price
+        order.expertise.price -= order.user.wallet
+        order.doctor.user.wallet += temp
+        order.user.wallet = 0
+        order.save()
+        order.user.save()
+        order.doctor.user.save()
+        return render(request, 'account/payment-page.html', context={"order": order})
 
 @login_required(login_url=LOGIN_REDIRECT_URL)
 def add_to_wallet(request):
