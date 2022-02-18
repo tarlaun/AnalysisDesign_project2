@@ -145,7 +145,7 @@
                         class="btn btn-success btn-lg mt-3" style="float: right;">
                     <b>Pay Online</b>
                     </button>
-                        <button type="button" onclick="if(confirm('Are you sure you want to cancel this request?')){{ order.id }}"
+                        <button type="button" onclick="window.location='{% url 'delete_order' order.id %}' "
                         class="btn btn-danger btn-lg mt-3"  >
                     <b>Cancel Request</b>
                     </button>
