@@ -26,7 +26,10 @@
                     />
                 </div>
                 <div class="rightside">
-                    <form method="post" action="">
+                    <form method="POST" action="{% url 'add-to-wallet' %}">
+
+                        {% csrf_token %}
+
                         <h1><b>CheckOut</b></h1>
                         <h2><b>Payment Information</b></h2>
                         <p>Amount to be paid</p>
@@ -38,16 +41,16 @@
                         <div class="card-number">
                             <input type="number"
                                    oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                                   maxlength="4" class="inputbox" name="card_number" id="card_number1" required/>
+                                   maxlength="4" class="inputbox" name="card_number1" id="card_number1" required/>
                             <input type="number"
                                    oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                                   maxlength="4" class="inputbox" name="card_number" id="card_number2" required/>
+                                   maxlength="4" class="inputbox" name="card_number2" id="card_number2" required/>
                             <input type="number"
                                    oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                                   maxlength="4" class="inputbox" name="card_number" id="card_number3" required/>
+                                   maxlength="4" class="inputbox" name="card_number3" id="card_number3" required/>
                             <input type="number"
                                    oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                                   maxlength="4" class="inputbox" name="card_number" id="card_number4" required/>
+                                   maxlength="4" class="inputbox" name="card_number4" id="card_number4" required/>
                         </div>
 
                         <p>Card Type</p>
@@ -58,7 +61,6 @@
                             <option value="MasterCard">MasterCard</option>
                         </select>
                         <div class="expcvv">
-
                             <p class="expcvv_text">Expiry</p>
                             <input type="date" class="inputbox" name="exp_date" id="exp_date" required/>
 
@@ -66,7 +68,8 @@
                             <input type="password" class="inputbox" name="cvv" id="cvv" required/>
                         </div>
                         <p></p>
-                        <button type="submit" class="button">CheckOut</button>
+                        {% comment %} onclick="window.location='{% url 'add-to-wallet' %}'" {% endcomment %}
+                        <button type="submit"  class="button">CheckOut</button>
                     </form>
                 </div>
             </div>
