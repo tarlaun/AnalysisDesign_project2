@@ -11,6 +11,7 @@ from .views import (
     finish_the_order,
     active_orders,
     finished_orders,
+    add_to_wallet
 )
 
 
@@ -30,6 +31,7 @@ class OrderTest(TestCase):
         email="mmd@gmail.com",
         user_type=2,
         phone_number="09129121112",
+        wallet=0
     ):
         return Account.objects.create(
             first_name=first_name,
@@ -39,6 +41,7 @@ class OrderTest(TestCase):
             email=email,
             user_type=user_type,
             phone_number=phone_number,
+            wallet=wallet,
         )
 
     def create_doctor(
@@ -218,3 +221,11 @@ class OrderTest(TestCase):
         response = finished_orders(request)
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Done Orders")
+
+    def test_charge_wallet(self):
+        request = self.factory.get("/accounts/add-to-wallet/")
+        test_user = self.create_user()
+        request.user = test_user
+
+        response = add_to_wallet(request)
+        self.assertEqual(response.status_code, 200)
