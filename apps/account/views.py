@@ -367,3 +367,7 @@ def finish_the_order(request, order_id):
     order.finished = True
     order.save()
     return redirect("active_orders")
+
+
+def help(request):
+    return render(request, 'account/help.html')
