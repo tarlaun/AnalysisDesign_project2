@@ -137,7 +137,7 @@
                     </dialog>
                 </div>
                 {% if order.accepted %}
-                <button type="button" class="btn btn-outline-warning mt-3 Score" onclick="score({{order.id}})">
+                {% comment %} <button type="button" class="btn btn-outline-warning mt-3 Score" onclick="score({{order.id}})">
                     <b>Score</b>
                 </button>
 
@@ -148,7 +148,7 @@
                 <button type="button" class="btn btn-outline-danger mt-3 Complaint"
                         onclick="set_complaint({{order.id}})">
                     <b>Complaint</b>
-                </button>
+                </button> {% endcomment %}
                 {% if not order.paid %}
                 {% comment %}
                 <button type="button" onclick="window.location='{% url 'online-payment-order' order.id %}'"
@@ -177,17 +177,19 @@
                         </div>
                         <span><i class="fa fa-frown-o" style="color: red;"></i></span>
                     </div>
+                    <div class="testtt">
+                        <div class="icon pay">
+                        <div class="tooltip">
+                            Pay Online
+                        </div>
+                        <span><i class="fab fa fa-credit-card" style="color: #3bb017"></i></span>
+                    </div>
                     <div class="icon cancel">
                         <div class="tooltip">
                             Cancel Order
                         </div>
                         <span><i class="fa fa-times-circle" style="color: red;"></i></span>
                     </div>
-                    <div class="icon pay">
-                        <div class="tooltip">
-                            Pay Online
-                        </div>
-                        <span><i class="fab fa fa-credit-card" style="color: #3bb017"></i></span>
                     </div>
                 </div>
 

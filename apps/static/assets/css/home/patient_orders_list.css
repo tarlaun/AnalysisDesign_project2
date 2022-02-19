@@ -253,20 +253,52 @@ dialog {
 }
 
 .icon-wrapper {
-  display: inline-flex;
+  /* background-color: red; */
+  /* display: inline-flex; */
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
 }
 .icon-wrapper .icon {
-  margin: 0 20px;
+  margin: 0 5px;
   text-align: center;
   cursor: pointer;
   display: flex;
+  /* margin-right: auto; */
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  /* flex: 1 1; */
   position: relative;
   z-index: 2;
   transition: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
+
+.score,
+.comment,
+.complaint {
+  left: 0;
+  /* background-color: orange; */
+  /* margin-right: auto; */
+  /* float: left; */
+}
+
+/* .cancel,
+.pay {
+  margin-left: auto;
+  right: 0;
+
+  background-color: blue;
+  float: right;
+} */
+
+.testtt {
+  margin-left: auto;
+  display: flex;
+  flex-direction: row;
+}
+
 .icon-wrapper .icon span {
   display: block;
   height: 60px;
