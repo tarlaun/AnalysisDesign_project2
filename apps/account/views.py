@@ -1,8 +1,8 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.contrib.auth.decorators import user_passes_test
 from .forms import AccountCreationForm, LoginForm, SignUpForm
@@ -10,6 +10,9 @@ from .models import UserType, Doctor, Account, Order, Expertise, FavDoctors
 from django.views import generic
 from django.views.decorators.csrf import csrf_protect
 from django.contrib import messages
+
+from .forms import AccountCreationForm, LoginForm, SignUpForm
+from .models import UserType, Doctor, Order, Expertise, FavDoctors
 
 LOGIN_REDIRECT_URL = "/accounts/signin/"
 
@@ -364,12 +367,25 @@ def online_payment(request):
 @login_required(login_url=LOGIN_REDIRECT_URL)
 def online_payment_order(request, order_id):
     order = get_object_or_404(Order, pk=order_id)
-    return render(request, 'account/payment-page.html', context={"order": order})
+    order.paid = True
+    if order.expertise.price <= order.user.wallet:
+        order.doctor.user.wallet += order.expertise.price
+        order.user.wallet -= order.expertise.price
+        order.save()
+        order.user.save()
+        order.doctor.user.save()
+        return redirect("patient_orders_list")
+        # TODO notification for successful
+    else:
+        temp = order.expertise.price
+        order.expertise.price -= order.user.wallet
+        order.doctor.user.wallet += temp
+        order.save()
+        order.doctor.user.save()
+        return render(request, 'account/payment-page.html', context={"order": order})
 
 @login_required(login_url=LOGIN_REDIRECT_URL)
 def add_to_wallet(request):
-    print("+++++++++ request", request)
-    print(request.POST.get("amount"))
     if request.method == "POST":
         user = request.user
         current_wallet = user.wallet
@@ -385,6 +401,17 @@ def add_to_wallet(request):
         # print("---------", request.POST.get("exp_date"))
         # print("---------", request.POST.get("cvv"))
 
+        return redirect("patient_orders_list")
+    return JsonResponse({"success": "false"})
+
+
+@login_required(login_url=LOGIN_REDIRECT_URL)
+def pay(request, order_id):
+    if request.method == "POST":
+        user = request.user
+        order = get_object_or_404(Order, pk=order_id)
+        user.wallet = user.wallet + int(request.POST.get("amount")) - order.expertise.price
+        user.save()
         return redirect("patient_orders_list")
     return JsonResponse({"success": "false"})
 

@@ -12,7 +12,8 @@ from .views import (
     active_orders,
     finished_orders,
     add_to_wallet,
-    delete_order
+    delete_order,
+    pay
 )
 
 
@@ -230,6 +231,15 @@ class OrderTest(TestCase):
 
         response = add_to_wallet(request)
         self.assertEqual(response.status_code, 200)
+
+    def test_payment(self):
+        request = self.factory.get("/accounts/pay/1")
+        test_order = self.create_order()
+        request.user = test_order.user
+        response = pay(request, 1)
+        self.assertEqual(response.status_code, 200)
+
+
     def test_delete_order(self):
         order = self.create_order()
         pk = order.pk

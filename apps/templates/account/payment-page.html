@@ -82,15 +82,14 @@
     </div>
 </div>
 
-
 <script>
 var order = "{{order}}";
 if (order) {
     form = document.getElementById('payment-form')
-    form.action = "{% url 'add-to-wallet' %}"
+    form.action = "{% url 'pay' order.id %}"
 } else {
     form = document.getElementById('payment-form')
-    form.action = "{% url 'any url you want' %}"
+    form.action = "{% url 'add-to-wallet' %}"
 }
 
 </script>
