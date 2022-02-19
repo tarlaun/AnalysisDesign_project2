@@ -12,9 +12,11 @@
 <script src="{% static 'assets/js/orders/stars.js' %}" defer></script>
 <script src="{% static 'assets/js/orders/comment-pop-up.js' %}" defer></script>
 <script src="{% static 'assets/js/orders/complaint-pop-up.js' %}" defer></script>
-{% comment %} <script src="{% static 'assets/js/messages.js' %}"></script> {% endcomment %}
+{% comment %}
+<script src="{% static 'assets/js/messages.js' %}"></script> {% endcomment %}
 
-{% comment %} <script src="/static/assets/js/messages.js"></script> {% endcomment %}
+{% comment %}
+<script src="/static/assets/js/messages.js"></script> {% endcomment %}
 
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
@@ -147,10 +149,46 @@
                     <b>Complaint</b>
                 </button>
                 {% if not order.paid %}
+                {% comment %}
                 <button type="button" onclick="window.location='{% url 'online-payment-order' order.id %}'"
                         class="btn btn-success btn-lg mt-3" style="float: right;">
                     <b>Pay Online</b>
                 </button>
+                {% endcomment %}
+
+                <div class="icon-wrapper">
+                    <div class="icon facebook">
+                        <div class="tooltip">
+                            Facebook
+                        </div>
+                        <span><i class="fab fa-facebook-f"></i></span>
+                    </div>
+
+                    <div class="icon twitter">
+                        <div class="tooltip">
+                            Twitter
+                        </div>
+                        <span><i class="fab fa-twitter"></i></span>
+                    </div>
+                    <div class="icon instagram">
+                        <div class="tooltip">
+                            Instagram
+                        </div>
+                        <span><i class="fab fa-instagram"></i></span>
+                    </div>
+                    <div class="icon github">
+                        <div class="tooltip">
+                            Github
+                        </div>
+                        <span><i class="fab fa-github"></i></span>
+                    </div>
+                    <div class="icon youtube">
+                        <div class="tooltip">
+                            YouTube
+                        </div>
+                        <span><i class="fab fa-youtube"></i></span>
+                    </div>
+                </div>
 
                 <a type="button" href="{% url 'delete_order' order.id %}"
                    onclick="return confirm('Are you sure you want to cancel this request?')"
@@ -181,6 +219,9 @@ function myFunction() {
   }
 
 }
+
+
+
 
 
 
