@@ -279,26 +279,33 @@ dialog {
   transition: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 .icon-wrapper .icon span i {
+  background-color: transparent;
+  border: transparent;
   line-height: 60px;
   font-size: 25px;
 }
+
 .icon-wrapper .icon .tooltip {
   position: absolute;
+  width: max-content;
   top: 0;
   z-index: 1;
   background: #fff;
   color: #fff;
   padding: 10px 18px;
-  font-size: 20px;
+  font-size: 10px;
   font-weight: 500;
-  border-radius: 25px;
+  /* border-radius: 25px; */
+  border-radius: 15px;
   opacity: 0;
   pointer-events: none;
   box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
   transition: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  /* transition: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1); */
 }
 .icon-wrapper .icon:hover .tooltip {
-  top: -70px;
+  /* top: -70px; */
+  top: -55px;
   opacity: 1;
   pointer-events: auto;
 }
@@ -320,28 +327,31 @@ dialog {
 .icon-wrapper .icon:hover .tooltip {
   text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.4);
 }
-.icon-wrapper .facebook:hover span,
-.icon-wrapper .facebook:hover .tooltip,
-.icon-wrapper .facebook:hover .tooltip:before {
-  background: #3b5999;
+
+.icon-wrapper .score:hover span,
+.icon-wrapper .score:hover .tooltip,
+.icon-wrapper .score:hover .tooltip:before {
+  background: #3e4959;
 }
-.icon-wrapper .twitter:hover span,
-.icon-wrapper .twitter:hover .tooltip,
-.icon-wrapper .twitter:hover .tooltip:before {
-  background: #46c1f6;
+
+.icon-wrapper .comment:hover span,
+.icon-wrapper .comment:hover .tooltip,
+.icon-wrapper .comment:hover .tooltip:before {
+  background: #3e4959;
 }
-.icon-wrapper .instagram:hover span,
-.icon-wrapper .instagram:hover .tooltip,
-.icon-wrapper .instagram:hover .tooltip:before {
-  background: #e1306c;
+.icon-wrapper .complaint:hover span,
+.icon-wrapper .complaint:hover .tooltip,
+.icon-wrapper .complaint:hover .tooltip:before {
+  background: #3e4959;
 }
-.icon-wrapper .github:hover span,
-.icon-wrapper .github:hover .tooltip,
-.icon-wrapper .github:hover .tooltip:before {
-  background: #333;
+.icon-wrapper .cancel:hover span,
+.icon-wrapper .cancel:hover .tooltip,
+.icon-wrapper .cancel:hover .tooltip:before {
+  background: #3e4959;
 }
-.icon-wrapper .youtube:hover span,
-.icon-wrapper .youtube:hover .tooltip,
-.icon-wrapper .youtube:hover .tooltip:before {
-  background: #de463b;
+
+.icon-wrapper .pay:hover span,
+.icon-wrapper .pay:hover .tooltip,
+.icon-wrapper .pay:hover .tooltip:before {
+  background: #3e4959;
 }

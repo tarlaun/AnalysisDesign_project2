@@ -7,7 +7,8 @@
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,500&amp;subset=latin-ext" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+{% comment %} <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/> {% endcomment %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
 <link rel="stylesheet" href="{% static 'assets/css/home/patient_orders_list.css' %}">
 <script src="{% static 'assets/js/orders/stars.js' %}" defer></script>
 <script src="{% static 'assets/js/orders/comment-pop-up.js' %}" defer></script>
@@ -157,44 +158,44 @@
                 {% endcomment %}
 
                 <div class="icon-wrapper">
-                    <div class="icon facebook">
+                    <div class="icon score">
                         <div class="tooltip">
-                            Facebook
+                            Score
                         </div>
-                        <span><i class="fab fa-facebook-f"></i></span>
+                        <span><i class="fa fa-star" style="color: #f0d822;"></i></span>
                     </div>
 
-                    <div class="icon twitter">
+                    <div class="icon comment">
                         <div class="tooltip">
-                            Twitter
+                            Comment
                         </div>
-                        <span><i class="fab fa-twitter"></i></span>
+                        <span><i class="fa fa-comment" style="color: #606266;"></i></span>
                     </div>
-                    <div class="icon instagram">
+                    <div class="icon complaint">
                         <div class="tooltip">
-                            Instagram
+                            Complaint
                         </div>
-                        <span><i class="fab fa-instagram"></i></span>
+                        <span><i class="fa fa-frown-o" style="color: red;"></i></span>
                     </div>
-                    <div class="icon github">
+                    <div class="icon cancel">
                         <div class="tooltip">
-                            Github
+                            Cancel Order
                         </div>
-                        <span><i class="fab fa-github"></i></span>
+                        <span><i class="fa fa-times-circle" style="color: red;"></i></span>
                     </div>
-                    <div class="icon youtube">
+                    <div class="icon pay">
                         <div class="tooltip">
-                            YouTube
+                            Pay Online
                         </div>
-                        <span><i class="fab fa-youtube"></i></span>
+                        <span><i class="fab fa fa-credit-card" style="color: #3bb017"></i></span>
                     </div>
                 </div>
 
-                <a type="button" href="{% url 'delete_order' order.id %}"
+                {% comment %} <a type="button" href="{% url 'delete_order' order.id %}"
                    onclick="return confirm('Are you sure you want to cancel this request?')"
                    class="btn btn-danger btn-lg mt-3">
                     <b>Cancel Request</b>
-                </a>
+                </a> {% endcomment %}
                 {% endif %}
 
                 {% endif %}
