@@ -138,9 +138,6 @@
                         </form>
                     </dialog>
                 </div>
-                <button type="button" class="btn btn-outline-warning mt-3 Score" onclick="score({{order.id}})">
-                    <b>Score</b>
-                </button>
                 {% comment %} {% if order.accepted %} {% endcomment %}
                 {% comment %}
                 <button type="button" class="btn btn-outline-warning mt-3 Score" onclick="score({{order.id}})">
@@ -165,20 +162,20 @@
                 {% endcomment %}
                 {% if order.accepted %}
                 <div class="icon-wrapper">
-                    <div class="icon score" onclick="score({{order.id}})">
+                    <div class="icon score Score" onclick="score({{order.id}})">
                         <div class="tooltip">
                             Score
                         </div>
                         <span><i class="fa fa-star" style="color: #f0d822;"></i></span>
                     </div>
 
-                    <div class="icon comment" onclick="commenting({{order.id}})">
+                    <div class="icon comment Comment" onclick="commenting({{order.id}})">
                         <div class="tooltip">
                             Comment
                         </div>
                         <span><i class="fa fa-comment" style="color: #606266;"></i></span>
                     </div>
-                    <div class="icon complaint" onclick="set_complaint({{order.id}})">
+                    <div class="icon complaint Complaint" onclick="set_complaint({{order.id}})">
                         <div class="tooltip">
                             Complaint
                         </div>
