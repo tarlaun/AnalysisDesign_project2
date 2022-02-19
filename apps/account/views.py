@@ -13,6 +13,7 @@ from django.contrib import messages
 
 from .forms import AccountCreationForm, LoginForm, SignUpForm
 from .models import UserType, Doctor, Order, Expertise, FavDoctors
+import json 
 
 LOGIN_REDIRECT_URL = "/accounts/signin/"
 
@@ -370,19 +371,21 @@ def online_payment_order(request, order_id):
     order.paid = True
     if order.expertise.price <= order.user.wallet:
         order.doctor.user.wallet += order.expertise.price
+        print(order.doctor.user.wallet)
         order.user.wallet -= order.expertise.price
+        print(order.user.wallet)
         order.save()
         order.user.save()
         order.doctor.user.save()
         return redirect("patient_orders_list")
-        # TODO notification for successful
+        # TODO notification for success
     else:
         temp = order.expertise.price
         order.expertise.price -= order.user.wallet
         order.doctor.user.wallet += temp
         order.save()
         order.doctor.user.save()
-        return render(request, 'account/payment-page.html', context={"order": order})
+        return render(request, 'account/payment-page.html', context={"order": json.dumps(order)})
 
 @login_required(login_url=LOGIN_REDIRECT_URL)
 def add_to_wallet(request):
