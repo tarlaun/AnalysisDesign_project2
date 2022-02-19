@@ -377,8 +377,8 @@ def online_payment_order(request, order_id):
         order.save()
         order.user.save()
         order.doctor.user.save()
+        messages.add_message(request, messages.SUCCESS, 'Successfully paid from your wallet')
         return redirect("patient_orders_list")
-        # TODO notification for success
     else:
         temp = order.expertise.price
         order.expertise.price -= order.user.wallet
