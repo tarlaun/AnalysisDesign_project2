@@ -4,8 +4,12 @@ from django.http import HttpResponse, JsonResponse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
+from django.contrib.auth.decorators import user_passes_test
+from .forms import AccountCreationForm, LoginForm, SignUpForm
+from .models import UserType, Doctor, Account, Order, Expertise, FavDoctors
 from django.views import generic
 from django.views.decorators.csrf import csrf_protect
+from django.contrib import messages
 
 from .forms import AccountCreationForm, LoginForm, SignUpForm
 from .models import UserType, Doctor, Order, Expertise, FavDoctors
@@ -360,7 +364,6 @@ def unfav_doctor_from_favs(request, doc_id):
 def online_payment(request):
     return render(request, 'account/payment-page.html')
 
-
 @login_required(login_url=LOGIN_REDIRECT_URL)
 def online_payment_order(request, order_id):
     order = get_object_or_404(Order, pk=order_id)
@@ -388,6 +391,7 @@ def add_to_wallet(request):
         current_wallet = user.wallet
         user.wallet = current_wallet + int(request.POST.get("amount"))
         user.save()
+        messages.add_message(request, messages.SUCCESS, 'Successfully added to you wallet')
         # print("---------", request.POST.get("amount"))
         # print("---------", request.POST.get("card_number1"))
         # print("---------", request.POST.get("card_number2"))

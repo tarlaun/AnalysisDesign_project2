@@ -9,6 +9,7 @@
 
 {% block content %}
 
+{% comment %} <script src="/static/assets/js/payment.js"></script> {% endcomment %}
 <link rel="stylesheet" href="{% static 'assets/css/account/online-payment.css' %}">
 
 <div class="content">
@@ -73,7 +74,7 @@
                         </div>
                         <p></p>
                         {% comment %} onclick="window.location='{% url 'add-to-wallet' %}'" {% endcomment %}
-                        <button type="submit"  class="button">CheckOut</button>
+                        <button type="submit" class="button">CheckOut</button>
                     </form>
                 </div>
             </div>
