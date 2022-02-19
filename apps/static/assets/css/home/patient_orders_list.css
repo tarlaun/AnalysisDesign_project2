@@ -286,7 +286,9 @@ dialog {
   display: block;
   height: 60px;
   width: 60px;
-  background: #fff;
+  background: #edeef2;
+  border: #131313;
+  border: 1px solid #124578;
   border-radius: 50%;
   position: relative;
   z-index: 2;
