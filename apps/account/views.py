@@ -385,7 +385,7 @@ def online_payment_order(request, order_id):
         order.doctor.user.wallet += temp
         order.save()
         order.doctor.user.save()
-        return render(request, 'account/payment-page.html', context={"order": json.dumps(order)})
+        return render(request, 'account/payment-page.html', context={"order": order})
 
 @login_required(login_url=LOGIN_REDIRECT_URL)
 def add_to_wallet(request):
