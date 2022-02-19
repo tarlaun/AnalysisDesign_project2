@@ -7,14 +7,19 @@
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,500&amp;subset=latin-ext" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+{% comment %}
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/> {% endcomment %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
 <link rel="stylesheet" href="{% static 'assets/css/home/patient_orders_list.css' %}">
 <script src="{% static 'assets/js/orders/stars.js' %}" defer></script>
 <script src="{% static 'assets/js/orders/comment-pop-up.js' %}" defer></script>
 <script src="{% static 'assets/js/orders/complaint-pop-up.js' %}" defer></script>
-{% comment %} <script src="{% static 'assets/js/messages.js' %}"></script> {% endcomment %}
+{% comment %}
+<script src="{% static 'assets/js/messages.js' %}"></script> {% endcomment %}
 
-{% comment %} <script src="/static/assets/js/messages.js"></script> {% endcomment %}
+{% comment %}
+<script src="/static/assets/js/messages.js"></script> {% endcomment %}
 
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
@@ -133,32 +138,46 @@
                         </form>
                     </dialog>
                 </div>
+
                 {% if order.accepted %}
-                <button type="button" class="btn btn-outline-warning mt-3 Score" onclick="score({{order.id}})">
-                    <b>Score</b>
-                </button>
+                <div class="icon-wrapper">
+                    <div class="icon score Score" onclick="score({{order.id}})">
+                        <div class="tooltip">
+                            Score
+                        </div>
+                        <span><i class="fa fa-star" style="color: #f0d822;"></i></span>
+                    </div>
 
-                <button type="button" class="btn btn-outline-light mt-3 Comment" onclick="commenting({{order.id}})">
-                    <b>Comment</b>
-                </button>
+                    <div class="icon comment Comment" onclick="commenting({{order.id}})">
+                        <div class="tooltip">
+                            Comment
+                        </div>
+                        <span><i class="fa fa-comment" style="color: #606266;"></i></span>
+                    </div>
+                    <div class="icon complaint Complaint" onclick="set_complaint({{order.id}})">
+                        <div class="tooltip">
+                            Complaint
+                        </div>
+                        <span><i class="fa fa-frown-o" style="color: red;"></i></span>
+                    </div>
 
-                <button type="button" class="btn btn-outline-danger mt-3 Complaint"
-                        onclick="set_complaint({{order.id}})">
-                    <b>Complaint</b>
-                </button>
-                {% if not order.paid %}
-                <button type="button" onclick="window.location='{% url 'online-payment-order' order.id %}'"
-                        class="btn btn-success btn-lg mt-3" style="float: right;">
-                    <b>Pay Online</b>
-                </button>
-
-                <a type="button" href="{% url 'delete_order' order.id %}"
-                   onclick="return confirm('Are you sure you want to cancel this request?')"
-                   class="btn btn-danger btn-lg mt-3">
-                    <b>Cancel Request</b>
-                </a>
-                {% endif %}
-
+                    {% if not order.paid %}
+                    <div class="action-buttons">
+                        <div class="icon pay" onclick="window.location='{% url 'online-payment-order' order.id %}'">
+                            <div class="tooltip">
+                                Pay Online
+                            </div>
+                            <span><i class="fab fa fa-credit-card" style="color: #3bb017"></i></span>
+                        </div>
+                        <div class="icon cancel" onclick="window.location='{% url 'delete_order' order.id %}'">
+                            <div class="tooltip">
+                                Cancel Order
+                            </div>
+                            <span><i class="fa fa-times-circle" style="color: red;"></i></span>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
                 {% endif %}
             </div>
         </div>
@@ -181,7 +200,5 @@ function myFunction() {
   }
 
 }
-
-
 
 </script>
