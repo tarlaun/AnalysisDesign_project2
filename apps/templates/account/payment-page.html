@@ -9,6 +9,7 @@
 
 {% block content %}
 
+{% comment %} <script src="/static/assets/js/payment.js"></script> {% endcomment %}
 <link rel="stylesheet" href="{% static 'assets/css/account/online-payment.css' %}">
 
 <div class="content">
@@ -26,7 +27,7 @@
                     />
                 </div>
                 <div class="rightside">
-                    <form method="POST" action="{% url 'add-to-wallet' %}">
+                    <form method="POST" action="{% url 'add-to-wallet' %}" id="payment-form">
 
                         {% csrf_token %}
 
@@ -73,12 +74,25 @@
                         </div>
                         <p></p>
                         {% comment %} onclick="window.location='{% url 'add-to-wallet' %}'" {% endcomment %}
-                        <button type="submit"  class="button">CheckOut</button>
+                        <button type="submit" class="button">CheckOut</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
+<script>
+var order = "{{order}}";
+if (order) {
+    form = document.getElementById('payment-form')
+    form.action = "{% url 'add-to-wallet' %}"
+} else {
+    form = document.getElementById('payment-form')
+    form.action = "{% url 'any url you want' %}"
+}
+
+</script>
 
 {% endblock content %}

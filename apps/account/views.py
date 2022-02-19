@@ -6,10 +6,10 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import user_passes_test
 from .forms import AccountCreationForm, LoginForm, SignUpForm
-from django.contrib import messages
 from .models import UserType, Doctor, Account, Order, Expertise, FavDoctors
 from django.views import generic
 from django.views.decorators.csrf import csrf_protect
+from django.contrib import messages
 
 LOGIN_REDIRECT_URL = "/accounts/signin/"
 
@@ -368,11 +368,14 @@ def online_payment_order(request, order_id):
 
 @login_required(login_url=LOGIN_REDIRECT_URL)
 def add_to_wallet(request):
+    print("+++++++++ request", request)
+    print(request.POST.get("amount"))
     if request.method == "POST":
         user = request.user
         current_wallet = user.wallet
         user.wallet = current_wallet + int(request.POST.get("amount"))
         user.save()
+        messages.add_message(request, messages.SUCCESS, 'Successfully added to you wallet')
         # print("---------", request.POST.get("amount"))
         # print("---------", request.POST.get("card_number1"))
         # print("---------", request.POST.get("card_number2"))

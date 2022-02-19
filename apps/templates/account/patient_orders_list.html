@@ -12,7 +12,12 @@
 <script src="{% static 'assets/js/orders/stars.js' %}" defer></script>
 <script src="{% static 'assets/js/orders/comment-pop-up.js' %}" defer></script>
 <script src="{% static 'assets/js/orders/complaint-pop-up.js' %}" defer></script>
+{% comment %} <script src="{% static 'assets/js/messages.js' %}"></script> {% endcomment %}
+
+{% comment %} <script src="/static/assets/js/messages.js"></script> {% endcomment %}
+
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
 
 <div class="content">
     <div class="panel-header bg-primary-gradient">
@@ -45,21 +50,22 @@
                         {% else %}
                         درخواست شما هنوز توسط هیچ پزشکی تایید نشده‌است.
                         {% endif %}
-                        </li>
-                        <li class="card-text"><b>Address:</b> {{ order.address }}</li>
-                        <li class="card-text"><b>Present Illness:</b> {{ order.details }}</li>
-                        <li class="card-text"><b>Score: </b> {% if order.score == 0 %} <b style="color: #edb321">You have
-                            not rated yet.</b> {% else %} {{ order.score }} {% endif %}
-                        </li>
-                        <li class="card-text"><b>Comment: </b> {% if not order.comment %} <b style="color: #edb321">There
-                            are no comments yet.</b>{% else %} {{ order.comment }} {% endif %}
-                        </li>
-                        <li class="card-text"><b>Complaint: </b> {% if not order.complaint %} <b style="color: #edb321">There
-                            are no complaints yet.</b>{% else %} {{ order.complaint }} {% endif %}
-                        </li>
-                        {% if not order.accepted %}
-                            <li class="card-text" style="color: #b50000"><b>Your request has not been accepted by doctor {{order.doctor}} yet.</b></li>
-                        {% endif %}
+                    </li>
+                    <li class="card-text"><b>Address:</b> {{ order.address }}</li>
+                    <li class="card-text"><b>Present Illness:</b> {{ order.details }}</li>
+                    <li class="card-text"><b>Score: </b> {% if order.score == 0 %} <b style="color: #edb321">You have
+                        not rated yet.</b> {% else %} {{ order.score }} {% endif %}
+                    </li>
+                    <li class="card-text"><b>Comment: </b> {% if not order.comment %} <b style="color: #edb321">There
+                        are no comments yet.</b>{% else %} {{ order.comment }} {% endif %}
+                    </li>
+                    <li class="card-text"><b>Complaint: </b> {% if not order.complaint %} <b style="color: #edb321">There
+                        are no complaints yet.</b>{% else %} {{ order.complaint }} {% endif %}
+                    </li>
+                    {% if not order.accepted %}
+                    <li class="card-text" style="color: #b50000"><b>Your request has not been accepted by doctor
+                        {{order.doctor}} yet.</b></li>
+                    {% endif %}
                 </div>
 
                 <div style="text-align: center;">
@@ -128,29 +134,30 @@
                     </dialog>
                 </div>
                 {% if order.accepted %}
-                    <button type="button" class="btn btn-outline-warning mt-3 Score" onclick="score({{order.id}})">
-                        <b>Score</b>
-                    </button>
+                <button type="button" class="btn btn-outline-warning mt-3 Score" onclick="score({{order.id}})">
+                    <b>Score</b>
+                </button>
 
-                    <button type="button" class="btn btn-outline-light mt-3 Comment" onclick="commenting({{order.id}})">
-                        <b>Comment</b>
-                    </button>
+                <button type="button" class="btn btn-outline-light mt-3 Comment" onclick="commenting({{order.id}})">
+                    <b>Comment</b>
+                </button>
 
-                    <button type="button" class="btn btn-outline-danger mt-3 Complaint" onclick="set_complaint({{order.id}})">
-                        <b>Complaint</b>
-                    </button>
-                    {% if not order.paid %}
-                    <button type="button" onclick="window.location='{% url 'online-payment-order' order.id %}'"
+                <button type="button" class="btn btn-outline-danger mt-3 Complaint"
+                        onclick="set_complaint({{order.id}})">
+                    <b>Complaint</b>
+                </button>
+                {% if not order.paid %}
+                <button type="button" onclick="window.location='{% url 'online-payment-order' order.id %}'"
                         class="btn btn-success btn-lg mt-3" style="float: right;">
                     <b>Pay Online</b>
-                    </button>
+                </button>
 
-                        <a type="button" href="{% url 'delete_order' order.id %}"
-                              onclick="return confirm('Are you sure you want to cancel this request?')"
-                        class="btn btn-danger btn-lg mt-3"  >
+                <a type="button" href="{% url 'delete_order' order.id %}"
+                   onclick="return confirm('Are you sure you want to cancel this request?')"
+                   class="btn btn-danger btn-lg mt-3">
                     <b>Cancel Request</b>
-                    </a>
-                    {% endif %}
+                </a>
+                {% endif %}
 
                 {% endif %}
             </div>
@@ -163,6 +170,7 @@
 </div>
 
 {% endblock content %}
+
 <script>
 function myFunction() {
   var txt;
@@ -173,4 +181,7 @@ function myFunction() {
   }
 
 }
+
+
+
 </script>

@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 
-	<title>
+    <title>
         DociCom
     </title>
 
-	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
-	<link rel="icon" href="/static/assets/img/icon.ico" type="image/x-icon"/>
-	<link rel="canonical" href="https://appseed.us/admin-dashboards/django-dashboard-atlantis-dark">
+    <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport'/>
+    <link rel="icon" href="/static/assets/img/icon.ico" type="image/x-icon"/>
+    <link rel="canonical" href="https://appseed.us/admin-dashboards/django-dashboard-atlantis-dark">
 
-	<!-- Fonts and icons -->
-	<script src="/static/assets/js/plugin/webfont/webfont.min.js"></script>
-	<script>
+    <!-- Fonts and icons -->
+	<script src="/static/assets/js/messages.js"></script>
+    <script src="/static/assets/js/plugin/webfont/webfont.min.js"></script>
+    
+    <script>
 		WebFont.load({
 			google: {"families":["Lato:300,400,700,900"]},
 			custom: {"families":["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands", "simple-line-icons"], 
@@ -22,46 +24,64 @@
 				sessionStorage.fonts = true;
 			}
 		});
-	</script>
 
-	<!-- CSS Files -->
-	<link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
-	<link rel="stylesheet" href="/static/assets/css/atlantis.css">
+    </script>
 
-	<!-- CSS Just for demo purpose, don't include it in your project -->
-	<link rel="stylesheet" href="/static/assets/css/demo.css">
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/assets/css/atlantis.css">
+
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link rel="stylesheet" href="/static/assets/css/demo.css">
+
+    <link rel="stylesheet" href="/static/assets/css/messages.css">
 
     <!-- Specific Page CSS goes HERE  -->
     {% block stylesheets %}{% endblock stylesheets %}
 
 </head>
 <body data-background-color="dark">
-	<div class="wrapper">
 
-        {% include 'includes/navigation.html' %}
+<ul class="messages" id="messages-list">
+    {% if messages %}
+    {% for message in messages %}
+    <li>
+        {% if message.tags %}
+        <div class="alert alert-{{ message.tags }} msg fade show" role="alert">{{ message }}</div>
+        {% else %}
+        <div class="alert alert-info msg fade show" role="alert">{{ message }}</div>
+        {% endif %}
+    </li>
+    {% endfor %}
+    {% endif %}
+</ul>
 
-        {% include 'includes/sidebar.html' %}
+<div class="wrapper">
 
-		<div class="main-panel">
-			
-			{% block content %}{% endblock content %}
+    {% include 'includes/navigation.html' %}
 
-			{% comment %} {% include 'includes/footer.html' %} {% endcomment %}
+    {% include 'includes/sidebar.html' %}
 
-		</div>
-        
-		{% if request.user.is_authenticated %}
+    <div class="main-panel">
 
-			<!-- Custom template | don't include it in your project! -->
+        {% block content %}{% endblock content %}
 
-		{% endif %}		
+        {% comment %} {% include 'includes/footer.html' %} {% endcomment %}
 
-	</div>
+    </div>
 
-	{% include 'includes/scripts.html' %}
+    {% if request.user.is_authenticated %}
 
-    <!-- Specific Page JS goes HERE  -->
-    {% block javascripts %}{% endblock javascripts %}
+    <!-- Custom template | don't include it in your project! -->
+
+    {% endif %}
+
+</div>
+
+{% include 'includes/scripts.html' %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
 
 </body>
 </html>
