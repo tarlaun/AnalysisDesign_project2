@@ -26,7 +26,7 @@
                     />
                 </div>
                 <div class="rightside">
-                    <form method="POST" action="{% url 'add-to-wallet' %}">
+                    <form method="POST" action="{% url 'add-to-wallet' %}" id="payment-form">
 
                         {% csrf_token %}
 
@@ -80,5 +80,17 @@
         </div>
     </div>
 </div>
+
+<script>
+var order = "{{order}}";
+if (order) {
+    form = document.getElementById('payment-form')
+    form.action = "{% url 'pay' order.id %}"
+} else {
+    form = document.getElementById('payment-form')
+    form.action = "{% url 'add-to-wallet' %}"
+}
+
+</script>
 
 {% endblock content %}
