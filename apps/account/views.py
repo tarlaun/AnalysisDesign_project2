@@ -79,7 +79,6 @@ def signout(request):
 
 @login_required(login_url=LOGIN_REDIRECT_URL)
 def home(request):
-    messages.add_message(request, messages.SUCCESS, '')
     return HttpResponse("Home Page")
 
 
