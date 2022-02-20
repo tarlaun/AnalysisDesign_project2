@@ -32,6 +32,7 @@ def register(request):
         form = AccountCreationForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.add_message(request, messages.SUCCESS, 'Congratulations! Your Account Created Successfully!')
             return redirect("signin")
         else:
             # TODO error
@@ -51,13 +52,17 @@ def signin(request):
         if user is not None:
             login(request, user)
             if being_doctor_check(user):
+                messages.add_message(request, messages.SUCCESS, 'You Signed in Successfully!')
                 return redirect("expertise_orders_list")
             else:
+                messages.add_message(request, messages.SUCCESS, 'You Signed in Successfully!')
                 return redirect("patient_orders_list")
         else:
-            return HttpResponse(
-                'Username or Password is incorrect. <a href="">Return to login</a>'
-            )
+            messages.add_message(request, messages.ERROR, 'Invalid Username or Password! Please Try Again!')
+            return redirect("signin")
+            # return HttpResponse(
+            #     'Username or Password is incorrect. <a href="">Return to login</a>'
+            # )
 
     # form = AccountCreationForm()
     form = LoginForm()
@@ -113,6 +118,7 @@ def accept_order(request, order_id):
     order.save()
     # doctor.not_processed_income += order.expertise.price
     doctor.save()
+    messages.add_message(request, messages.SUCCESS, f'You Accepted {order.user.first_name} {order.user.last_name} s Order Successfully! Our Patient is waiting for your service!')
     return redirect("expertise_orders_list")
 
 
@@ -162,6 +168,7 @@ def add_order(request, doc_id):
         details=details,
     )
     o.save()
+    messages.add_message(request, messages.SUCCESS, 'Your Order is submitted successfully!')
     return HttpResponseRedirect(reverse("patient_orders_list"))
 
 
@@ -322,6 +329,7 @@ def fav_doctor(request, doc_id):
     fav_doctors.favorite_doctors.add(doctor)
     fav_doctors.save()
 
+    messages.add_message(request, messages.INFO, f'Dr. {doctor.user.last_name} is now in your favorite list.')
     return redirect("all_doctors")
     # return render(request, 'account/list_of_doctors.html', {'doctors_list': doctors_list, 'fav_doctors': fav_doctors.favorite_doctors.all()})
 
@@ -334,6 +342,7 @@ def unfav_doctor(request, doc_id):
     fav_doctors.favorite_doctors.remove(doctor)
     fav_doctors.save()
 
+    messages.add_message(request, messages.INFO, f'Dr. {doctor.user.last_name} is removed from your favorites')
     return redirect("all_doctors")
 
 
@@ -358,6 +367,7 @@ def unfav_doctor_from_favs(request, doc_id):
     fav_doctors.favorite_doctors.remove(doctor)
     fav_doctors.save()
 
+    messages.add_message(request, messages.INFO, f'Dr. {doctor.user.last_name} is removed from your favorites')
     return redirect("favorite_doctors")
 
 
@@ -385,6 +395,7 @@ def online_payment_order(request, order_id):
         order.doctor.user.wallet += temp
         order.save()
         order.doctor.user.save()
+        messages.add_message(request, messages.WARNING, 'Your balance is not enough to pay! Please Charge your wallet.')
         return render(request, 'account/payment-page.html', context={"order": order})
 
 @login_required(login_url=LOGIN_REDIRECT_URL)
@@ -426,7 +437,7 @@ def finish_the_order(request, order_id):
     order.save()
     return redirect("active_orders")
 
-#Confirm cash payment
+# Confirm cash payment
 @login_required(login_url=LOGIN_REDIRECT_URL)
 def confirm_cash_pay(request, order_id):
     order = get_object_or_404(Order, pk=order_id)
@@ -439,6 +450,7 @@ def confirm_cash_pay(request, order_id):
 def delete_order(request, order_id):
     order = get_object_or_404(Order, pk=order_id)
     order.delete()
+    messages.add_message(request, messages.SUCCESS, 'You deleted this order successfully!')
     return redirect("patient_orders_list")
 
 
