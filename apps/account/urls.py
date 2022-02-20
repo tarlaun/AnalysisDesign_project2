@@ -40,6 +40,8 @@ urlpatterns = [
 
     path('finish_the_order/<int:order_id>/', views.finish_the_order, name='finish_the_order'),
 
+    path('confirm_cash_pay/<int:order_id>/', views.confirm_cash_pay, name='confirm_cash_pay'),
+
     path('help/', views.help, name='help'),
 
     path('delete_order/<int:order_id>', views.delete_order, name='delete_order'),

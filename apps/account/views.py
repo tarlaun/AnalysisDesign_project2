@@ -426,6 +426,14 @@ def finish_the_order(request, order_id):
     order.save()
     return redirect("active_orders")
 
+#Confirm cash payment
+@login_required(login_url=LOGIN_REDIRECT_URL)
+def confirm_cash_pay(request, order_id):
+    order = get_object_or_404(Order, pk=order_id)
+    order.paid = True
+    order.save()
+    return redirect("active_orders")
+
 
 @login_required(login_url=LOGIN_REDIRECT_URL)
 def delete_order(request, order_id):
