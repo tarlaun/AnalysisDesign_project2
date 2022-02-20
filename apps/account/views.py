@@ -79,6 +79,7 @@ def signout(request):
 
 @login_required(login_url=LOGIN_REDIRECT_URL)
 def home(request):
+    messages.add_message(request, messages.SUCCESS, '')
     return HttpResponse("Home Page")
 
 
@@ -118,6 +119,7 @@ def accept_order(request, order_id):
     order.save()
     # doctor.not_processed_income += order.expertise.price
     doctor.save()
+    messages.add_message(request, messages.SUCCESS, f'You Accepted {order.user.first_name} {order.user.last_name} s Order Successfully! Our Patient is waiting for your service!')
     return redirect("expertise_orders_list")
 
 
@@ -167,6 +169,7 @@ def add_order(request, doc_id):
         details=details,
     )
     o.save()
+    messages.add_message(request, messages.SUCCESS, 'Your Order is registered successfully!')
     return HttpResponseRedirect(reverse("patient_orders_list"))
 
 
