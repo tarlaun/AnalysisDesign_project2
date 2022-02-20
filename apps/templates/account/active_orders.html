@@ -30,6 +30,7 @@
 											<th>Phone Number</th>
 											<th>Description</th>
 											<th>Online Payment</th>
+											<th>Cash Payment</th>
 											<th>Done</th>
 										</tr>
 									</thead>
@@ -42,6 +43,8 @@
 											<th>Phone Number</th>
 											<th>Description</th>
 											<th>Online Payment</th>
+											<th>Cash Payment</th>
+                                            <th>Done</th>
 										</tr>
 									</tfoot>
 									<tbody>
@@ -56,10 +59,17 @@
 													<td>{{ order.details }}</td>
 													{% if order.paid %}
 														<td>Paid</td>
-													{% else %}
-														<td>Not Paid</td>
-													{% endif %}
+
 													<td>
+														<div class="form-button-action">
+															<button type="button" disabled
+																	onclick="window.location='{% url 'confirm_cash_pay' order.id %}'"
+																	class="btn btn-icon btn-round">
+																<i class="fa fa-check"></i>
+															</button>
+														</div>
+													</td>
+                                                        <td>
 														<div class="form-button-action">
 															<button type="button"
 																	onclick="window.location='{% url 'finish_the_order' order.id %}'"
@@ -68,6 +78,30 @@
 															</button>
 														</div>
 													</td>
+													<td>
+													{% else %}
+														<td>Not Paid</td>
+
+													<td>
+														<div class="form-button-action">
+															<button type="button"
+																	onclick="window.location='{% url 'confirm_cash_pay' order.id %}'"
+																	class="btn btn-icon btn-round">
+																<i class="fa fa-check"></i>
+															</button>
+														</div>
+													</td>
+                                                        <td>
+														<div class="form-button-action">
+															<button type="button" disabled
+																	onclick="window.location='{% url 'finish_the_order' order.id %}'"
+																	class="btn btn-icon btn-round">
+																<i class="fa fa-check"></i>
+															</button>
+														</div>
+													</td>
+													{% endif %}
+
                                                 </tr>
                                             {% endfor %}
                                         {% endif %}
