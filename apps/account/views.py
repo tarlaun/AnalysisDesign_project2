@@ -396,6 +396,7 @@ def online_payment_order(request, order_id):
         order.doctor.user.wallet += temp
         order.save()
         order.doctor.user.save()
+        messages.add_message(request, messages.WARNING, 'Your balance is not enough to pay! Please Charge your wallet.')
         return render(request, 'account/payment-page.html', context={"order": order})
 
 @login_required(login_url=LOGIN_REDIRECT_URL)
@@ -437,7 +438,7 @@ def finish_the_order(request, order_id):
     order.save()
     return redirect("active_orders")
 
-#Confirm cash payment
+# Confirm cash payment
 @login_required(login_url=LOGIN_REDIRECT_URL)
 def confirm_cash_pay(request, order_id):
     order = get_object_or_404(Order, pk=order_id)
@@ -450,6 +451,7 @@ def confirm_cash_pay(request, order_id):
 def delete_order(request, order_id):
     order = get_object_or_404(Order, pk=order_id)
     order.delete()
+    messages.add_message(request, messages.SUCCESS, 'You deleted this order successfully!')
     return redirect("patient_orders_list")
 
 
