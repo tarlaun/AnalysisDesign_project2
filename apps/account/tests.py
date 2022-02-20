@@ -13,7 +13,8 @@ from .views import (
     finished_orders,
     add_to_wallet,
     delete_order,
-    pay
+    pay,
+    confirm_cash_pay
 )
 
 
@@ -246,3 +247,12 @@ class OrderTest(TestCase):
         order_by_pk = Order.objects.get(pk=order.pk)
         order_by_pk.delete()
         self.assertFalse(Order.objects.filter(pk=pk).exists())
+
+
+    def test_confirm_cash_pay(self):
+        request = self.factory.get("/accounts/confirm_cash_pay/1")
+        test_order = self.create_order()
+        request.user = test_order.user
+        response = confirm_cash_pay(request, 1)
+        self.assertEqual(response.status_code, 302)
+
