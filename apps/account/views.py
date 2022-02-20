@@ -330,6 +330,7 @@ def fav_doctor(request, doc_id):
     fav_doctors.favorite_doctors.add(doctor)
     fav_doctors.save()
 
+    messages.add_message(request, messages.INFO, f'Dr. {doctor.user.last_name} is now in your favorite list.')
     return redirect("all_doctors")
     # return render(request, 'account/list_of_doctors.html', {'doctors_list': doctors_list, 'fav_doctors': fav_doctors.favorite_doctors.all()})
 
@@ -342,6 +343,7 @@ def unfav_doctor(request, doc_id):
     fav_doctors.favorite_doctors.remove(doctor)
     fav_doctors.save()
 
+    messages.add_message(request, messages.INFO, f'Dr. {doctor.user.last_name} is removed from your favorites')
     return redirect("all_doctors")
 
 
@@ -366,6 +368,7 @@ def unfav_doctor_from_favs(request, doc_id):
     fav_doctors.favorite_doctors.remove(doctor)
     fav_doctors.save()
 
+    messages.add_message(request, messages.INFO, f'Dr. {doctor.user.last_name} is removed from your favorites')
     return redirect("favorite_doctors")
 
 
