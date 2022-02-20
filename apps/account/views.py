@@ -168,7 +168,7 @@ def add_order(request, doc_id):
         details=details,
     )
     o.save()
-    messages.add_message(request, messages.SUCCESS, 'Your Order is registered successfully!')
+    messages.add_message(request, messages.SUCCESS, 'Your Order is submitted successfully!')
     return HttpResponseRedirect(reverse("patient_orders_list"))
 
 
