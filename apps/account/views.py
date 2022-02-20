@@ -32,6 +32,7 @@ def register(request):
         form = AccountCreationForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.add_message(request, messages.SUCCESS, 'Congratulations! Your Account Created Successfully!')
             return redirect("signin")
         else:
             # TODO error
@@ -51,13 +52,17 @@ def signin(request):
         if user is not None:
             login(request, user)
             if being_doctor_check(user):
+                messages.add_message(request, messages.SUCCESS, 'You Signed in Successfully!')
                 return redirect("expertise_orders_list")
             else:
+                messages.add_message(request, messages.SUCCESS, 'You Signed in Successfully!')
                 return redirect("patient_orders_list")
         else:
-            return HttpResponse(
-                'Username or Password is incorrect. <a href="">Return to login</a>'
-            )
+            messages.add_message(request, messages.ERROR, 'Invalid Username or Password! Please Try Again!')
+            return redirect("signin")
+            # return HttpResponse(
+            #     'Username or Password is incorrect. <a href="">Return to login</a>'
+            # )
 
     # form = AccountCreationForm()
     form = LoginForm()
