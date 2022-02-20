@@ -70,6 +70,17 @@
                     {% if not order.accepted %}
                     <li class="card-text" style="color: #b50000"><b>Your request has not been accepted by doctor
                         {{order.doctor}} yet.</b></li>
+
+                <div class="icon-wrapper">
+                        <a class="icon cancel" href="{% url 'delete_order' order.id %} "
+                             onclick="return confirm('Are you sure you want to cancel this request?')"
+>
+                            <div class="tooltip">
+                                Cancel Order
+                            </div>
+                            <span><i class="fa fa-times-circle" style="color: red;"></i></span>
+                        </a>
+                </div>
                     {% endif %}
                 </div>
 
@@ -169,12 +180,14 @@
                             </div>
                             <span><i class="fab fa fa-credit-card" style="color: #3bb017"></i></span>
                         </div>
-                        <div class="icon cancel" onclick="window.location='{% url 'delete_order' order.id %}'">
+                        <a class="icon cancel" href="{% url 'delete_order' order.id %} "
+                             onclick="return confirm('Are you sure you want to cancel this request?')"
+>
                             <div class="tooltip">
                                 Cancel Order
                             </div>
                             <span><i class="fa fa-times-circle" style="color: red;"></i></span>
-                        </div>
+                        </a>
                     </div>
                     {% endif %}
                 </div>
@@ -190,15 +203,3 @@
 
 {% endblock content %}
 
-<script>
-function myFunction() {
-  var txt;
-  if (confirm("Do you want to delete!")) {
-   //go to your delete path
-  } else {
-  //don't do anything
-  }
-
-}
-
-</script>
