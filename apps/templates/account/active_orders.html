@@ -58,18 +58,17 @@
                                                     <td>{{ order.user.phone_number }}</td>
 													<td>{{ order.details }}</td>
 													{% if order.paid %}
-														<td>Paid</td>
-
+													<td>Paid</td>
 													<td>
 														<div class="form-button-action">
 															<button type="button" disabled
 																	onclick="window.location='{% url 'confirm_cash_pay' order.id %}'"
 																	class="btn btn-icon btn-round">
-																<i class="fa fa-check"></i>
+																<i class="fas fa-wallet"></i>
 															</button>
 														</div>
 													</td>
-                                                        <td>
+                                                    <td>
 														<div class="form-button-action">
 															<button type="button"
 																	onclick="window.location='{% url 'finish_the_order' order.id %}'"
@@ -78,20 +77,18 @@
 															</button>
 														</div>
 													</td>
-													<td>
 													{% else %}
-														<td>Not Paid</td>
-
+													<td>Not Paid</td>
 													<td>
 														<div class="form-button-action">
 															<button type="button"
 																	onclick="window.location='{% url 'confirm_cash_pay' order.id %}'"
 																	class="btn btn-icon btn-round">
-																<i class="fa fa-check"></i>
+																<i class="fas fa-wallet"></i>
 															</button>
 														</div>
 													</td>
-                                                        <td>
+                                                    <td>
 														<div class="form-button-action">
 															<button type="button" disabled
 																	onclick="window.location='{% url 'finish_the_order' order.id %}'"
@@ -101,7 +98,6 @@
 														</div>
 													</td>
 													{% endif %}
-
                                                 </tr>
                                             {% endfor %}
                                         {% endif %}
