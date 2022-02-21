@@ -10,10 +10,16 @@
 <link rel="stylesheet" href="{% static 'assets/css/account/register.css' %}">
 
 <div class="page-inner register-page-inner">
-    <div class="page-header">
-        <h4 class="page-title">Register</h4>
-    </div>
-    <div class="row register-container">
+    <nav class="ui container" style="padding-bottom: 50px">
+        <div class="ui borderless inverted compact menu">
+            <a class="item" href="/">Home</a>
+            <a class="active item" href="/accounts/signup/">Register</a>
+            <a class="item" href="/accounts/signin/">Login</a>
+            <a class="item" href="/accounts/help/">Help</a>
+        </div>
+    </nav>
+
+    <div class="row register-container" style="padding-top: 60px">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">

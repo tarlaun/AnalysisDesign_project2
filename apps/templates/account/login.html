@@ -8,11 +8,16 @@
 <link rel="stylesheet" href="{% static 'assets/css/account/login.css' %}">
 
 <div class="page-inner">
-    <div class="page-header">
-        <h4 class="page-title">Login</h4>
-    </div>
-    <div class="row login-container">
-        <div class="col-md-12 login" >
+    <nav class="ui container">
+        <div class="ui borderless inverted compact menu">
+            <a class="item" href="/">Home</a>
+            <a class="item" href="/accounts/signup/">Register</a>
+            <a class="active item" href="/accounts/signin/">Login</a>
+            <a class="item" href="/accounts/help/">Help</a>
+        </div>
+    </nav>
+    <div class="row login-container" style="padding-top: 60px;">
+        <div class="col-md-12 login">
             <div class="card login-card">
                 <div class="card-header">
                     <div class="card-title">
