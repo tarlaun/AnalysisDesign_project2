@@ -92,7 +92,6 @@ document.querySelector(".inputbox").addEventListener("keypress", function (evt) 
 });
 
 const inputs = document.querySelectorAll(".inputbox")
-console.log("---", inputs.length)
 for (let i = 0; i < inputs.length; i++) {
      inputs[i].addEventListener("keypress", function (evt) {
     if (evt.which < 48 || evt.which > 57)
