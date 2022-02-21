@@ -7,6 +7,7 @@ urlpatterns = [
     path('signup/', views.register, name='signup'),
     path('signin/', views.signin, name='signin'),
     path('home/', views.home, name='home'),
+
     path('signout/', views.signout, name='signout'),
     # پزشک :: نمایش درخواست‌های فعال موجود برای تخصص پزشک
     # پزشک :: قابلیت قبول درخواست

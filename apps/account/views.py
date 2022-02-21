@@ -79,7 +79,7 @@ def signout(request):
 
 @login_required(login_url=LOGIN_REDIRECT_URL)
 def home(request):
-    return HttpResponse("Home Page")
+    return render(request, "home.html", {})
 
 
 # @login_required
