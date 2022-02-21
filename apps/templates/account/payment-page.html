@@ -104,8 +104,11 @@ for (let i = 0; i < inputs.length; i++) {
 var order = "{{order|safe}}";
 form = document.getElementById('payment-form')
 
+curr_url = window.location.href
+url_parts = curr_url.split("/")
+
 if (order != "") {
-    form.action = "/accounts/pay/{}".format(order.id)
+    form.action = "/accounts/pay/" + url_parts[url_parts.length - 2] + "/"
 } else {
     form.action = "{% url 'add-to-wallet' %}"
 }

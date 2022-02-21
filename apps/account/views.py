@@ -381,9 +381,7 @@ def online_payment_order(request, order_id):
     order.paid = True
     if order.expertise.price <= order.user.wallet:
         order.doctor.user.wallet += order.expertise.price
-        print(order.doctor.user.wallet)
         order.user.wallet -= order.expertise.price
-        print(order.user.wallet)
         order.save()
         order.user.save()
         order.doctor.user.save()
