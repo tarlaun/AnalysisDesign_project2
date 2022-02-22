@@ -10,7 +10,6 @@ h3 {
 img {
   width: 60%;
   height: auto;
-  margin: auto;
 }
 
 .img-container {
@@ -20,12 +19,11 @@ img {
 .accordion {
   width: 80%;
   margin: auto;
-  align-content: center;
-  align-items: center;
 }
 
 .accordion-item {
   margin: 5px;
+  text-align: left;
 }
 
 .accordion a {
