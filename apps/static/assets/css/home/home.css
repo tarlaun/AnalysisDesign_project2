@@ -73,9 +73,9 @@ nav.ui.container .ui.inverted.compact.menu .active.item {
 }
 
 .ui.content.container {
-  height: 300px;
   position: absolute;
-  top: 0;
+  width: 70%;
+  top: 100px;
   bottom: 0;
   left: 0;
   right: 0;

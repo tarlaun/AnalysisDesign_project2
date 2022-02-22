@@ -1,75 +1,124 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:300, 800);
+/* Code By Webdevtrick ( https://webdevtrick.com ) */
+@import url("https://fonts.googleapis.com/css?family=Hind:300,400");
+/* *,
+*:before,
+*:after {
+  -webkit-box-sizing: inherit;
+  box-sizing: inherit;
+}
+html {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Hind", sans-serif;
+  background: #fff;
+  color: #4d5974;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  min-height: 100vh;
+} */
+/* .container {
+  margin: 0 auto;
+  padding: 4rem;
+  width: 48rem;
+} */
+h3 {
+  font-size: 1.75rem;
+  color: #373d51;
+  padding: 1.3rem;
+  margin: 0;
+}
 
-.faq {
+.accordion {
   width: 80%;
-  margin: 0 auto;
+  margin: auto;
 }
 
-.centerplease {
-  text-align: center;
-  margin: 0 auto;
-  font-size: 40px;
+.accordion-item {
+  margin: 5px;
+  /* align-content: center;
+  height: 70px; */
+  /* background-color: red; */
 }
 
-.question {
-  color: #fff;
-  font-weight: normal;
+.accordion a {
   position: relative;
-  background: #4892c7;
-  margin: 0 auto;
-  opacity: 0.9;
-  padding: 10px 10px 10px 50px;
-  display: block;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  padding: 1.5rem 3rem 1.5rem 1rem;
+  color: #7288a2;
+  font-size: 1.15rem;
+  font-weight: 400;
+  border-bottom: 1px solid #e5e5e5;
+}
+.accordion a:hover,
+.accordion a:hover::after {
   cursor: pointer;
-  text-shadow: -1px 1px 0px #4892c7, -2px 2px 0px #2a4163;
+  color: #ff5353;
 }
-
-.answers {
-  border-top: 1px solid #2a4163;
-  background: #8fbc8f;
-  padding: 0px 15px;
-  margin: 0 0 7px 0;
-  height: 0;
-  overflow: hidden;
-  z-index: 100;
-  position: relative;
-  opacity: 0;
-  -webkit-transition: 0.7s ease;
-  -moz-transition: 0.7s ease;
-  -o-transition: 0.7s ease;
-  transition: 0.7s ease;
+.accordion a:hover::after {
+  border: 1px solid #ff5353;
 }
-
-.questions:checked ~ .answers {
-  height: auto;
-  opacity: 1;
-  padding: 15px;
+.accordion a.active {
+  color: #ff5353;
+  border-bottom: 1px solid #ff5353;
 }
-
-.plus {
+.accordion a::after {
+  font-family: "Ionicons";
+  bottom: 12px;
+  content: "\f218";
   position: absolute;
-  margin-left: 10px;
-  z-index: 5;
-  font-size: 1.8em;
-  line-height: 100%;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -o-user-select: none;
-  user-select: none;
-  -webkit-transition: 0.3s ease;
-  -moz-transition: 0.3s ease;
-  -o-transition: 0.3s ease;
-  transition: 0.3s ease;
+  float: right;
+  right: 1rem;
+  font-size: 1rem;
+  color: #7288a2;
+  padding: 5px;
+  width: 30px;
+  height: 30px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  border: 1px solid #7288a2;
+  text-align: center;
 }
-
-.questions:checked ~ .plus {
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-  -o-transform: rotate(45deg);
-  transform: rotate(45deg);
+.accordion a.active::after {
+  font-family: "Ionicons";
+  content: "\f209";
+  color: #ff5353;
+  border: 1px solid #ff5353;
 }
-
-.questions {
-  display: none;
+.accordion .content {
+  opacity: 0;
+  padding: 0 1rem;
+  max-height: 0;
+  border-bottom: 1px solid #e5e5e5;
+  overflow: hidden;
+  clear: both;
+  -webkit-transition: all 0.2s ease 0.15s;
+  -o-transition: all 0.2s ease 0.15s;
+  transition: all 0.2s ease 0.15s;
+}
+.accordion .content p {
+  font-size: 1rem;
+  font-weight: 300;
+}
+.accordion .content.active {
+  opacity: 1;
+  padding: 1rem;
+  max-height: 100%;
+  -webkit-transition: all 0.35s ease 0.15s;
+  -o-transition: all 0.35s ease 0.15s;
+  transition: all 0.35s ease 0.15s;
 }

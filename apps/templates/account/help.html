@@ -22,9 +22,11 @@
             href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
             type="text/css"
     />
+
     <link rel="stylesheet" href="{% static 'assets/css/home/home.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/home/help.css' %}">
     <link rel="icon" href="/static/assets/img/icon.ico" type="image/x-icon"/>
+    <link rel='stylesheet' href='https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css'>
     <script src="{% static 'assets/js/help.js' %}" defer></script>
 
     <script type="text/javascript" src="//code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -34,18 +36,65 @@
 <body id="root">
 
 <div class="ui inverted vertical segment" id="container">
-    {% comment %} <nav class="ui container">
+    {% comment %}
+    <nav class="ui container">
         <div class="ui borderless inverted compact menu">
             <a class="item" href="/">Home</a> <a class="item" href="/accounts/signup/">Register</a>
             <a class="item" href="/accounts/signin/">Login</a>
             <a class="active item" href="/accounts/help/">Help</a>
         </div>
-    </nav> {% endcomment %}
+    </nav>
+    {% endcomment %}
     <div class="ui content container">
         <h1 class="ui inverted header center aligned">Docicom FAQ's</h1>
         <br>
         <br>
 
+        <div class="accordion">
+            <div class="accordion-item">
+                <a>What can JavaScript Do?</a>
+                <div class="content">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Elementum sagittis vitae et leo duis ut. Ut tortor pretium
+                        viverra suspendisse potenti.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <a>How JavaScript Can Modify HTML and CSS Values?</a>
+                <div class="content">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Elementum sagittis vitae et leo duis ut. Ut tortor pretium
+                        viverra suspendisse potenti.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <a>What Is SVG?</a>
+                <div class="content">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Elementum sagittis vitae et leo duis ut. Ut tortor pretium
+                        viverra suspendisse potenti.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <a>Is FAQ Section Matters In Website?</a>
+                <div class="content">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Elementum sagittis vitae et leo duis ut. Ut tortor pretium
+                        viverra suspendisse potenti.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <a>How To Create a Light FAQ Element?</a>
+                <div class="content">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Elementum sagittis vitae et leo duis ut. Ut tortor pretium
+                        viverra suspendisse potenti.</p>
+                </div>
+            </div>
+        </div>
+
+
+        {% comment %}
         <div class="faq">
 
             <p dir="ltr">
@@ -149,19 +198,20 @@
                 </div>
             </div>
         </div>
+        {% endcomment %}
 
         {% comment %} <p dir="ltr">
-            Hello! <br>
-            Thanks for using our website. In This page, we want to help you in using our website.<br>
-            On the Homepage, by clicking on Register, you can sign in to Docicom.
-            Then, by clicking on Login, you can log in to your profile.<br>
-            Please notice that if you are a doctor who wants to use our website,
-            after registering you need to contact us, in order to authenticate and change your user type.<br>
-            <br>
+        Hello! <br>
+        Thanks for using our website. In This page, we want to help you in using our website.<br>
+        On the Homepage, by clicking on Register, you can sign in to Docicom.
+        Then, by clicking on Login, you can log in to your profile.<br>
+        Please notice that if you are a doctor who wants to use our website,
+        after registering you need to contact us, in order to authenticate and change your user type.<br>
+        <br>
 
-            If you are a doctor, these tips can help you:
-            <br>
-        </p>
+        If you are a doctor, these tips can help you:
+        <br>
+    </p>
         <ol style="line-height:180%">
             <li>To see all of the requests which are submitted for you and haven’t been accepted,
                 click on All Requests on your sidebar.
