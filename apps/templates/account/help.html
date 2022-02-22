@@ -35,8 +35,7 @@
 
 <body id="root">
 
-<div class="ui inverted vertical segment" id="container">
-    {% comment %}
+<div class="ui inverted vertical center aligned segment" id="container">
     <nav class="ui container">
         <div class="ui borderless inverted compact menu">
             <a class="item" href="/">Home</a> <a class="item" href="/accounts/signup/">Register</a>
@@ -44,16 +43,11 @@
             <a class="active item" href="/accounts/help/">Help</a>
         </div>
     </nav>
-    {% endcomment %}
     <div class="ui content container">
-        {% comment %} <h1 class="ui inverted header center aligned">Docicom FAQ's</h1>
-        <br>
-        <br> {% endcomment %}
-
-        
-
         <div class="accordion">
-        <img src="{% static 'assets/img/question4.png' %}"/>
+            <div class="img-container">
+                <img src="{% static 'assets/img/question3.png' %}"/>
+            </div>
             <div class="accordion-item">
                 <a>If you are a doctor, these tips can help you:</a>
                 <div class="content">
@@ -125,189 +119,6 @@
                 </div>
             </div>
         </div>
-
-
-        {% comment %}
-        <div class="faq">
-
-            <p dir="ltr">
-                Hello! <br>
-                Thanks for using our website. In This page, we want to help you in using our website.<br>
-                On the Homepage, by clicking on Register, you can sign in to Docicom.
-                Then, by clicking on Login, you can log in to your profile.<br>
-                Please notice that if you are a doctor who wants to use our website,
-                after registering you need to contact us, in order to authenticate and change your user type.<br>
-                <br>
-            </p>
-            <div>
-                <input type="checkbox" id="question1" name="q" class="questions">
-                <div class="plus">+</div>
-                <label for="question1" class="question">
-                    If you are a doctor, these tips can help you:
-                </label>
-                <div class="answers">
-                    <ol style="line-height:180%">
-                        <li>To see all of the requests which are submitted for you and haven’t been accepted,
-                            click on All Requests on your sidebar.
-                        </li>
-                        <li>To see your active requests (accepted and not finished) which are submitted for you,
-                            click on Active Orders on your sidebar. By clicking on Done icon for each request,
-                            you can finish them. If your patient paid you in cash, click on Paid icon.
-                        </li>
-                        <li>To see your done requests (accepted and finished) which are submitted for you,
-                            click on Done Orders on your sidebar.
-                        </li>
-                        <li>To accept a request, click on its Accept button on All Requests page.</li>
-                        <li>You can search or filter your orders on Active Orders and Done Orders page,
-                            using the search bar and the row at the end of columns.
-                        </li>
-                        <li>You can see your wallet charge, or the amount of money you are paid online,
-                            in your profile (top left).
-                        </li>
-                        <li>To log out of your profile, click on profile icon on top right, then click on Logout.</li>
-                    </ol>
-                </div>
-            </div>
-
-            <div>
-                <input type="checkbox" id="question2" name="q" class="questions">
-                <div class="plus">+</div>
-                <label for="question2" class="question">
-                    If you are a patient, these tips can help you:
-                </label>
-                <div class="answers">
-                    <ol style="line-height:180%">
-                        <li>You can see the history of your orders on your dashboard.
-                            Information of each order is written on it.
-                        </li>
-                        <li>To submit a request, follow this instruction: By clicking on Submit New Request,
-                            first, you can choose the expertise that you want, with its specified price.
-                            Then, you can choose a doctor of that expertise.
-                            Finally, you write your address and details about your problem and you click on Submit
-                            Request.
-                            Now your request is submitted and will be considered.
-                        </li>
-                        <li>By clicking on Doctors in your sidebar,
-                            you will see a list of all of our doctors an their information.
-                            By clicking on Profile icon of each doctor, you can see additional information.
-                            By clicking on Submit Request icon of each doctor, you can directly submit a request for
-                            them.
-                            By clicking on Heart icon of each doctor, you can add them to your favorite doctors.
-                        </li>
-                        <li>To view your favorite doctors, click on Favorite Doctors on your sidebar.
-                            You can remove them from your favorites any time by clicking again on the Heart icon.
-                        </li>
-                        <li>To search in doctors, you can use the search field in Doctors.
-                            Also, you can filter doctors by different features, using the row at the end of columns.
-                        </li>
-                        <li>After your request is accepted by your doctor, you can submit score, comment, or compliment,
-                            according to your doctor’s service. Your review of our services is very important to us!
-                        </li>
-                        <li>By clicking on Charge Your Wallet, you can charge your wallet in order to pay to your doctor
-                            online.
-                            After inserting your card info, click on Check Out.
-                            Your current wallet charge is visible on your dashboard and also on paying page.
-                        </li>
-                        <li>To pay to your doctor in cash, you need to ask them to submit your check out.</li>
-                        <li>To pay to your doctor online, you can click on Pay Online of your request.
-                            If your wallet has enough money, it will be paid.
-                            Otherwise, you wil be asked to charge your wallet.
-                        </li>
-                        <li>If you want to cancel your order, click on Cancel button of that order.</li>
-                        <li>To log out of your profile, click on profile icon on top right, then click on Logout.</li>
-                    </ol>
-                </div>
-            </div>
-
-            <div>
-                <input type="checkbox" id="question3" name="q" class="questions">
-                <div class="plus">+</div>
-                <label for="question3" class="question">
-                    But what if the question is really long and wraps the whole page and you feel like you will never
-                    finish reading the question?
-                </label>
-                <div class="answers">
-                    This is the answer!
-                </div>
-            </div>
-        </div>
-        {% endcomment %}
-
-        {% comment %} <p dir="ltr">
-        Hello! <br>
-        Thanks for using our website. In This page, we want to help you in using our website.<br>
-        On the Homepage, by clicking on Register, you can sign in to Docicom.
-        Then, by clicking on Login, you can log in to your profile.<br>
-        Please notice that if you are a doctor who wants to use our website,
-        after registering you need to contact us, in order to authenticate and change your user type.<br>
-        <br>
-
-        If you are a doctor, these tips can help you:
-        <br>
-    </p>
-        <ol style="line-height:180%">
-            <li>To see all of the requests which are submitted for you and haven’t been accepted,
-                click on All Requests on your sidebar.
-            </li>
-            <li>To see your active requests (accepted and not finished) which are submitted for you,
-                click on Active Orders on your sidebar. By clicking on Done icon for each request,
-                you can finish them. If your patient paid you in cash, click on Paid icon.
-            </li>
-            <li>To see your done requests (accepted and finished) which are submitted for you,
-                click on Done Orders on your sidebar.
-            </li>
-            <li>To accept a request, click on its Accept button on All Requests page.</li>
-            <li>You can search or filter your orders on Active Orders and Done Orders page,
-                using the search bar and the row at the end of columns.
-            </li>
-            <li>You can see your wallet charge, or the amount of money you are paid online,
-                in your profile (top left).
-            </li>
-            <li>To log out of your profile, click on profile icon on top right, then click on Logout.</li>
-        </ol>
-        <p dir="ltr">
-            <br>
-            If you are a patient, these tips can help you:
-            <br>
-        </p>
-        <ol style="line-height:180%">
-            <li>You can see the history of your orders on your dashboard.
-                Information of each order is written on it.
-            </li>
-            <li>To submit a request, follow this instruction: By clicking on Submit New Request,
-                first, you can choose the expertise that you want, with its specified price.
-                Then, you can choose a doctor of that expertise.
-                Finally, you write your address and details about your problem and you click on Submit Request.
-                Now your request is submitted and will be considered.
-            </li>
-            <li>By clicking on Doctors in your sidebar,
-                you will see a list of all of our doctors an their information.
-                By clicking on Profile icon of each doctor, you can see additional information.
-                By clicking on Submit Request icon of each doctor, you can directly submit a request for them.
-                By clicking on Heart icon of each doctor, you can add them to your favorite doctors.
-            </li>
-            <li>To view your favorite doctors, click on Favorite Doctors on your sidebar.
-                You can remove them from your favorites any time by clicking again on the Heart icon.
-            </li>
-            <li>To search in doctors, you can use the search field in Doctors.
-                Also, you can filter doctors by different features, using the row at the end of columns.
-            </li>
-            <li>After your request is accepted by your doctor, you can submit score, comment, or compliment,
-                according to your doctor’s service. Your review of our services is very important to us!
-            </li>
-            <li>By clicking on Charge Your Wallet, you can charge your wallet in order to pay to your doctor online.
-                After inserting your card info, click on Check Out.
-                Your current wallet charge is visible on your dashboard and also on paying page.
-            </li>
-            <li>To pay to your doctor in cash, you need to ask them to submit your check out.</li>
-            <li>To pay to your doctor online, you can click on Pay Online of your request.
-                If your wallet has enough money, it will be paid.
-                Otherwise, you wil be asked to charge your wallet.
-            </li>
-            <li>If you want to cancel your order, click on Cancel button of that order.</li>
-            <li>To log out of your profile, click on profile icon on top right, then click on Logout.</li>
-        </ol>
-        <br> {% endcomment %}
     </div>
 </div>
 </body>
