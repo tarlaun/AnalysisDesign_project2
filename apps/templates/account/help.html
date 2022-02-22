@@ -36,15 +36,16 @@
 <body id="root">
 
 <div class="ui inverted vertical center aligned segment" id="container">
-    <nav class="ui container">
+    <nav class="ui container" style="background-color: red;">
         <div class="ui borderless inverted compact menu">
-            <a class="item" href="/">Home</a> <a class="item" href="/accounts/signup/">Register</a>
+            <a class="item" href="/">Home</a>
+            <a class="item" href="/accounts/signup/">Register</a>
             <a class="item" href="/accounts/signin/">Login</a>
             <a class="active item" href="/accounts/help/">Help</a>
         </div>
     </nav>
   
-    <div class="ui content container" style="top: 140px;background-color: red">
+    <div class="ui content container" style="top: 140px;">
         <div class="accordion">
             <div class="img-container">
                 <img src="{% static 'assets/img/question3.png' %}"/>

@@ -7,164 +7,166 @@
 
 {% block content %}
 
-<link rel="stylesheet" href="{% static 'assets/css/account/register.css' %}">
-
 <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
         type="text/css"
 />
 
-<div class="page-inner register-page-inner">
-    <nav class="ui container" style="padding-bottom: 50px">
-        <div class="ui borderless inverted compact menu">
-            <a class="item" href="/">Home</a>
-            <a class="active item" href="/accounts/signup/">Register</a>
-            <a class="item" href="/accounts/signin/">Login</a>
-            <a class="item" href="/accounts/help/">Help</a>
-        </div>
-    </nav>
+<link rel="stylesheet" href="{% static 'assets/css/account/register.css' %}">
 
-    <div class="row register-container" style="padding-top: 60px; background-color: red">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">
-                        {% if msg %}
-                        <span class="text-danger">{{ msg | safe }}</span>
-                        {% else %}
-                        <span>
+    <div class="ui inverted vertical center aligned segment" id="container">
+        <nav class="ui container">
+            <div class="ui borderless inverted compact menu">
+                <a class="item" href="/">Home</a>
+                <a class="active item" href="/accounts/signup/">Register</a>
+                <a class="item" href="/accounts/signin/">Login</a>
+                <a class="item" href="/accounts/help/">Help</a>
+            </div>
+        </nav>
+
+        <div class="ui content container">
+            <div class="row register-container" style="padding-top: 60px;width: 80%">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                {% if msg %}
+                                <span class="text-danger">{{ msg | safe }}</span>
+                                {% else %}
+                                <span>
                             Complete your credentials
                         </span>
-                        {% endif %}
-                    </div>
-                </div>
-
-                <form method="post" action="">
-                    {% csrf_token %}
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                                <span class="input-group-text">
-                                                    <i class="fas fa-user-circle"></i>
-                                                </span>
-                                        </div>
-                                        {{ form.first_name }}
-                                    </div>
-                                </div>
-                                <span class="text-danger">{{ form.first_name.errors }}</span>
-                            </div>
-
-                            <div class="col">
-                                <div class="form-group">
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                                <span class="input-group-text">
-                                                    <i class="fas fa-user-circle"></i>
-                                                </span>
-                                        </div>
-                                        {{ form.last_name }}
-                                    </div>
-                                </div>
-                                <span class="text-danger">{{ form.last_name.errors }}</span>
+                                {% endif %}
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
+                        <form method="post" action="">
+                            {% csrf_token %}
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="fas fa-user-circle"></i>
+                                                </span>
+                                                </div>
+                                                {{ form.first_name }}
+                                            </div>
+                                        </div>
+                                        <span class="text-danger">{{ form.first_name.errors }}</span>
+                                    </div>
+
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="fas fa-user-circle"></i>
+                                                </span>
+                                                </div>
+                                                {{ form.last_name }}
+                                            </div>
+                                        </div>
+                                        <span class="text-danger">{{ form.last_name.errors }}</span>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
                                                 <span class="input-group-text">
                                                     <i class="fas fa-user-alt"></i>
                                                 </span>
+                                                </div>
+                                                {{ form.username }}
+                                            </div>
                                         </div>
-                                        {{ form.username }}
+                                        <span class="text-danger">{{ form.username.errors }}</span>
                                     </div>
-                                </div>
-                                <span class="text-danger">{{ form.username.errors }}</span>
-                            </div>
 
-                            <div class="col">
-                                <div class="form-group">
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
                                                 <span class="input-group-text">
                                                     <i class="far fa-envelope"></i>
                                                 </span>
+                                                </div>
+                                                {{ form.email }}
+                                            </div>
                                         </div>
-                                        {{ form.email }}
+                                        <span class="text-danger">{{ form.email.errors }}</span>
                                     </div>
                                 </div>
-                                <span class="text-danger">{{ form.email.errors }}</span>
-                            </div>
-                        </div>
 
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
                                                 <span class="input-group-text">
                                                     <i class="fas fa-phone"></i>
                                                 </span>
+                                                </div>
+                                                {{ form.phone_number }}
+                                            </div>
                                         </div>
-                                        {{ form.phone_number }}
+                                        <span class="text-danger">{{ form.phone_number.errors }}</span>
                                     </div>
+
+                                    <div class="col"></div>
                                 </div>
-                                <span class="text-danger">{{ form.phone_number.errors }}</span>
-                            </div>
-
-                            <div class="col"></div>
-                        </div>
 
 
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
                                                 <span class="input-group-text">
                                                     <i class="fas fa-lock"></i>
                                                 </span>
+                                                </div>
+                                                {{ form.password1 }}
+                                            </div>
                                         </div>
-                                        {{ form.password1 }}
+                                        <span class="text-danger">{{ form.password1.errors }}</span>
                                     </div>
-                                </div>
-                                <span class="text-danger">{{ form.password1.errors }}</span>
-                            </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
                                                 <span class="input-group-text">
                                                     <i class="fas fa-lock"></i>
                                                 </span>
+                                                </div>
+                                                {{ form.password2 }}
+                                            </div>
                                         </div>
-                                        {{ form.password2 }}
+                                        <span class="text-danger">{{ form.password2.errors }}</span>
                                     </div>
                                 </div>
-                                <span class="text-danger">{{ form.password2.errors }}</span>
                             </div>
-                        </div>
-                    </div>
-                    <div class="card-action">
-                        <button type="submit" class="btn btn-success">Submit</button>
-                        &nbsp; &nbsp;
-                        <span>Already have an account?</span> <a href="{% url 'signin' %}">Login</a>
-                    </div>
+                            <div class="card-action">
+                                <button type="submit" class="btn btn-success">Submit</button>
+                                &nbsp; &nbsp;
+                                <span>Already have an account?</span> <a href="{% url 'signin' %}">Login</a>
+                            </div>
 
-                </form>
+                        </form>
 
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-{% endblock content %}
+    {% endblock content %}
 
-<!-- Specific JS goes HERE -->
-{% block javascripts %}{% endblock javascripts %}
+    <!-- Specific JS goes HERE -->
+    {% block javascripts %}{% endblock javascripts %}
