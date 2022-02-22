@@ -34,9 +34,16 @@ h3 {
   margin: 0;
 }
 
+img {
+  width: 80%;
+  height: auto;
+  margin: auto;
+}
+
 .accordion {
   width: 80%;
   margin: auto;
+  align-content: center;
 }
 
 .accordion-item {
@@ -66,14 +73,14 @@ h3 {
 .accordion a:hover,
 .accordion a:hover::after {
   cursor: pointer;
-  color: #ff5353;
+  color: #3498eb;
 }
 .accordion a:hover::after {
-  border: 1px solid #ff5353;
+  border: 1px solid #3498eb;
 }
 .accordion a.active {
-  color: #ff5353;
-  border-bottom: 1px solid #ff5353;
+  color: #3498eb;
+  border-bottom: 1px solid #3498eb;
 }
 .accordion a::after {
   font-family: "Ionicons";
@@ -96,8 +103,8 @@ h3 {
 .accordion a.active::after {
   font-family: "Ionicons";
   content: "\f209";
-  color: #ff5353;
-  border: 1px solid #ff5353;
+  color: #3498eb;
+  border: 1px solid #3498eb;
 }
 .accordion .content {
   opacity: 0;
