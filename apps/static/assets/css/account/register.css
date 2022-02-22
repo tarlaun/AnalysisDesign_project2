@@ -28,7 +28,8 @@ body {
 }
 
 nav.ui.container .ui.inverted.compact.menu {
-  background-color: #1a2035;
+  /* background-color: #1a2035; */
+  background-color: #202940;
 }
 
 nav.ui.container .ui.inverted.compact.menu .item {
