@@ -77,9 +77,11 @@
                                 </div>
                             </div>
                             <div class="card-action">
-                                <button type="submit" class="btn btn-success">Submit</button>
+                                <button type="submit" class="btn btn-success">Sign In</button>
                                 &nbsp; &nbsp;
-                                <span>Not a member?</span> Please <a href="{% url 'signup' %}">Register</a>
+                                <div class="login-link">
+                                    <span>Not a member?</span> Please <a href="{% url 'signup' %}">Register</a>
+                                </div>
                             </div>
 
                         </form>

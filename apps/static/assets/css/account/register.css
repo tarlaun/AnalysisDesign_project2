@@ -94,3 +94,19 @@ nav.ui.container .ui.inverted.compact.menu .active.item {
 .ui.inverted.vertical.segment footer.ui.segment a {
   color: white;
 }
+
+.card-action {
+  display: flex;
+  flex-direction: column;
+  background-color: yellow;
+}
+
+button {
+  width: 30%;
+  margin: auto;
+  margin-bottom: 0;
+}
+
+.login-link {
+  margin-top: -20px;
+}
