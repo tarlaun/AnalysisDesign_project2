@@ -79,7 +79,7 @@ def signout(request):
 
 @login_required(login_url=LOGIN_REDIRECT_URL)
 def home(request):
-    return HttpResponse("Home Page")
+    return render(request, "home.html", {})
 
 
 # @login_required
@@ -378,23 +378,16 @@ def online_payment(request):
 @login_required(login_url=LOGIN_REDIRECT_URL)
 def online_payment_order(request, order_id):
     order = get_object_or_404(Order, pk=order_id)
-    order.paid = True
     if order.expertise.price <= order.user.wallet:
         order.doctor.user.wallet += order.expertise.price
-        print(order.doctor.user.wallet)
         order.user.wallet -= order.expertise.price
-        print(order.user.wallet)
+        order.paid = True
         order.save()
         order.user.save()
         order.doctor.user.save()
         messages.add_message(request, messages.SUCCESS, 'Successfully paid from your wallet')
         return redirect("patient_orders_list")
     else:
-        temp = order.expertise.price
-        order.expertise.price -= order.user.wallet
-        order.doctor.user.wallet += temp
-        order.save()
-        order.doctor.user.save()
         messages.add_message(request, messages.WARNING, 'Your balance is not enough to pay! Please Charge your wallet.')
         return render(request, 'account/payment-page.html', context={"order": order})
 
@@ -424,12 +417,23 @@ def pay(request, order_id):
     if request.method == "POST":
         user = request.user
         order = get_object_or_404(Order, pk=order_id)
-        user.wallet = user.wallet + int(request.POST.get("amount")) - order.expertise.price
+        temp_charge = int(request.POST.get("amount"))
+        print(f'temp_charge:{temp_charge}')
+        print(f'u wallet:{user.wallet}')
+        print(f'price:{order.expertise.price}')
+        if temp_charge + user.wallet >= order.expertise.price:
+            order.paid = True
+            order.doctor.user.wallet += order.expertise.price
+            user.wallet += (temp_charge - order.expertise.price)
+            order.doctor.user.save()
+            order.save()
+        else:
+            user.wallet += temp_charge
         user.save()
         return redirect("patient_orders_list")
     return JsonResponse({"success": "false"})
 
-# Finish the order aftre doctor confirmed payment
+# Finish the order after doctor confirmed payment
 @login_required(login_url=LOGIN_REDIRECT_URL)
 def finish_the_order(request, order_id):
     order = get_object_or_404(Order, pk=order_id)
