@@ -23,6 +23,9 @@
 
 # ویژگی‌های سامانه
 
+###مشاهده امکانات وبسایت
+![help](images/help.png)
+
 ## بیماران
 ![landing](images/landing.png)
 ### امکان ورود و ثبت نام بیماران در سامانه
@@ -36,10 +39,20 @@
 ![score](images/score.png)
 ### امکان ثبت نظر
 ![comment](images/comment.png)
+### امکان ثبت شکایت
+![comment](images/comment.png)
 ### امکان مشاهده پزشکان هر تخصص
 ![expertise'sDoctor](images/expertise'sDoctor.png)
 ### امکان ثبت درخواست
 ![submitOrder](images/submitOrder.png)
+###مشاهده لیست پزشکان
+![docList](images/docList.png)
+###مشخص کردن لیست پزشکان موردعلاقه و مشاهده لیست آنها
+![fav](images/fav.png)
+###شارژ کیف پول و پرداخت آنلاین
+![payment](images/payment.png)
+###مشاهده پروفایل پزشکان و ثبت درخواست مستقیم
+![pro](images/pro.png)
 
 ## پزشکان
 
@@ -49,4 +62,5 @@
 ![orders](images/doctor.png)
 ### امکان مشاهده درخواست‌های پذیرفته شده
 ![accepted](images/accepted.png)
-
+### امکان مشاهده درخواست‌های اتمام یافته
+![done](images/done.png)
