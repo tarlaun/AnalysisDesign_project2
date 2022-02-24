@@ -1,3 +1,4 @@
+from cgi import test
 from django.test import TestCase, RequestFactory
 from .models import Account, Expertise, Doctor, Order, FavDoctors
 from django.urls import reverse
@@ -7,6 +8,13 @@ from .views import (
     unfav_doctor,
     favorite_doctors,
     unfav_doctor_from_favs,
+    finish_the_order,
+    active_orders,
+    finished_orders,
+    add_to_wallet,
+    delete_order,
+    pay,
+    confirm_cash_pay
 )
 
 
@@ -26,6 +34,7 @@ class OrderTest(TestCase):
         email="mmd@gmail.com",
         user_type=2,
         phone_number="09129121112",
+        wallet=0
     ):
         return Account.objects.create(
             first_name=first_name,
@@ -35,6 +44,7 @@ class OrderTest(TestCase):
             email=email,
             user_type=user_type,
             phone_number=phone_number,
+            wallet=wallet,
         )
 
     def create_doctor(
@@ -196,3 +206,53 @@ class OrderTest(TestCase):
         response = unfav_doctor_from_favs(request, test_doctor.user.id)
 
         self.assertEqual(response.status_code, 302)
+        
+    def test_active_orders(self):
+        request = self.factory.get("/account/active_orders/")
+        test_doctor = self.create_doctor()
+        request.user = test_doctor.user
+        
+        response = active_orders(request)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Active Orders")
+        
+    def test_finished_orders(self):
+        request = self.factory.get("/account/finished_orders/")
+        test_doctor = self.create_doctor()
+        request.user = test_doctor.user
+
+        response = finished_orders(request)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Done Orders")
+
+    def test_charge_wallet(self):
+        request = self.factory.get("/accounts/add-to-wallet/")
+        test_user = self.create_user()
+        request.user = test_user
+
+        response = add_to_wallet(request)
+        self.assertEqual(response.status_code, 200)
+
+    def test_payment(self):
+        request = self.factory.get("/accounts/pay/1")
+        test_order = self.create_order()
+        request.user = test_order.user
+        response = pay(request, 1)
+        self.assertEqual(response.status_code, 200)
+
+
+    def test_delete_order(self):
+        order = self.create_order()
+        pk = order.pk
+        order_by_pk = Order.objects.get(pk=order.pk)
+        order_by_pk.delete()
+        self.assertFalse(Order.objects.filter(pk=pk).exists())
+
+
+    def test_confirm_cash_pay(self):
+        request = self.factory.get("/accounts/confirm_cash_pay/1")
+        test_order = self.create_order()
+        request.user = test_order.user
+        response = confirm_cash_pay(request, 1)
+        self.assertEqual(response.status_code, 302)
+

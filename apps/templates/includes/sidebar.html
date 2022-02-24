@@ -14,6 +14,7 @@
 							{{ request.user.username }}
 							<span class="user-level">
 								{{ request.user.email }}
+                                <br>Wallet Credit: {{ request.user.wallet }} Toman
 							</span>
 							<span class="caret"></span>
 						</span>
@@ -22,11 +23,6 @@
 
 					<div class="collapse in" id="collapseExample">
 						<ul class="nav">
-							<li>
-								<a href="#profile">
-									<span class="link-collapse">My Profile</span>
-								</a>
-							</li>
 							<li>
 								<a href="{% url 'signout' %}">
 									<span class="link-collapse">Logout</span>
@@ -70,15 +66,28 @@
                     </a>
                 </li>
 
+                <li class="nav-item {% if 'index' in segment %} active {% endif %}">
+                    <a href="{% url 'online-payment' %}" aria-expanded="false">
+                        <i class="fa fa-credit-card"></i>
+                        <p>Charge Your Wallet</p>
+                    </a>
+                </li>
+
 
                 {% endif %}
 
                 </li>
                 {% if request.user.user_type == 1 %}
                 <li class="nav-item {% if 'index' in segment %} active {% endif %}">
-                    <a href="{% url 'pre_orders' %}" aria-expanded="false">
+                    <a href="{% url 'active_orders' %}" aria-expanded="false">
+                        <i class="fas fa-hourglass"></i>
+                        <p>Active Orders</p>
+                    </a>
+                </li>
+                <li class="nav-item {% if 'index' in segment %} active {% endif %}">
+                    <a href="{% url 'finished_orders' %}" aria-expanded="false">
                         <i class="fas fa-layer-group"></i>
-                        <p>Accepted Orders</p>
+                        <p>Done Orders</p>
                     </a>
                 </li>
                 {% endif %}

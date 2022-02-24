@@ -1,0 +1,149 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Active Orders {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+	<div class="content">
+		<div class="page-inner">
+			<div class="page-header-doctor-dashboard">
+				<h4 class="page-title">Active Orders</h4>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card">
+						<div class="card-header">
+							<h4 class="card-title">Orders</h4>
+						</div>
+						<div class="card-body">
+							<div class="table-responsive">
+								<table id="multi-filter-select" class="display table table-striped table-hover" >
+									<thead>
+										<tr>
+											<th>First Name</th>
+											<th>Last Name</th>
+											<th>Address</th>
+											<th>Email</th>
+											<th>Phone Number</th>
+											<th>Description</th>
+											<th>Payment Status</th>
+											<th>Cash Payment</th>
+											<th>Done</th>
+										</tr>
+									</thead>
+                                    <tfoot>
+										<tr>
+											<th>First Name</th>
+											<th>Last Name</th>
+											<th>Address</th>
+											<th>Email</th>
+											<th>Phone Number</th>
+											<th>Description</th>
+											<th>Online Payment</th>
+											<th>Cash Payment</th>
+                                            <th>Done</th>
+										</tr>
+									</tfoot>
+									<tbody>
+                                        {% if orders_list %}
+                                            {% for order in orders_list %}
+                                                <tr>
+                                                    <td>{{ order.user.first_name }}</td>
+                                                    <td>{{ order.user.last_name }}</td>
+                                                    <td>{{ order.address }}</td>
+                                                    <td>{{ order.user.email }}</td>
+                                                    <td>{{ order.user.phone_number }}</td>
+													<td>{{ order.details }}</td>
+													{% if order.paid %}
+													<td>Paid</td>
+													<td>
+														<div class="form-button-action">
+															<button type="button" disabled
+																	onclick="window.location='{% url 'confirm_cash_pay' order.id %}'"
+																	class="btn btn-icon btn-round">
+																<i class="fas fa-wallet"></i>
+															</button>
+														</div>
+													</td>
+                                                    <td>
+														<div class="form-button-action">
+															<button type="button"
+																	onclick="window.location='{% url 'finish_the_order' order.id %}'"
+																	class="btn btn-icon btn-round">
+																<i class="fa fa-check"></i>
+															</button>
+														</div>
+													</td>
+													{% else %}
+													<td>Not Paid</td>
+													<td>
+														<div class="form-button-action">
+															<button type="button"
+																	onclick="window.location='{% url 'confirm_cash_pay' order.id %}'"
+																	class="btn btn-icon btn-round">
+																<i class="fas fa-wallet"></i>
+															</button>
+														</div>
+													</td>
+                                                    <td>
+														<div class="form-button-action">
+															<button type="button" disabled
+																	onclick="window.location='{% url 'finish_the_order' order.id %}'"
+																	class="btn btn-icon btn-round">
+																<i class="fa fa-check"></i>
+															</button>
+														</div>
+													</td>
+													{% endif %}
+                                                </tr>
+                                            {% endfor %}
+                                        {% endif %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+	<!-- Atlantis DEMO methods, don't include it in your project! -->
+	<script src="/static/assets/js/setting-demo2.js"></script>
+	<script >
+		$(document).ready(function() {
+			$('#multi-filter-select').DataTable( {
+				"pageLength": 5,
+				initComplete: function () {
+					this.api().columns().every( function () {
+						var column = this;
+						var select = $('<select class="form-control"><option value=""></option></select>')
+						.appendTo( $(column.footer()).empty() )
+						.on( 'change', function () {
+							var val = $.fn.dataTable.util.escapeRegex(
+								$(this).val()
+								);
+
+							column
+							.search( val ? '^'+val+'$' : '', true, false )
+							.draw();
+						} );
+
+						column.data().unique().sort().each( function ( d, j ) {
+							select.append( '<option value="'+d+'">'+d+'</option>' )
+						} );
+					} );
+				}
+			});
+		});
+	</script>
+
+{% endblock javascripts %}

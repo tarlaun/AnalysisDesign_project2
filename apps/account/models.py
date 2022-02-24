@@ -14,6 +14,7 @@ class Account(AbstractUser):
     phone_regex = RegexValidator(regex=r'^(\+|0)9\d{9,11}$',
                                  message="Phone number must be entered in the format: '+999999999'.")
     phone_number = models.CharField(validators=[phone_regex], max_length=13, blank=False)  # validators should be a list
+    wallet = models.IntegerField(default=0)
 
     def __str__(self):
         return self.username
@@ -80,6 +81,8 @@ class Order(models.Model):
 
     # NEW: added this field to show if doctor has accepted request or not
     accepted = models.BooleanField(default=False)
+    finished = models.BooleanField(default=False)
+    paid = models.BooleanField(default=False)
 
     def __str__(self):
         return f'{self.user.__str__()} {self.doctor.__str__()} {self.expertise.__str__()}'

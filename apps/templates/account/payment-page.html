@@ -1,0 +1,118 @@
+{% extends "layouts/base.html" %}
+
+{% load static%}
+
+{% block title %} Online Payment {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+{% comment %} <script src="/static/assets/js/payment.js"></script> {% endcomment %}
+<link rel="stylesheet" href="{% static 'assets/css/account/online-payment.css' %}">
+
+<div class="content">
+    <div class="page-inner">
+        <div class="page-header-doctor-dashboard">
+            {% comment %} <h4 class="page-title">Online Payment</h4> {% endcomment %}
+        </div>
+        <div class="row">
+            <div class="card">
+                <div class="leftside">
+                    <img
+                            src="{% static 'assets/img/bill.jpg' %}"
+                            class="product"
+                            alt="Shoes"
+                    />
+                </div>
+                <div class="rightside">
+                    <form method="POST" action="{% url 'add-to-wallet' %}" id="payment-form">
+
+                        {% csrf_token %}
+
+                        <h1><b>CheckOut</b></h1>
+                        {% if order %}
+                            <p>Price of your order: <b style="color: black">{{ order.expertise.price }} Toman</b></p>
+                        {% endif %}
+                        <h2><b>Payment Information</b></h2>
+                        <p>Wallet Credit: {{ request.user.wallet }} Toman </p>
+                        <p>Amount to be paid</p>
+                        <div class="amount-row">
+                            <input type="number" class="inputbox" name="amount" required
+                                   placeholder="Enter your amount of money"/><b style="color: black;font-size: large;">(Toman)</b>
+                        </div>
+                        <p>Card Number</p>
+                        <div class="card-number">
+                            <input type="number"
+                                   oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                   maxlength="4" class="inputbox" name="card_number1" id="card_number1" required/>
+                            <input type="number"
+                                   oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                   maxlength="4" class="inputbox" name="card_number2" id="card_number2" required/>
+                            <input type="number"
+                                   oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                   maxlength="4" class="inputbox" name="card_number3" id="card_number3" required/>
+                            <input type="number"
+                                   oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                   maxlength="4" class="inputbox" name="card_number4" id="card_number4" required/>
+                        </div>
+
+                        <p>Card Type</p>
+                        <select class="inputbox" name="card_type" id="card_type" required>
+                            <option value="">--Select a Card Type--</option>
+                            <option value="Visa">Visa</option>
+                            <option value="RuPay">RuPay</option>
+                            <option value="MasterCard">MasterCard</option>
+                        </select>
+                        <div class="expcvv">
+                            <p class="expcvv_text">Expiry</p>
+                            <input type="date" class="inputbox" name="exp_date" id="exp_date" required/>
+
+                            <p class="expcvv_text2">CVV</p>
+                            <input type="password" class="inputbox" name="cvv" id="cvv" required/>
+                        </div>
+                        <p></p>
+                        {% comment %} onclick="window.location='{% url 'add-to-wallet' %}'" {% endcomment %}
+                        <button type="submit" class="button">CheckOut</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+document.querySelector(".inputbox").addEventListener("keypress", function (evt) {
+    if (evt.which < 48 || evt.which > 57)
+    {
+        evt.preventDefault();
+    }
+});
+
+const inputs = document.querySelectorAll(".inputbox")
+for (let i = 0; i < inputs.length; i++) {
+     inputs[i].addEventListener("keypress", function (evt) {
+    if (evt.which < 48 || evt.which > 57)
+    {
+        evt.preventDefault();
+    }
+});
+ }
+
+var order = "{{order|safe}}";
+form = document.getElementById('payment-form')
+
+curr_url = window.location.href
+url_parts = curr_url.split("/")
+
+if (order != "") {
+    form.action = "/accounts/pay/" + url_parts[url_parts.length - 2] + "/"
+} else {
+    form.action = "{% url 'add-to-wallet' %}"
+}
+
+</script>
+
+{% endblock content %}

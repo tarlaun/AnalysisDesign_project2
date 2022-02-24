@@ -1,16 +1,19 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.contrib.auth.decorators import user_passes_test
 from .forms import AccountCreationForm, LoginForm, SignUpForm
-from django.contrib import messages
 from .models import UserType, Doctor, Account, Order, Expertise, FavDoctors
 from django.views import generic
 from django.views.decorators.csrf import csrf_protect
+from django.contrib import messages
 
+from .forms import AccountCreationForm, LoginForm, SignUpForm
+from .models import UserType, Doctor, Order, Expertise, FavDoctors
+import json 
 
 LOGIN_REDIRECT_URL = "/accounts/signin/"
 
@@ -29,6 +32,7 @@ def register(request):
         form = AccountCreationForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.add_message(request, messages.SUCCESS, 'Congratulations! Your Account Created Successfully!')
             return redirect("signin")
         else:
             # TODO error
@@ -48,13 +52,17 @@ def signin(request):
         if user is not None:
             login(request, user)
             if being_doctor_check(user):
+                messages.add_message(request, messages.SUCCESS, 'You Signed in Successfully!')
                 return redirect("expertise_orders_list")
             else:
+                messages.add_message(request, messages.SUCCESS, 'You Signed in Successfully!')
                 return redirect("patient_orders_list")
         else:
-            return HttpResponse(
-                'Username or Password is incorrect. <a href="">Return to login</a>'
-            )
+            messages.add_message(request, messages.ERROR, 'Invalid Username or Password! Please Try Again!')
+            return redirect("signin")
+            # return HttpResponse(
+            #     'Username or Password is incorrect. <a href="">Return to login</a>'
+            # )
 
     # form = AccountCreationForm()
     form = LoginForm()
@@ -71,7 +79,7 @@ def signout(request):
 
 @login_required(login_url=LOGIN_REDIRECT_URL)
 def home(request):
-    return HttpResponse("Home Page")
+    return render(request, "home.html", {})
 
 
 # @login_required
@@ -108,8 +116,9 @@ def accept_order(request, order_id):
     # order.doctor = doctor
     order.accepted = True
     order.save()
-    doctor.not_processed_income += order.expertise.price
+    # doctor.not_processed_income += order.expertise.price
     doctor.save()
+    messages.add_message(request, messages.SUCCESS, f'You Accepted {order.user.first_name} {order.user.last_name} s Order Successfully! Our Patient is waiting for your service!')
     return redirect("expertise_orders_list")
 
 
@@ -159,6 +168,7 @@ def add_order(request, doc_id):
         details=details,
     )
     o.save()
+    messages.add_message(request, messages.SUCCESS, 'Your Order is submitted successfully!')
     return HttpResponseRedirect(reverse("patient_orders_list"))
 
 
@@ -239,15 +249,26 @@ def request_for_chosen_doctor(request, doc_id):
     )
 
 
-# get requests for doctor which she/he accepted
+# get requests for doctor which she/he accepted but not finished
 @login_required(login_url=LOGIN_REDIRECT_URL)
-def previous_orders(request):
+def active_orders(request):
     doctor = Doctor.objects.get(user=request.user)
     expertise = doctor.expertise
     orders_list = Order.objects.filter(
-        expertise=expertise, doctor=doctor, accepted=True
+        expertise=expertise, doctor=doctor, accepted=True, finished=False
     )
-    return render(request, "account/pre_orders.html", {"orders_list": orders_list})
+    return render(request, "account/active_orders.html", {"orders_list": orders_list})
+
+
+# get requests for doctor which she/he finished
+@login_required(login_url=LOGIN_REDIRECT_URL)
+def finished_orders(request):
+    doctor = Doctor.objects.get(user=request.user)
+    expertise = doctor.expertise
+    orders_list = Order.objects.filter(
+        expertise=expertise, doctor=doctor, accepted=True, finished=True
+    )
+    return render(request, "account/finished_orders.html", {"orders_list": orders_list})
 
 
 @login_required(login_url=LOGIN_REDIRECT_URL)
@@ -274,8 +295,8 @@ def doc_pro(request, doc_id):
     orders_list = Order.objects.filter(doctor=doctor, accepted=True)
     final_orders = []
     for order in orders_list:
-        if order.score > 0 or order.comment!="":
-            if order.score>0:
+        if order.score > 0 or order.comment != "":
+            if order.score > 0:
                 scores += order.score
                 count += 1
             final_orders.append(order)
@@ -308,20 +329,22 @@ def fav_doctor(request, doc_id):
     fav_doctors.favorite_doctors.add(doctor)
     fav_doctors.save()
 
+    messages.add_message(request, messages.INFO, f'Dr. {doctor.user.last_name} is now in your favorite list.')
     return redirect("all_doctors")
     # return render(request, 'account/list_of_doctors.html', {'doctors_list': doctors_list, 'fav_doctors': fav_doctors.favorite_doctors.all()})
 
 
 @login_required(login_url=LOGIN_REDIRECT_URL)
 def unfav_doctor(request, doc_id):
-
     doctor = get_object_or_404(Doctor, pk=doc_id)
     fav_doctors = get_object_or_404(FavDoctors, user=request.user)
 
     fav_doctors.favorite_doctors.remove(doctor)
     fav_doctors.save()
 
+    messages.add_message(request, messages.INFO, f'Dr. {doctor.user.last_name} is removed from your favorites')
     return redirect("all_doctors")
+
 
 @login_required(login_url=LOGIN_REDIRECT_URL)
 def favorite_doctors(request):
@@ -335,13 +358,105 @@ def favorite_doctors(request):
         request, "account/fav-doctors.html", {"fav_doctors_list": all_fav_doctors}
     )
 
+
 @login_required(login_url=LOGIN_REDIRECT_URL)
 def unfav_doctor_from_favs(request, doc_id):
-
     doctor = get_object_or_404(Doctor, pk=doc_id)
     fav_doctors = get_object_or_404(FavDoctors, user=request.user)
 
     fav_doctors.favorite_doctors.remove(doctor)
     fav_doctors.save()
 
+    messages.add_message(request, messages.INFO, f'Dr. {doctor.user.last_name} is removed from your favorites')
     return redirect("favorite_doctors")
+
+
+@login_required(login_url=LOGIN_REDIRECT_URL)
+def online_payment(request):
+    return render(request, 'account/payment-page.html')
+
+@login_required(login_url=LOGIN_REDIRECT_URL)
+def online_payment_order(request, order_id):
+    order = get_object_or_404(Order, pk=order_id)
+    if order.expertise.price <= order.user.wallet:
+        order.doctor.user.wallet += order.expertise.price
+        order.user.wallet -= order.expertise.price
+        order.paid = True
+        order.save()
+        order.user.save()
+        order.doctor.user.save()
+        messages.add_message(request, messages.SUCCESS, 'Successfully paid from your wallet')
+        return redirect("patient_orders_list")
+    else:
+        messages.add_message(request, messages.WARNING, 'Your balance is not enough to pay! Please Charge your wallet.')
+        return render(request, 'account/payment-page.html', context={"order": order})
+
+@login_required(login_url=LOGIN_REDIRECT_URL)
+def add_to_wallet(request):
+    if request.method == "POST":
+        user = request.user
+        current_wallet = user.wallet
+        user.wallet = current_wallet + int(request.POST.get("amount"))
+        user.save()
+        messages.add_message(request, messages.SUCCESS, 'Successfully added to you wallet')
+        # print("---------", request.POST.get("amount"))
+        # print("---------", request.POST.get("card_number1"))
+        # print("---------", request.POST.get("card_number2"))
+        # print("---------", request.POST.get("card_number3"))
+        # print("---------", request.POST.get("card_number4"))
+        # print("---------", request.POST.get("card_type"))
+        # print("---------", request.POST.get("exp_date"))
+        # print("---------", request.POST.get("cvv"))
+
+        return redirect("patient_orders_list")
+    return JsonResponse({"success": "false"})
+
+
+@login_required(login_url=LOGIN_REDIRECT_URL)
+def pay(request, order_id):
+    if request.method == "POST":
+        user = request.user
+        order = get_object_or_404(Order, pk=order_id)
+        temp_charge = int(request.POST.get("amount"))
+        print(f'temp_charge:{temp_charge}')
+        print(f'u wallet:{user.wallet}')
+        print(f'price:{order.expertise.price}')
+        if temp_charge + user.wallet >= order.expertise.price:
+            order.paid = True
+            order.doctor.user.wallet += order.expertise.price
+            user.wallet += (temp_charge - order.expertise.price)
+            order.doctor.user.save()
+            order.save()
+        else:
+            user.wallet += temp_charge
+        user.save()
+        return redirect("patient_orders_list")
+    return JsonResponse({"success": "false"})
+
+# Finish the order after doctor confirmed payment
+@login_required(login_url=LOGIN_REDIRECT_URL)
+def finish_the_order(request, order_id):
+    order = get_object_or_404(Order, pk=order_id)
+    order.finished = True
+    order.save()
+    return redirect("active_orders")
+
+# Confirm cash payment
+@login_required(login_url=LOGIN_REDIRECT_URL)
+def confirm_cash_pay(request, order_id):
+    order = get_object_or_404(Order, pk=order_id)
+    order.paid = True
+    order.save()
+    return redirect("active_orders")
+
+
+@login_required(login_url=LOGIN_REDIRECT_URL)
+def delete_order(request, order_id):
+    order = get_object_or_404(Order, pk=order_id)
+    order.delete()
+    messages.add_message(request, messages.SUCCESS, 'You deleted this order successfully!')
+    return redirect("patient_orders_list")
+
+
+def help(request):
+    return render(request, 'account/help.html')
